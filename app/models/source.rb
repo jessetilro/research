@@ -6,6 +6,7 @@ class Source < ApplicationRecord
 
   validates :title, presence: true
 
+  scope :by_search_query, ->(q) { where('title LIKE ? OR abstract LIKE ? OR authors LIKE ?', "%#{q}%", "%#{q}%", "%#{q}%") }
   default_scope { order(created_at: :desc) }
 
 end

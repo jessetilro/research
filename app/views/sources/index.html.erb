@@ -1,6 +1,19 @@
-<div class="text-center">
-  <%= link_to 'Add Source', new_source_path, class: 'btn btn-default' %>
-</div>
+
+<div class="row">
+  <div class="col-lg-6">
+    <%= link_to 'Add Source', new_source_path, class: 'btn btn-default' %>
+  </div><!-- /.col-lg-6 -->
+  <div class="col-lg-6">
+    <form action="<%= sources_url %>" method="get">
+      <div class="input-group">
+        <input type="text" name="q" class="form-control" placeholder="Search for..." value="<%= h(params[:q]) %>">
+        <span class="input-group-btn">
+          <button class="btn btn-default" type="button">Find</button>
+        </span>
+      </div><!-- /input-group -->
+    </form>
+  </div><!-- /.col-lg-6 -->
+</div><!-- /.row -->
 
 <table class="table">
   <thead>
@@ -14,7 +27,7 @@
     <% @sources.each do |s| %>
       <tr>
         <td>
-          <%= content_tag :p, s.title, class: 'lead' %>
+          <%= content_tag :p, link_to(s.title, source_path(s)), class: 'lead' %>
           <em><%= s.authors %> | <%= s.year %></em>
         </td>
         <td><%= s.kind %></td>

@@ -1,7 +1,7 @@
 class SourcesController < ApplicationController
 
   def index
-    @sources = Source.all
+    @sources = Source.by_search_query(params[:q])
   end
 
   def new
