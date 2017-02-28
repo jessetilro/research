@@ -10,3 +10,10 @@ User.create({
   email: 'jesse@jessetilro.nl',
   password: 'testtest'
   })
+
+Source.create({
+  title: 'Example Source',
+  authors: 'Doe J.',
+  kind: 0,
+  user: User.first
+  })

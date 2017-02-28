@@ -10,7 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170227195904) do
+ActiveRecord::Schema.define(version: 20170228170814) do
+
+  create_table "sources", force: :cascade do |t|
+    t.string   "title"
+    t.string   "authors"
+    t.integer  "year"
+    t.integer  "kind"
+    t.string   "url"
+    t.text     "abstract"
+    t.text     "description"
+    t.integer  "user_id"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.index ["user_id"], name: "index_sources_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
