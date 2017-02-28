@@ -8,6 +8,8 @@
 
 User.create({
   email: 'jesse@jessetilro.nl',
+  first_name: 'Jesse',
+  last_name: 'Tilro',
   password: 'testtest'
   })
 

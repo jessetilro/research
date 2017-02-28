@@ -31,7 +31,7 @@
           <em><%= s.authors %> | <%= s.year %></em>
         </td>
         <td><%= s.kind %></td>
-        <td><%= s.user.id %>, <%= time_ago_in_words(s.created_at) %></td>
+        <td><%= s.user.full_name %>, <%= time_ago_in_words(s.created_at) %></td>
       </tr>
     <% end %>
   </tbody>
