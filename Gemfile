@@ -57,3 +57,10 @@ gem 'devise'
 
 # Associatiating files with models
 gem 'paperclip'
+
+# Bootstrap framework
+gem 'bootstrap-sass'
+gem 'bootstrap_form'
+
+# Automatically add vendor prefixes to css
+gem 'autoprefixer-rails'

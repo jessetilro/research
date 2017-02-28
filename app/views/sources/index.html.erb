@@ -1,3 +1,25 @@
-<% @sources.each do |s| %>
-  <%= s.title %>
-<% end %>
+<div class="text-center">
+  <%= link_to 'Add Source', new_source_path, class: 'btn btn-default' %>
+</div>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Description</th>
+      <th>Kind</th>
+      <th>Added By</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @sources.each do |s| %>
+      <tr>
+        <td>
+          <%= content_tag :p, s.title, class: 'lead' %>
+          <em><%= s.authors %> | <%= s.year %></em>
+        </td>
+        <td><%= s.kind %></td>
+        <td><%= s.user.id %>, <%= time_ago_in_words(s.created_at) %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

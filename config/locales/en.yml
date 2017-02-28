@@ -20,4 +20,21 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
-  hello: "Hello world"
+  activerecord:
+    models:
+      source:
+        one: Source
+        other: Sources
+
+    attributes:
+      source:
+        title: Title
+        authors: Authors
+        year: Publication Year
+        kind: Kind
+        kinds:
+          paper: Paper
+          book: Book
+        url: URL
+        abstract: Abstract
+        description: Description
