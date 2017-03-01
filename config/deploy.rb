@@ -3,6 +3,7 @@ lock "3.7.2"
 
 set :application, "research"
 set :repo_url, "git@github.com:jessetilro/research.git"
+set :branch, ENV['BRANCH'] if ENV['BRANCH']
 
 set :deploy_to, '/home/deploy/www/research'
 
