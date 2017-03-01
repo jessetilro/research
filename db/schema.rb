@@ -10,7 +10,36 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170227195904) do
+ActiveRecord::Schema.define(version: 20170301170640) do
+
+  create_table "approvals", force: :cascade do |t|
+    t.integer  "user_id",    null: false
+    t.integer  "source_id",  null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["source_id"], name: "index_approvals_on_source_id"
+    t.index ["user_id"], name: "index_approvals_on_user_id"
+  end
+
+  create_table "sources", force: :cascade do |t|
+    t.string   "title"
+    t.string   "authors"
+    t.integer  "year"
+    t.integer  "kind"
+    t.string   "url"
+    t.text     "abstract"
+    t.text     "description"
+    t.integer  "user_id"
+    t.datetime "created_at",            null: false
+    t.datetime "updated_at",            null: false
+    t.string   "document_file_name"
+    t.string   "document_content_type"
+    t.integer  "document_file_size"
+    t.datetime "document_updated_at"
+    t.string   "search_query"
+    t.string   "search_database"
+    t.index ["user_id"], name: "index_sources_on_user_id"
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "email",                  default: "", null: false
@@ -25,6 +54,8 @@ ActiveRecord::Schema.define(version: 20170227195904) do
     t.string   "last_sign_in_ip"
     t.datetime "created_at",                          null: false
     t.datetime "updated_at",                          null: false
+    t.string   "first_name"
+    t.string   "last_name"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end

@@ -1,0 +1,40 @@
+
+<div class="row">
+  <div class="col-lg-6">
+    <%= link_to 'Add Source', new_source_path, class: 'btn btn-default' %>
+  </div><!-- /.col-lg-6 -->
+  <div class="col-lg-6">
+    <form action="<%= sources_url %>" method="get">
+      <div class="input-group">
+        <input type="text" name="q" class="form-control" placeholder="Search for..." value="<%= h(params[:q]) %>">
+        <span class="input-group-btn">
+          <button class="btn btn-default" type="button">Find</button>
+        </span>
+      </div><!-- /input-group -->
+    </form>
+  </div><!-- /.col-lg-6 -->
+</div><!-- /.row -->
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>Source <span class="badge"><%= @sources.size %></span></th>
+      <th><%= Source.human_attribute_name :kind %></th>
+      <th><%= Source.human_attribute_name :user %></th>
+      <th><%= Source.human_attribute_name :approvals %></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @sources.each do |s| %>
+      <tr>
+        <td>
+          <%= content_tag :p, link_to(s.title, source_path(s)), class: 'lead' %>
+          <em><%= s.authors %> | <%= s.year %></em>
+        </td>
+        <td><%= s.translated_kind %></td>
+        <td><%= s.user.full_name %>,<br /><small><em><%= time_ago_in_words(s.created_at) %> ago</em></small></td>
+        <td><%= s.approvals.count %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html>
   <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Research</title>
     <%= csrf_meta_tags %>
 
@@ -9,8 +10,24 @@
   </head>
 
   <body>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
-    <%= yield %>
+
+    <% flash.each do |name, msg| %>
+      <%= content_tag :div, msg, class: "alert alert-#{name}" %>
+    <% end %>
+
+    <div id="main-container" class="container-fluid">
+      <div class="row">
+        <div class="col-xs-12 col-md-2 col-lg-1">
+          <h3><%= link_to Rails.application.class.parent_name.to_s, root_url  %></h3>
+          <% if user_signed_in? %>
+          <%= link_to 'Logout', destroy_user_session_path, method: :delete %>
+          <% end %>
+        </div>
+        <div class="col-xs-12 col-md-10 col-lg-11">
+          <%= yield %>
+        </div>
+      </div>
+    </div>
+
   </body>
 </html>

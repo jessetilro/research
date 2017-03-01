@@ -8,5 +8,27 @@
 
 User.create({
   email: 'jesse@jessetilro.nl',
+  first_name: 'Jesse',
+  last_name: 'Tilro',
   password: 'testtest'
+  })
+
+Source.create({
+  title: 'Een Uitgebreid Verhaal over Karamel en Walvissen.',
+  authors: 'Koekepeer M.',
+  year: 2017,
+  kind: :paper,
+  abstract: 'Lorem ipsum...',
+  description: 'Dit sprak mij wel aan!',
+  user: User.first
+  })
+
+Source.create({
+  title: 'Waarom Ruikt Mijn Haar Naar Gras? Feiten en Statistieken Over Mens Naar Plant Transformaties.',
+  authors: 'Boom A., Bos P.',
+  year: 2017,
+  kind: :paper,
+  abstract: 'Lorem ipsum...',
+  description: 'Reuze interessant!',
+  user: User.first
   })
