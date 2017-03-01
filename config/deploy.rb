@@ -4,7 +4,7 @@ lock "3.7.2"
 set :application, "research"
 set :repo_url, "git@github.com:jessetilro/research.git"
 
-set :deploy_to, '/var/www/rails.jessetilro.nl'
+set :deploy_to, '/home/deploy/www/research'
 
 append :linked_files, "config/database.yml", "config/secrets.yml"
 append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "vendor/bundle", "public/system", "public/uploads"
