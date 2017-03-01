@@ -37,5 +37,6 @@ en:
           book: Book
         url: URL
         abstract: Abstract
-        description: Description
+        description: Description (by contributor)
+        user: Contributed by
         document: PDF Document

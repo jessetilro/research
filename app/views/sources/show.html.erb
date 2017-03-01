@@ -1,11 +1,52 @@
 
 <div class="row">
   <div class="col-xs-12 col-lg-6">
-    <%= @source.title %>
-  </div><!-- /.col-lg-6 -->
+    <%= content_tag :h3, @source.title %>
+    <%= link_to raw("Edit #{glyphicon :pencil}"), edit_source_path(@source), class: 'btn btn-default' %>
+    <% if @source.document.present? %>
+      <%= link_to raw("Download PDF #{content_tag(:span, '', class: 'glyphicon glyphicon-download-alt')}"), url_for(format: :pdf, download: true), class: 'btn btn-default' %>
+    <% end %>
+    <% if @source.url.present? %>
+      <%= link_to raw("#{@source.url} #{content_tag(:span, '', class: 'glyphicon glyphicon-new-window')}"), @source.url %>
+    <% end %>
+
+    <form class="form-horizontal mt-1 pt-10">
+      <% [
+          :authors, :year, :kind, :abstract, :description,
+          [:user, "#{@source.user.full_name}, #{time_ago_in_words(@source.created_at)}"]
+        ].each do |field| %>
+        <div class="form-group">
+          <div class="col-sm-12 col-md-3">
+            <% if field.is_a? Array %>
+              <strong><%= Source.human_attribute_name(field[0]) %></strong>
+            <% else %>
+              <strong><%= Source.human_attribute_name(field) %></strong>
+            <% end %>
+          </div>
+          <div class="col-sm-12 col-md-9">
+            <% if field.is_a? Array %>
+              <%= field[1] %>
+            <% else %>
+              <%= @source.send field %>
+            <% end %>
+          </div>
+        </div>
+      <% end %>
+    </form>
+
+    <%= link_to raw("Delete #{glyphicon :trash}"), source_path(@source),
+          method: :delete,
+          data: { confirm: 'Are you sure?' },
+          class: 'btn btn-warning' %>
+
+  </div>
   <div class="col-xs-12 col-lg-6">
-    <object data="<%= url_for(format: :pdf) %>" type="application/pdf" width="100%" height="600">
-      alt : <a href="<%= url_for(format: :pdf) %>"><%= File.basename @source.document.path %></a>
-    </object>
-  </div><!-- /.col-lg-6 -->
-</div><!-- /.row -->
+    <% if @source.document.present? %>
+      <object data="<%= url_for(format: :pdf) %>" type="application/pdf" width="100%" height="600">
+        alt : <a href="<%= url_for(format: :pdf) %>"><%= File.basename @source.document.path %></a>
+      </object>
+    <% else %>
+      <em>No document attached yet...</em>
+    <% end %>
+  </div>
+</div>

@@ -8,6 +8,10 @@ class SourcesController < ApplicationController
     @source = Source.new
   end
 
+  def edit
+    @source = Source.find params[:id]
+  end
+
   def show
     @source = Source.find params[:id]
     disposition = params.key?(:download) ? 'attachment' : 'inline'
@@ -28,6 +32,27 @@ class SourcesController < ApplicationController
       redirect_to sources_url
     else
       render 'new'
+    end
+  end
+
+  def update
+    @source = Source.find params[:id]
+    @source.update source_params
+    if (@source.save)
+      redirect_to source_url(@source)
+    else
+      render 'edits'
+    end
+  end
+
+  def destroy
+    @source = Source.find params[:id]
+    if @source.destroy
+      flash[:success] = 'Source removed succesfully!'
+      redirect_to sources_url
+    else
+      flash[:error] = 'Could not delete Source...'
+      redirect_to source_url(@source)
     end
   end
 

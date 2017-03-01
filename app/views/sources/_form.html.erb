@@ -3,6 +3,12 @@
   <%= f.text_field :authors %>
   <%= f.number_field :year %>
   <%= f.select :kind, Source.kinds.keys.map { |k| [I18n.t("activerecord.attributes.source.kinds.#{k}"), k] }  %>
+  <%= f.text_field :url %>
+  <%= f.text_area :abstract %>
+  <%= f.text_area :description %>
   <%= f.file_field :document %>
-  <%= f.submit 'Save Source', class: 'btn btn-default' %>
+  <%= f.submit 'Save Source',
+        class: 'btn btn-primary' %>
+  <%= link_to 'Cancel', ((@source.new_record?) ? sources_path : source_path(@source)),
+        class: 'btn btn-default'%>
 <% end %>
