@@ -45,3 +45,5 @@ en:
         description: Description (by contributor)
         user: Contributed by
         document: PDF Document
+        approvals: Approvals
+        approvers: Approved by

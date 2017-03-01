@@ -5,6 +5,7 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :sources
+  has_many :approvals, dependent: :destroy
 
   def full_name
     last_name.present? ? "#{first_name} #{last_name}" : first_name

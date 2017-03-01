@@ -1,21 +1,41 @@
 
 <div class="row">
-  <div class="col-xs-12 col-lg-6">
+  <div class="col-xs-12 col-md-6">
     <%= content_tag :h3, @source.title %>
-    <%= link_to raw("Edit #{glyphicon :pencil}"), edit_source_path(@source), class: 'btn btn-default' %>
-    <% if @source.document.present? %>
-      <%= link_to raw("Download PDF #{content_tag(:span, '', class: 'glyphicon glyphicon-download-alt')}"), url_for(format: :pdf, download: true), class: 'btn btn-default' %>
-    <% end %>
+
+    <div class="row">
+      <div class="col-xs-12 col-md-8">
+        <%= link_to raw("Edit #{glyphicon :pencil}"), edit_source_path(@source), class: 'btn btn-default' %>
+        <% if @source.document.present? %>
+          <%= link_to raw("Download PDF #{glyphicon 'download-alt'}"), url_for(format: :pdf, download: true), class: 'btn btn-default' %>
+        <% end %>
+      </div>
+
+      <div class="col-xs-12 col-md-4 text-right">
+        <% if @source.approved_by? current_user %>
+          <%= link_to raw("Approved #{glyphicon :ok}"), approval_url(@source.approval_by(current_user)), method: :delete, class: 'btn btn-info' %>
+        <% else %>
+          <%= form_for Approval.new, class: 'form-inline' do |f| %>
+            <%= f.hidden_field :source_id, value: @source.id %>
+            <%= f.hidden_field :user_id, value: current_user.id %>
+            <%= f.submit 'Approve', class: 'btn btn-default' %>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
 
     <form class="form-horizontal mt-1 pt-10">
       <% [
-          :authors, :year, :kind, :abstract, :search_database, :search_query,
+          :authors, :year,
+          [:kind, @source.translated_kind],
+          :abstract, :search_database, :search_query,
           [:url, link_to(
-                  raw("#{@source.url} #{content_tag(:span, '', class: 'glyphicon glyphicon-new-window')}"),
+                  raw("#{@source.url} #{glyphicon 'new-window'}"),
                   @source.url,
                   target: '_blank')],
           :description,
-          [:user, "#{@source.user.full_name}, #{time_ago_in_words(@source.created_at)}"]
+          [:user, "#{@source.user.full_name}, #{time_ago_in_words(@source.created_at)}"],
+          [:approvers, @source.approvers.map { |u| u.full_name }.join(', ')]
         ].each do |field| %>
         <div class="form-group">
           <div class="col-sm-12 col-md-3">
@@ -42,7 +62,7 @@
           class: 'btn btn-warning' %>
 
   </div>
-  <div class="col-xs-12 col-lg-6">
+  <div class="col-xs-12 col-md-6">
     <% if @source.document.present? %>
       <object data="<%= url_for(format: :pdf) %>" type="application/pdf" width="100%" height="600">
         alt : <a href="<%= url_for(format: :pdf) %>"><%= File.basename @source.document.path %></a>

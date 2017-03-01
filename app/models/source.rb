@@ -5,6 +5,8 @@ class Source < ApplicationRecord
   ]
 
   belongs_to :user
+  has_many :approvals, dependent: :destroy
+  has_many :approvers, through: :approvals, source: :user
 
   validates :title, presence: true
 
@@ -16,6 +18,14 @@ class Source < ApplicationRecord
 
   def translated_kind
     I18n.t(kind, scope: 'activerecord.attributes.source.kinds')
+  end
+
+  def approved_by? user
+    !approvals.by_user(user).empty?
+  end
+
+  def approval_by user
+    approvals.by_user(user).first
   end
 
 end

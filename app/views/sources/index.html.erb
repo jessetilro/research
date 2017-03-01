@@ -18,9 +18,10 @@
 <table class="table">
   <thead>
     <tr>
-      <th>Description</th>
-      <th>Kind</th>
-      <th>Added By</th>
+      <th><%= Source.human_attribute_name :description %></th>
+      <th><%= Source.human_attribute_name :kind %></th>
+      <th><%= Source.human_attribute_name :user %></th>
+      <th><%= Source.human_attribute_name :approvals %></th>
     </tr>
   </thead>
   <tbody>
@@ -31,7 +32,8 @@
           <em><%= s.authors %> | <%= s.year %></em>
         </td>
         <td><%= s.translated_kind %></td>
-        <td><%= s.user.full_name %>, <%= time_ago_in_words(s.created_at) %></td>
+        <td><%= s.user.full_name %>,<br /><small><em><%= time_ago_in_words(s.created_at) %> ago</em></small></td>
+        <td><%= s.approvals.count %></td>
       </tr>
     <% end %>
   </tbody>

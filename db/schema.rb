@@ -10,7 +10,16 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170301162337) do
+ActiveRecord::Schema.define(version: 20170301170640) do
+
+  create_table "approvals", force: :cascade do |t|
+    t.integer  "user_id",    null: false
+    t.integer  "source_id",  null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["source_id"], name: "index_approvals_on_source_id"
+    t.index ["user_id"], name: "index_approvals_on_user_id"
+  end
 
   create_table "sources", force: :cascade do |t|
     t.string   "title"

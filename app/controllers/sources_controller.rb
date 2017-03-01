@@ -14,6 +14,7 @@ class SourcesController < ApplicationController
 
   def show
     @source = Source.find params[:id]
+    @approval = @source.approval_by current_user
     disposition = params.key?(:download) ? 'attachment' : 'inline'
     respond_to do |format|
       format.html
