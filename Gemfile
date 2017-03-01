@@ -41,9 +41,7 @@ group :development do
 end
 
 # Use mysql2 as production database
-group :production do
-  gem 'mysql2'
-end
+gem 'mysql2'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
