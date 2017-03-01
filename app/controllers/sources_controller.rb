@@ -8,6 +8,16 @@ class SourcesController < ApplicationController
     @source = Source.new
   end
 
+  def show
+    @source = Source.find params[:id]
+    respond_to do |format|
+      format.html
+      format.pdf do
+        send_file @source.document.path
+      end
+    end
+  end
+
   def create
     @source = Source.new(source_params)
     @source.user = current_user
@@ -27,7 +37,8 @@ class SourcesController < ApplicationController
       :kind,
       :url,
       :abstract,
-      :description
+      :description,
+      :document
     )
   end
 

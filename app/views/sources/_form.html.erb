@@ -3,5 +3,6 @@
   <%= f.text_field :authors %>
   <%= f.number_field :year %>
   <%= f.select :kind, Source.kinds.keys.map { |k| [I18n.t("activerecord.attributes.source.kinds.#{k}"), k] }  %>
+  <%= f.file_field :document %>
   <%= f.submit 'Save Source', class: 'btn btn-default' %>
 <% end %>
