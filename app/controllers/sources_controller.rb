@@ -64,6 +64,8 @@ class SourcesController < ApplicationController
       :year,
       :kind,
       :url,
+      :search_database,
+      :search_query,
       :abstract,
       :description,
       :document
