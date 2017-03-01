@@ -37,6 +37,8 @@ en:
           book: Book
         url: URL
         abstract: Abstract
+        search_database: Search Tool/Database
+        search_query: Search Query
         description: Description (by contributor)
         user: Contributed by
         document: PDF Document

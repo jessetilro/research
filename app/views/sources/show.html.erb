@@ -6,13 +6,15 @@
     <% if @source.document.present? %>
       <%= link_to raw("Download PDF #{content_tag(:span, '', class: 'glyphicon glyphicon-download-alt')}"), url_for(format: :pdf, download: true), class: 'btn btn-default' %>
     <% end %>
-    <% if @source.url.present? %>
-      <%= link_to raw("#{@source.url} #{content_tag(:span, '', class: 'glyphicon glyphicon-new-window')}"), @source.url %>
-    <% end %>
 
     <form class="form-horizontal mt-1 pt-10">
       <% [
-          :authors, :year, :kind, :abstract, :description,
+          :authors, :year, :kind, :abstract, :search_database, :search_query,
+          [:url, link_to(
+                  raw("#{@source.url} #{content_tag(:span, '', class: 'glyphicon glyphicon-new-window')}"),
+                  @source.url,
+                  target: '_blank')],
+          :description,
           [:user, "#{@source.user.full_name}, #{time_ago_in_words(@source.created_at)}"]
         ].each do |field| %>
         <div class="form-group">

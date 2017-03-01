@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170301133215) do
+ActiveRecord::Schema.define(version: 20170301162337) do
 
   create_table "sources", force: :cascade do |t|
     t.string   "title"
@@ -27,6 +27,8 @@ ActiveRecord::Schema.define(version: 20170301133215) do
     t.string   "document_content_type"
     t.integer  "document_file_size"
     t.datetime "document_updated_at"
+    t.string   "search_query"
+    t.string   "search_database"
     t.index ["user_id"], name: "index_sources_on_user_id"
   end
 
