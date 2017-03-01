@@ -18,7 +18,7 @@ class SourcesController < ApplicationController
     respond_to do |format|
       format.html
       format.pdf do
-        send_file @source.document.path,
+        send_file File.realpath(@source.document.path),
           type: @source.document.content_type,
           disposition: disposition
       end
