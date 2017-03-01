@@ -23,3 +23,6 @@
 # Exclude database and secrets config from repo.
 config/database.yml
 config/secrets.yml
+
+# Exclude private uploads
+private/uploads/*

@@ -10,10 +10,13 @@ class SourcesController < ApplicationController
 
   def show
     @source = Source.find params[:id]
+    disposition = params.key?(:download) ? 'attachment' : 'inline'
     respond_to do |format|
       format.html
       format.pdf do
-        send_file @source.document.path
+        send_file @source.document.path,
+          type: @source.document.content_type,
+          disposition: disposition
       end
     end
   end
