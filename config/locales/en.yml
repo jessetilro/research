@@ -31,10 +31,13 @@ en:
         title: Title
         authors: Authors
         year: Publication Year
-        kind: Kind
+        kind: Publication Kind
         kinds:
-          paper: Paper
+          paper: Research paper
           book: Book
+          edited: Edited volume
+          conference: Conference paper/proceeding
+          journal: Journal article
         url: URL
         abstract: Abstract
         search_database: Search Tool/Database
