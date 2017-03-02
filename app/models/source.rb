@@ -11,7 +11,10 @@ class Source < ApplicationRecord
   validates :title, presence: true
 
   scope :by_search_query, ->(q) { where('title LIKE ? OR abstract LIKE ? OR authors LIKE ?', "%#{q}%", "%#{q}%", "%#{q}%") }
-  default_scope { order(created_at: :desc) }
+  scope :sorted_by_approvals_nonzero, ->(dir=:desc) { joins(:approvals).group('sources.id').order('count(sources.id) desc') }
+  scope :sorted_by_time, ->(dir=:desc) { order(created_at: dir) }
+
+  default_scope { sorted_by_time }
 
   has_attached_file :document
   validates_attachment_content_type :document, content_type: /pdf/
