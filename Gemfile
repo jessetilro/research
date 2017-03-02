@@ -72,3 +72,6 @@ gem 'bootstrap_form'
 
 # Automatically add vendor prefixes to css
 gem 'autoprefixer-rails'
+
+# PDF generation based on HTML, for export.
+gem 'wicked_pdf'
