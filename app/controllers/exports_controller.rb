@@ -8,6 +8,9 @@ class ExportsController < ApplicationController
       format.pdf do
         render  pdf: 'export',
                 template: 'exports/export',
+                dpi: '300',
+                margin: {top: 10, bottom: 10, left: 20, right: 20},
+                user_xserver: false,
                 disposition: disposition
       end
     end
