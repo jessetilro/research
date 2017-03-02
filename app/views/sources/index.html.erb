@@ -2,18 +2,21 @@
 <div class="row">
   <div class="col-lg-6">
     <%= link_to raw("Add #{Source.model_name.human} #{glyphicon :plus}"), new_source_path, class: 'btn btn-default' %>
-    <%= link_to raw("Generate PDF #{glyphicon :export}"), export_path(format: :pdf), class: 'btn btn-default' %>
-  </div><!-- /.col-lg-6 -->
-  <div class="col-lg-6">
-    <form action="<%= sources_url %>" method="get">
-      <div class="input-group">
-        <input type="text" name="q" class="form-control" placeholder="Search for..." value="<%= h(params[:q]) %>">
-        <span class="input-group-btn">
-          <button class="btn btn-default" type="button"><%= glyphicon :search %></button>
-        </span>
-      </div><!-- /input-group -->
-    </form>
-  </div><!-- /.col-lg-6 -->
+    <div class="btn-group" role="group" aria-label="...">
+      <%= link_to raw("Generate PDF #{glyphicon 'download-alt'}"), export_path(format: :pdf, download: true), class: 'btn btn-default' %>
+      <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+        <span class="caret"></span>
+        <span class="sr-only">Toggle Dropdown</span>
+      </button>
+      <ul class="dropdown-menu">
+        <li>
+          <%= link_to 'View in browser', export_path(format: :pdf), target: '_blank' %>
+        </li>
+        <li>
+          <%= link_to 'Download', export_path(format: :pdf, download: true) %>
+        </li>
+      </ul>
+    </div>
 </div><!-- /.row -->
 
 <table class="table">

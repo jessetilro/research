@@ -1,9 +1,29 @@
 <!doctype html>
-<html>
+<html id="export-pdf">
   <head>
     <meta charset='utf-8' />
+    <%= wicked_pdf_stylesheet_link_tag "exports" -%>
   </head>
-  <body onload='number_pages'>
-    <h1>Sources</h1>
+  <body>
+
+    <div id="header">
+      <h1>Sources for Literature Review</h1>
+      <small><em>Generated on <%= Time.now.strftime("%A %B %d, %Y, at %H:%M:%S") %></em></small>
+
+      <p>
+        <strong>Contributors</strong><br />
+        <% @users.each do |user| %>
+          <%= user.full_name %> - <%= user.email %><br />
+        <% end %>
+      </p>
+    </div>
+
+    <% @sources.each do |s| %>
+      <%= content_tag :h3, s.title %>
+      <strong><%= s.authors %> (<%= s.year %>)</strong><br />
+      <small><em>Keywords: <%= s.keywords %></em></small>
+      <%= content_tag :p, s.abstract %>
+    <% end %>
+
   </body>
 </html>

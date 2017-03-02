@@ -1,3 +1,20 @@
 // Place all the styles related to the exports controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+#export-pdf {
+
+  body {
+    font-family: 'Helvetica';
+    padding: 10px 60px;
+  }
+
+  h3 {
+    margin-top: 40px;
+  }
+
+  #header {
+    margin-bottom: 42px;
+  }
+
+}
