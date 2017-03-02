@@ -1,7 +1,7 @@
 class Source < ApplicationRecord
 
   enum kind: [
-    :paper, :book, :edited, :conference, :journal
+    :paper, :book, :edited, :conference, :journal, :report
   ]
 
   belongs_to :user

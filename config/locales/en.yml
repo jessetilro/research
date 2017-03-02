@@ -38,6 +38,7 @@ en:
           edited: Edited volume
           conference: Conference paper/proceeding
           journal: Journal article
+          report: (Technical) Report
         url: URL
         abstract: Abstract
         search_database: Search Tool/Database
