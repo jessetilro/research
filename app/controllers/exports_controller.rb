@@ -1,7 +1,7 @@
 class ExportsController < ApplicationController
 
   def show
-    @sources = Source.all
+    @sources = Source.by_search_params search_params
     @users = User.all
     disposition = params.key?(:download) ? 'attachment' : 'inline'
     respond_to do |format|
@@ -14,6 +14,11 @@ class ExportsController < ApplicationController
                 disposition: disposition
       end
     end
+  end
+
+  protected
+  def search_params
+    params.permit(:q, :sort)
   end
 
 end

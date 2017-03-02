@@ -1,7 +1,8 @@
 class SourcesController < ApplicationController
 
   def index
-    @sources = Source.by_search_query(params[:q])
+    @search_params = search_params
+    @sources = Source.by_search_params(@search_params)
   end
 
   def new
@@ -72,6 +73,10 @@ class SourcesController < ApplicationController
       :description,
       :document
     )
+  end
+
+  def search_params
+    params.permit(:q, :sort)
   end
 
 end

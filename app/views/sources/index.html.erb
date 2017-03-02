@@ -1,6 +1,6 @@
 
 <div class="row">
-  <div class="col-lg-6">
+  <div class="col-xs-12 col-lg-4">
     <%= link_to raw("Add #{Source.model_name.human} #{glyphicon :plus}"), new_source_path, class: 'btn btn-default' %>
 
     <div class="btn-group" role="group" aria-label="...">
@@ -10,17 +10,32 @@
       </button>
       <ul class="dropdown-menu">
         <li>
-          <%= link_to 'View PDF', export_path(format: :pdf), target: '_blank' %>
+          <%= link_to 'View PDF', export_path(:pdf, @search_params), target: '_blank' %>
         </li>
         <li>
-          <%= link_to 'Download PDF', export_path(format: :pdf, download: true) %>
+          <%= link_to 'Download PDF', export_path(:pdf, @search_params.merge(download: true)) %>
         </li>
       </ul>
     </div>
+
   </div>
 
-  <div class="col-lg-6">
+  <div class="col-xs-12 col-lg-4">
+    Sort by:
+    <div class="btn-group" role="group" aria-label="sort">
+      <% [:time, :approvals].each do |sort| %>
+        <%= link_to sort.to_s.capitalize,
+              sources_path(@search_params.merge(sort: sort)),
+              class: "btn btn-#{@search_params[:sort].try(:to_sym) == sort ? 'primary' : 'default'}"
+              %>
+        <% end %>
+      </div>
+  </div>
+
+  <div class="col-xs-12 col-lg-4">
     <form action="<%= sources_url %>" method="get">
+      <div class="input-group">
+      </div>
       <div class="input-group">
         <input type="text" name="q" class="form-control" placeholder="Search for..." value="<%= h(params[:q]) %>">
         <span class="input-group-btn">
@@ -49,7 +64,7 @@
         </td>
         <td><%= s.translated_kind %></td>
         <td><%= s.user.full_name %>,<br /><small><em><%= time_ago_in_words(s.created_at) %> ago</em></small></td>
-        <td><%= s.approvals.count %></td>
+        <td><%= s.approvals_count %></td>
       </tr>
     <% end %>
   </tbody>

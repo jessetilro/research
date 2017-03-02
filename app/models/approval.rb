@@ -1,7 +1,7 @@
 class Approval < ApplicationRecord
 
   belongs_to :user
-  belongs_to :source
+  belongs_to :source, counter_cache: true
 
   validates :source, presence: true
   validates :user, presence: true
