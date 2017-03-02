@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170302160526) do
+ActiveRecord::Schema.define(version: 20170302190230) do
 
   create_table "approvals", force: :cascade do |t|
     t.integer  "user_id",    null: false
@@ -23,10 +23,10 @@ ActiveRecord::Schema.define(version: 20170302160526) do
 
   create_table "sources", force: :cascade do |t|
     t.string   "title"
-    t.string   "authors"
+    t.text     "authors"
     t.integer  "year"
     t.integer  "kind"
-    t.string   "url"
+    t.text     "url"
     t.text     "abstract"
     t.text     "description"
     t.integer  "user_id"
@@ -36,9 +36,9 @@ ActiveRecord::Schema.define(version: 20170302160526) do
     t.string   "document_content_type"
     t.integer  "document_file_size"
     t.datetime "document_updated_at"
-    t.string   "search_query"
+    t.text     "search_query"
     t.string   "search_database"
-    t.string   "keywords"
+    t.text     "keywords"
     t.index ["user_id"], name: "index_sources_on_user_id"
   end
 
