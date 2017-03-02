@@ -64,10 +64,11 @@ class SourcesController < ApplicationController
       :authors,
       :year,
       :kind,
+      :keywords,
+      :abstract,
       :url,
       :search_database,
       :search_query,
-      :abstract,
       :description,
       :document
     )

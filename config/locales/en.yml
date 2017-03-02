@@ -40,6 +40,7 @@ en:
           journal: Journal article
           report: (Technical) Report
         url: URL
+        keywords: Keywords
         abstract: Abstract
         search_database: Search Tool/Database
         search_query: Search Query
