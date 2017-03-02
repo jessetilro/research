@@ -2,7 +2,19 @@
 <html id="export-pdf">
   <head>
     <meta charset='utf-8' />
-    <%= stylesheet_link_tag wicked_pdf_asset_base64('exports') %>
+    <style type="text/css">
+      h3 {
+        margin-top: 40px;
+      }
+
+      p {
+        font-size: 12px;
+      }
+
+      #header {
+        margin-bottom: 42px;
+      }
+    </style>
   </head>
   <body>
 
@@ -19,6 +31,7 @@
     </div>
 
     <% @sources.each do |s| %>
+      <hr>
       <%= content_tag :h3, s.title %>
       <strong><%= s.authors %> (<%= s.year %>)</strong><br />
       <small><em>Keywords: <%= s.keywords %></em></small>

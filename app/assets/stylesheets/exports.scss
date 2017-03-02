@@ -5,11 +5,15 @@
 #export-pdf {
 
   body {
-    font-family: 'Times';
+    font-family: 'Helvetica';
   }
 
   h3 {
     margin-top: 40px;
+  }
+
+  p {
+    font-size: 9px;
   }
 
   #header {
