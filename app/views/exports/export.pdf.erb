@@ -3,16 +3,22 @@
   <head>
     <meta charset='utf-8' />
     <style type="text/css">
-      h3 {
-        margin-top: 40px;
-      }
-
-      p {
-        font-size: 12px;
-      }
-
-      #header {
-        margin-bottom: 42px;
+      body { font-family: "Times New Roman", Times, serif; }
+      h1 { font-size: 28px; }
+      h3 { margin-bottom: 10px; }
+      p { font-size: 13px; }
+      small { font-size: 12px; }
+      #header { margin-bottom: 42px; }
+      .source { margin: 20px 0; }
+      .source strong { font-size: 14px; }
+      .source small { font-size: 12px; }
+      .source p { font-size: 12px; }
+      .source .description strong { font-size: 12px; }
+      .source .description small { font-size: 10px; }
+      .source .description blockquote { font-size: 14px; }
+      .source .description {
+        background-color: #f0f0f0;
+        padding: 4px 8px;
       }
     </style>
   </head>
@@ -32,10 +38,19 @@
 
     <% @sources.each do |s| %>
       <hr>
-      <%= content_tag :h3, s.title %>
-      <strong><%= s.authors %> (<%= s.year %>)</strong><br />
-      <small><em>Keywords: <%= s.keywords %></em></small>
-      <%= content_tag :p, s.abstract %>
+      <div class="source">
+        <%= content_tag :h3, s.title %>
+        <strong><%= s.authors %> (<%= s.year %>)</strong><br />
+        <small><em>Keywords: <%= s.keywords %></em></small>
+        <%= content_tag :p, s.abstract %>
+        <div class="description">
+          <strong>Contributed by <%= s.user.full_name %>:</strong><br />
+          <small><em><%= s.created_at.strftime("%Y-%m-%d %H:%M:%S") %></em></small>
+          <blockquote>
+            "<%= s.description %>"
+          </blockquote>
+        </div>
+      </div>
     <% end %>
 
   </body>
