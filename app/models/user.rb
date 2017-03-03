@@ -7,6 +7,8 @@ class User < ApplicationRecord
   has_many :sources
   has_many :approvals, dependent: :destroy
 
+  enum role: [:contributor, :supervisor]
+
   def full_name
     last_name.present? ? "#{first_name} #{last_name}" : first_name
   end
