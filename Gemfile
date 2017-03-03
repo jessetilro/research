@@ -76,3 +76,6 @@ gem 'autoprefixer-rails'
 # PDF generation based on HTML, for export.
 gem 'wicked_pdf'
 gem 'wkhtmltopdf-binary', group: :production
+
+# Permission management
+gem 'cancancan'
