@@ -29,8 +29,15 @@
       <small><em>Generated on <%= Time.now.strftime("%A %B %d, %Y, at %H:%M:%S") %></em></small>
 
       <p>
+        <strong>Supervisors</strong><br />
+        <% @users.supervisors.each do |user| %>
+          <%= user.full_name %> - <%= user.email %><br />
+        <% end %>
+      </p>
+
+      <p>
         <strong>Contributors</strong><br />
-        <% @users.each do |user| %>
+        <% @users.contributors.each do |user| %>
           <%= user.full_name %> - <%= user.email %><br />
         <% end %>
       </p>
