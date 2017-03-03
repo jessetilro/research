@@ -1,7 +1,8 @@
 class SourcesController < ApplicationController
 
   def index
-    @sources = Source.by_search_query(params[:q])
+    @search_params = search_params
+    @sources = Source.by_search_params(@search_params)
   end
 
   def new
@@ -14,6 +15,7 @@ class SourcesController < ApplicationController
 
   def show
     @source = Source.find params[:id]
+    authorize! :read, @source
     @approval = @source.approval_by current_user
     disposition = params.key?(:download) ? 'attachment' : 'inline'
     respond_to do |format|
@@ -27,6 +29,7 @@ class SourcesController < ApplicationController
   end
 
   def create
+    authorize! :create, Source
     @source = Source.new(source_params)
     @source.user = current_user
     if (@source.save)
@@ -38,6 +41,7 @@ class SourcesController < ApplicationController
 
   def update
     @source = Source.find params[:id]
+    authorize! :update, @source
     @source.update source_params
     if (@source.save)
       redirect_to source_url(@source)
@@ -48,6 +52,7 @@ class SourcesController < ApplicationController
 
   def destroy
     @source = Source.find params[:id]
+    authorize! :destroy, @source
     if @source.destroy
       flash[:success] = 'Source removed succesfully!'
       redirect_to sources_url
@@ -64,13 +69,18 @@ class SourcesController < ApplicationController
       :authors,
       :year,
       :kind,
+      :keywords,
+      :abstract,
       :url,
       :search_database,
       :search_query,
-      :abstract,
       :description,
       :document
     )
+  end
+
+  def search_params
+    params.permit(:q, :sort)
   end
 
 end

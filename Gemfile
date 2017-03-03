@@ -41,7 +41,7 @@ group :development do
 end
 
 # Use mysql2 as production database
-gem 'mysql2'
+gem 'mysql2', group: :production
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
@@ -72,3 +72,10 @@ gem 'bootstrap_form'
 
 # Automatically add vendor prefixes to css
 gem 'autoprefixer-rails'
+
+# PDF generation based on HTML, for export.
+gem 'wicked_pdf'
+gem 'wkhtmltopdf-binary', group: :production
+
+# Permission management
+gem 'cancancan'

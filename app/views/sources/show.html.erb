@@ -28,7 +28,7 @@
       <% [
           :authors, :year,
           [:kind, @source.translated_kind],
-          :abstract, :search_database, :search_query,
+          :keywords, :abstract, :search_database, :search_query,
           [:url, link_to(
                   raw("#{@source.url} #{glyphicon 'new-window'}"),
                   @source.url,
