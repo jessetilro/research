@@ -27,7 +27,7 @@
     <form class="form-horizontal mt-1 pt-10">
       <% [
           :authors, :year,
-          [:kind, @source.translated_kind],
+          [:bibtex_type, @source.translated_bibtex_type],
           :keywords, :abstract, :search_database, :search_query,
           [:url, link_to(
                   raw("#{@source.url} #{glyphicon 'new-window'}"),

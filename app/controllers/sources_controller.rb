@@ -68,7 +68,7 @@ class SourcesController < ApplicationController
       :title,
       :authors,
       :year,
-      :kind,
+      :bibtex_type,
       :keywords,
       :abstract,
       :url,

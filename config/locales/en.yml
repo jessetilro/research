@@ -31,7 +31,7 @@ en:
         title: Title
         authors: Authors
         year: Publication Year
-        kind: Publication Kind
+        bibtex_type: BibTeX Item Type
         bibtex_types:
           article: Journal/Magazine Article
           book: Book

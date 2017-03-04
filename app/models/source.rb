@@ -27,7 +27,7 @@ class Source < ApplicationRecord
   has_attached_file :document
   validates_attachment_content_type :document, content_type: /pdf/
 
-  def translated_kind
+  def translated_bibtex_type
     I18n.t(bibtex_type, scope: 'activerecord.attributes.source.bibtex_types')
   end
 
