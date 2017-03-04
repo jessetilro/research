@@ -13,6 +13,9 @@ class ExportsController < ApplicationController
                 user_xserver: false,
                 disposition: disposition
       end
+      format.bib do
+        #TODO implement BibTeX export
+      end
     end
   end
 

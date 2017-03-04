@@ -32,13 +32,20 @@ en:
         authors: Authors
         year: Publication Year
         kind: Publication Kind
-        kinds:
-          paper: Research paper
+        bibtex_types:
+          article: Journal/Magazine Article
           book: Book
-          edited: Edited volume
-          conference: Conference paper/proceeding
-          journal: Journal article
-          report: (Technical) Report
+          booklet: Booklet (printed work without publisher)
+          inbook: Part of Book (e.g. chapter)
+          incollection: Named Part of Book (e.g. in Edited Volume)
+          inproceedings: Paper in Conference Proceedings
+          manual: Manual (Technical Documentation)
+          mastersthesis: Master's Thesis
+          misc: Miscellaneous
+          phdthesis: Ph.D. Thesis
+          proceedings: Conference Proceedings
+          techreport: Technical Report
+          unpublished: Unpublished work
         url: URL
         keywords: Keywords
         abstract: Abstract

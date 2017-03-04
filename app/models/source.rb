@@ -1,7 +1,7 @@
 class Source < ApplicationRecord
 
-  enum kind: [
-    :paper, :book, :edited, :conference, :journal, :report
+  enum bibtex_type: [
+    :article, :book, :booklet, :inbook, :incollection, :inproceedings, :manual, :mastersthesis, :misc, :phdthesis, :proceedings, :techreport, :unpublished
   ]
 
   belongs_to :user
@@ -28,7 +28,7 @@ class Source < ApplicationRecord
   validates_attachment_content_type :document, content_type: /pdf/
 
   def translated_kind
-    I18n.t(kind, scope: 'activerecord.attributes.source.kinds')
+    I18n.t(bibtex_type, scope: 'activerecord.attributes.source.bibtex_types')
   end
 
   def approved_by? user

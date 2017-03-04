@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170303075008) do
+ActiveRecord::Schema.define(version: 20170304174354) do
 
   create_table "approvals", force: :cascade do |t|
     t.integer  "user_id",    null: false
@@ -25,7 +25,6 @@ ActiveRecord::Schema.define(version: 20170303075008) do
     t.string   "title"
     t.text     "authors"
     t.integer  "year"
-    t.integer  "kind"
     t.text     "url"
     t.text     "abstract"
     t.text     "description"
@@ -40,6 +39,7 @@ ActiveRecord::Schema.define(version: 20170303075008) do
     t.string   "search_database"
     t.text     "keywords"
     t.integer  "approvals_count",       default: 0
+    t.integer  "bibtex_type",           default: 0
     t.index ["user_id"], name: "index_sources_on_user_id"
   end
 
