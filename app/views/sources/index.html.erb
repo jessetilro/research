@@ -15,6 +15,9 @@
         <li>
           <%= link_to 'Download PDF', export_path(:pdf, @search_params.merge(download: true)) %>
         </li>
+        <li>
+          <%= link_to 'View BibTeX', export_path(:bib, @search_params), target: '_blank' %>
+        </li>
       </ul>
     </div>
 

@@ -79,3 +79,8 @@ gem 'wkhtmltopdf-binary', group: :production
 
 # Permission management
 gem 'cancancan'
+
+# Bibliography export/import and reference styling
+gem "citeproc-ruby"
+gem "bibtex-ruby"
+gem "csl-styles"
