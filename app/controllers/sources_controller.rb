@@ -74,8 +74,24 @@ class SourcesController < ApplicationController
       :url,
       :search_database,
       :search_query,
-      :description,
-      :document
+      :document,
+      :isbn,
+      :doi,
+      :editors,
+      :subtitle,
+      :shorttitle,
+      :month,
+      :publisher,
+      :institution,
+      :organization,
+      :school,
+      :series,
+      :chapter,
+      :pages,
+      :journal,
+      :number,
+      :volume,
+      :note
     )
   end
 

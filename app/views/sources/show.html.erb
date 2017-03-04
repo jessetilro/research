@@ -33,7 +33,7 @@
                   raw("#{@source.url} #{glyphicon 'new-window'}"),
                   @source.url,
                   target: '_blank')],
-          :description,
+          :note,
           [:user, "#{@source.user.full_name}, #{time_ago_in_words(@source.created_at)}"],
           [:approvers, @source.approvers.map { |u| u.full_name }.join(', ')]
         ].each do |field| %>

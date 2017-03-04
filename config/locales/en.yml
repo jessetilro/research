@@ -29,8 +29,22 @@ en:
     attributes:
       source:
         title: Title
+        subtitle: Title (of the full work)
+        shorttitle: Short Title
         authors: Authors
-        year: Publication Year
+        editors: Editors
+        year: Year (of publication)
+        month: Month (of publication)
+        publisher: Publisher
+        institution: Institution (involved in publishing)
+        organization: Organization (conference sponsor)
+        school: School (in case of thesis)
+        series: Series (of books)
+        chapter: Chapter
+        pages: Page numbers
+        journal: Journal
+        number: Number (e.g. issue)
+        volume: Volume
         bibtex_type: BibTeX Item Type
         bibtex_types:
           article: Journal/Magazine Article
@@ -49,9 +63,11 @@ en:
         url: URL
         keywords: Keywords
         abstract: Abstract
+        isbn: ISBN
+        doi: DOI
         search_database: Search Tool/Database
         search_query: Search Query
-        description: Description (by contributor)
+        note: Miscellaneous extra information
         user: Contributed by
         document: PDF Document
         approvals: Approvals
