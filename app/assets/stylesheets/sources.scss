@@ -1,3 +1,20 @@
 // Place all the styles related to the sources controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
+
+/* Override table header. */
+.floatingheader thead {
+    position: sticky;
+    top: 0;
+    background-color: white;
+    border-bottom: 1px solid dimgray;
+}
+
+/* Override table border trick
+   Replace with something else instead. */
+table.floatingheader {
+    border-collapse: separate;
+}
+table.floatingheader > tbody > tr:first-of-type > td {
+    border-top: none;
+}
