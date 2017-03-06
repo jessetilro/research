@@ -39,6 +39,7 @@ ActiveRecord::Schema.define(version: 20170304213824) do
     t.text     "keywords"
     t.integer  "approvals_count",       default: 0
     t.integer  "bibtex_type",           default: 0
+    t.string   "bibtex_key"
     t.string   "isbn"
     t.string   "doi"
     t.text     "editors"
@@ -48,7 +49,9 @@ ActiveRecord::Schema.define(version: 20170304213824) do
     t.string   "publisher"
     t.string   "institution"
     t.string   "organization"
+    t.text     "address"
     t.string   "school"
+    t.string   "edition"
     t.string   "series"
     t.integer  "chapter"
     t.string   "pages"

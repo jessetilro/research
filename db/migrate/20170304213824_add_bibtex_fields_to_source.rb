@@ -1,5 +1,6 @@
 class AddBibtexFieldsToSource < ActiveRecord::Migration[5.0]
   def change
+    add_column :sources, :bibtex_key, :string
     add_column :sources, :isbn, :string
     add_column :sources, :doi, :string
     add_column :sources, :editors, :text
@@ -9,7 +10,9 @@ class AddBibtexFieldsToSource < ActiveRecord::Migration[5.0]
     add_column :sources, :publisher, :string
     add_column :sources, :institution, :string
     add_column :sources, :organization, :string
+    add_column :sources, :address, :text
     add_column :sources, :school, :string
+    add_column :sources, :edition, :string
     add_column :sources, :series, :string
     add_column :sources, :chapter, :integer
     add_column :sources, :pages, :string

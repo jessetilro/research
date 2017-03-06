@@ -45,6 +45,7 @@ en:
         journal: Journal
         number: Number (e.g. issue)
         volume: Volume
+        bibtex_key: BibTeX Entry Key
         bibtex_type: BibTeX Item Type
         bibtex_types:
           article: Journal/Magazine Article
@@ -72,3 +73,4 @@ en:
         document: PDF Document
         approvals: Approvals
         approvers: Approved by
+        reference: Reference (APA)

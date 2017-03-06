@@ -1,4 +1,36 @@
 class Source < ApplicationRecord
+  include Referrable
+
+  BIBTEX_MAPPING = {
+    title: :title,
+    author: :authors,
+    year: :year,
+    url: :url,
+    abstract: :abstract,
+    keywords: :keywords,
+    approvals_count: :approvals_count,
+    bibtex_type: :bibtex_type,
+    key: :bibtex_key,
+    isbn: :isbn,
+    doi: :doi,
+    editors: :editors,
+    booktitle: :subtitle,
+    shorttitle: :shorttitle,
+    month: :month,
+    publisher: :publisher,
+    institution: :institution,
+    organization: :organization,
+    address: :address,
+    school: :school,
+    edition: :edition,
+    series: :series,
+    chapter: :chapter,
+    pages: :pages,
+    journal: :journal,
+    number: :number,
+    volume: :volume,
+    note: :note
+  }
 
   enum bibtex_type: [
     :article, :book, :booklet, :inbook, :incollection, :inproceedings, :manual, :mastersthesis, :misc, :phdthesis, :proceedings, :techreport, :unpublished
@@ -37,6 +69,11 @@ class Source < ApplicationRecord
 
   def approval_by user
     approvals.by_user(user).first
+  end
+
+  def to_bibtex
+    mapped = BIBTEX_MAPPING.map { |k,v| {k => self.send(v)} }.reduce({}, :update)
+    BibTeX::Entry.new(mapped)
   end
 
 end
