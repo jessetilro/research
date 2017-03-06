@@ -8,7 +8,6 @@ class Source < ApplicationRecord
     url: :url,
     abstract: :abstract,
     keywords: :keywords,
-    approvals_count: :approvals_count,
     bibtex_type: :bibtex_type,
     key: :bibtex_key,
     isbn: :isbn,
@@ -72,7 +71,7 @@ class Source < ApplicationRecord
   end
 
   def to_bibtex
-    mapped = BIBTEX_MAPPING.map { |k,v| {k => self.send(v)} }.reduce({}, :update)
+    mapped = (BIBTEX_MAPPING.map { |k,v| (self.send(v).present? ? {k => self.send(v)} : nil)  } - [nil]).reduce({}, :update)
     BibTeX::Entry.new(mapped)
   end
 

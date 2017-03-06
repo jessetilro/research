@@ -27,6 +27,7 @@
     <form class="form-horizontal mt-1 pt-10">
       <% [
           :reference,
+          [:bibtex, @source.to_bibtex.to_s ],
           :subtitle,
           :shorttitle,
           :authors,
