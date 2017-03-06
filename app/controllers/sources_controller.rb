@@ -85,6 +85,8 @@ class SourcesController < ApplicationController
       :institution,
       :organization,
       :school,
+      :address,
+      :edition,
       :series,
       :chapter,
       :pages,

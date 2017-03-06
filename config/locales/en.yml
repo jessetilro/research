@@ -39,6 +39,8 @@ en:
         institution: Institution (involved in publishing)
         organization: Organization (conference sponsor)
         school: School (in case of thesis)
+        address: Address of the publisher
+        edition: Edition
         series: Series (of books)
         chapter: Chapter
         pages: Page numbers
