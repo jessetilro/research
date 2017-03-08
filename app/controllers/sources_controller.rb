@@ -57,7 +57,7 @@ class SourcesController < ApplicationController
       flash[:success] = 'Source removed succesfully!'
       redirect_to sources_url
     else
-      flash[:error] = 'Could not delete Source...'
+      flash[:danger] = 'Could not delete Source...'
       redirect_to source_url(@source)
     end
   end

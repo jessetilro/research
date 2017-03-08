@@ -6,4 +6,5 @@ Rails.application.routes.draw do
   resources :sources
   resources :approvals, only: [:create, :destroy]
   resource :export, only: :show
+  resources :source_imports, only: :create
 end

@@ -14,7 +14,7 @@ class ExportsController < ApplicationController
                 disposition: disposition
       end
       format.bib do
-        #TODO implement BibTeX export
+        render plain: Source.to_bibliography.to_s
       end
     end
   end

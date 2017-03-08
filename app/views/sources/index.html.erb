@@ -3,6 +3,10 @@
   <div class="col-xs-12 col-lg-4">
     <%= link_to raw("Add #{Source.model_name.human} #{glyphicon :plus}"), new_source_path, class: 'btn btn-default' %>
 
+    <%= content_tag :button, raw("Import Sources #{glyphicon :import}"),
+          class: 'btn btn-default',
+          data: { toggle: 'modal', target: '#importModal' } %>
+
     <div class="btn-group" role="group" aria-label="...">
       <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         Export
@@ -16,7 +20,7 @@
           <%= link_to 'Download PDF', export_path(:pdf, @search_params.merge(download: true)) %>
         </li>
         <li>
-          <%= link_to 'View BibTeX', export_path(:bib, @search_params), target: '_blank' %>
+          <%= link_to 'Download BibTeX', export_path(:bib, @search_params) %>
         </li>
       </ul>
     </div>
@@ -72,3 +76,5 @@
     <% end %>
   </tbody>
 </table>
+
+<%= render partial: 'import_form' %>

@@ -26,8 +26,8 @@
 
     <form class="form-horizontal mt-1 pt-10">
       <% [
-          :reference,
-          [:bibtex, @source.to_bibtex.to_s ],
+          [:bibtex, click_to_select_box(@source.to_bibtex.to_s)],
+          [:reference, click_to_select_box(@source.reference, rows: 2)],
           :subtitle,
           :shorttitle,
           :authors,

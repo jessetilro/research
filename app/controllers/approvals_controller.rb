@@ -3,7 +3,7 @@ class ApprovalsController < ApplicationController
   def create
     @approval = Approval.create approval_params
     if @approval.errors.any?
-      flash[:error] = 'Failed to approve the source...'
+      flash[:danger] = 'Failed to approve the source...'
     else
       flash[:success] = 'Source succesfully approved!'
     end
@@ -20,7 +20,7 @@ class ApprovalsController < ApplicationController
     if @approval.user == current_user && @approval.destroy
       flash[:success] = 'Approval succesfully removed!'
     else
-      flash[:error] = "Removing approval failed!"
+      flash[:danger] = "Removing approval failed!"
     end
     redirect_to source_url(@source)
   end
