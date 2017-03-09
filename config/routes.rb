@@ -5,6 +5,7 @@ Rails.application.routes.draw do
 
   resources :sources
   resources :stars, only: [:create, :destroy]
+  resources :reviews, only: [:create, :update, :destroy]
   resource :export, only: :show
   resources :source_imports, only: :create
 end

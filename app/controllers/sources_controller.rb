@@ -17,6 +17,7 @@ class SourcesController < ApplicationController
     @source = Source.find params[:id]
     authorize! :read, @source
     @star = @source.star_by current_user
+    @review = @source.review_by(current_user) || Review.new(user: current_user, source: @source)
     disposition = params.key?(:download) ? 'attachment' : 'inline'
     respond_to do |format|
       format.html

@@ -87,12 +87,23 @@
 
   </div>
   <div class="col-xs-12 col-md-6">
-    <% if @source.document.present? %>
-      <object data="<%= url_for(format: :pdf) %>" type="application/pdf" width="100%" height="600">
-        alt : <a href="<%= url_for(format: :pdf) %>"><%= File.basename @source.document.path %></a>
-      </object>
-    <% else %>
-      <em>No document attached yet...</em>
-    <% end %>
+    <div class="row">
+      <% if @source.document.present? %>
+        <object data="<%= url_for(format: :pdf) %>" type="application/pdf" width="100%" height="600">
+          alt : <a href="<%= url_for(format: :pdf) %>"><%= File.basename @source.document.path %></a>
+        </object>
+      <% else %>
+        <em>No document attached yet...</em>
+      <% end %>
+    </div>
+
+    <div class="row">
+      <%= bootstrap_form_for @review do |f| %>
+        <%= f.hidden_field :source_id, value: @source.id %>
+        <%= f.text_area :comment %>
+        <%= f.number_field :rating, min: 1, max: 10, value: 1 %>
+        <%= f.submit 'Save Review', class: 'btn btn-primary' %>
+      <% end %>
+    </div>
   </div>
 </div>

@@ -10,7 +10,18 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170309135612) do
+ActiveRecord::Schema.define(version: 20170309144035) do
+
+  create_table "reviews", force: :cascade do |t|
+    t.integer  "rating"
+    t.text     "comment"
+    t.integer  "user_id"
+    t.integer  "source_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["source_id"], name: "index_reviews_on_source_id"
+    t.index ["user_id"], name: "index_reviews_on_user_id"
+  end
 
   create_table "sources", force: :cascade do |t|
     t.string   "title"

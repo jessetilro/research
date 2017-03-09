@@ -6,6 +6,7 @@ class User < ApplicationRecord
 
   has_many :sources
   has_many :stars, dependent: :destroy
+  has_many :reviews, dependent: :destroy
 
   enum role: [:contributor, :supervisor]
 

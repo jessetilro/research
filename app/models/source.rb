@@ -8,6 +8,7 @@ class Source < ApplicationRecord
   ]
 
   belongs_to :user
+  has_many :reviews, dependent: :destroy
   has_many :stars, dependent: :destroy
   has_many :starrers, through: :stars, source: :user
 
@@ -49,6 +50,10 @@ class Source < ApplicationRecord
 
   def star_by user
     stars.by_user(user).first
+  end
+
+  def review_by user
+    reviews.by_user(user).first
   end
 
 end

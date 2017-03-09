@@ -27,7 +27,9 @@ class StarsController < ApplicationController
 
   protected
   def star_params
-    params.require(:star).permit(:user_id, :source_id)
+    prms = params.require(:star).permit(:user_id, :source_id)
+    prms[:user_id] = current_user.id
+    prms
   end
 
 end
