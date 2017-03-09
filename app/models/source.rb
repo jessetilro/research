@@ -56,4 +56,8 @@ class Source < ApplicationRecord
     reviews.by_user(user).first
   end
 
+  def average_rating
+    reviews.average :rating
+  end
+
 end
