@@ -13,6 +13,13 @@ User.create({
   password: 'testtest'
   })
 
+User.create({
+  email: 'otherguy@jessetilro.nl',
+  first_name: 'Other',
+  last_name: 'Guy',
+  password: 'testtest'
+  })
+
 Source.create({
   title: 'Een Uitgebreid Verhaal over Karamel en Walvissen.',
   authors: 'Koekepeer M.',
@@ -42,4 +49,18 @@ Source.create({
   series: 'The Facets of Ruby',
   title: 'Agile Web Development with Rails',
   year: '2009'
+  })
+
+Review.create({
+  user_id: User.first.id,
+  source_id: Source.last.id,
+  comment: 'I liked this Source and totally approve it.',
+  rating: (1 + Random.rand(9))
+  })
+
+Review.create({
+  user_id: User.last.id,
+  source_id: Source.last.id,
+  comment: 'I liked this Source and totally approve it.',
+  rating: (1 + Random.rand(9))
   })

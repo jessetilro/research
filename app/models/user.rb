@@ -5,7 +5,8 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable
 
   has_many :sources
-  has_many :approvals, dependent: :destroy
+  has_many :stars, dependent: :destroy
+  has_many :reviews, dependent: :destroy
 
   enum role: [:contributor, :supervisor]
 

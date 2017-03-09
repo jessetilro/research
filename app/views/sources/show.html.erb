@@ -1,7 +1,10 @@
 
 <div class="row">
   <div class="col-xs-12 col-md-6">
-    <%= content_tag :h3, @source.title %>
+    <div class="page-header">
+      <h1><%= content_tag :h3, @source.title %>
+        <small>Source <%= @source.id %>, added by <%= "#{@source.user.full_name} #{time_ago_in_words(@source.created_at)}" %> ago.</small></h1>
+    </div>
 
     <div class="row">
       <div class="col-xs-12 col-md-8">
@@ -9,16 +12,20 @@
         <% if @source.document.present? %>
           <%= link_to raw("Download PDF #{glyphicon 'download-alt'}"), url_for(format: :pdf, download: true), class: 'btn btn-default' %>
         <% end %>
+
+        <%= content_tag :button, raw("Export Source #{glyphicon :export}"),
+              class: 'btn btn-default',
+              data: { toggle: 'modal', target: '#exportModal' } %>
       </div>
 
       <div class="col-xs-12 col-md-4 text-right">
-        <% if @source.approved_by? current_user %>
-          <%= link_to raw("Approved #{glyphicon :ok}"), approval_url(@source.approval_by(current_user)), method: :delete, class: 'btn btn-info' %>
+        <% if @source.starred_by? current_user %>
+          <%= link_to raw("#{glyphicon :star}"), star_url(@source.star_by(current_user)), method: :delete, class: 'btn btn-success btn-lg' %>
         <% else %>
-          <%= form_for Approval.new, class: 'form-inline' do |f| %>
+          <%= form_for Star.new, class: 'form-inline' do |f| %>
             <%= f.hidden_field :source_id, value: @source.id %>
             <%= f.hidden_field :user_id, value: current_user.id %>
-            <%= f.submit 'Approve', class: 'btn btn-default' %>
+            <%= content_tag :button, raw("#{glyphicon 'star-empty'}"), class: 'btn btn-default btn-lg' %>
           <% end %>
         <% end %>
       </div>
@@ -26,8 +33,6 @@
 
     <form class="form-horizontal mt-1 pt-10">
       <% [
-          [:bibtex, click_to_select_box(@source.to_bibtex.to_s)],
-          [:reference, click_to_select_box(@source.reference, rows: 2)],
           :subtitle,
           :shorttitle,
           :authors,
@@ -59,7 +64,7 @@
                   target: '_blank')],
           :note,
           [:user, "#{@source.user.full_name}, #{time_ago_in_words(@source.created_at)}"],
-          [:approvers, @source.approvers.map { |u| u.full_name }.join(', ')]
+          [:starrers, @source.starrers.map { |u| u.full_name }.join(', ')]
         ].each do |field| %>
         <div class="form-group">
           <div class="col-sm-12 col-md-3">
@@ -87,12 +92,84 @@
 
   </div>
   <div class="col-xs-12 col-md-6">
-    <% if @source.document.present? %>
-      <object data="<%= url_for(format: :pdf) %>" type="application/pdf" width="100%" height="600">
-        alt : <a href="<%= url_for(format: :pdf) %>"><%= File.basename @source.document.path %></a>
-      </object>
-    <% else %>
-      <em>No document attached yet...</em>
-    <% end %>
+
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <% if @source.document.present? %>
+              <object data="<%= url_for(format: :pdf) %>" type="application/pdf" width="100%" height="500">
+                alt : <a href="<%= url_for(format: :pdf) %>"><%= File.basename @source.document.path %></a>
+              </object>
+            <% else %>
+              <em>No document attached yet...</em>
+            <% end %>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
+    <div class="row">
+
+      <div class="col-xs-12 col-md-6">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">Your Review</h4>
+          </div>
+          <div class="panel-body">
+            <%= bootstrap_form_for @review do |f| %>
+              <%= f.hidden_field :source_id, value: @source.id %>
+              <%= f.text_area :comment %>
+              <%= f.number_field :rating, min: 1, max: 10 %>
+              <div class="text-right">
+                <% unless @review.new_record? %>
+                <%= link_to raw("Delete Review #{glyphicon :trash}"), review_path(@review),
+                      method: :delete,
+                      data: { confirm: 'Are you sure?' },
+                      class: 'btn btn-warning' %>
+                <% end %>
+                <%= f.submit (@review.new_record? ? 'Save Review' : 'Update Review' ), class: 'btn btn-primary' %>
+              </div>
+            <% end %>
+          </div>
+        </div>
+      </div>
+
+      <div class="col-xs-12 col-md-6">
+        <div class="jumbotron">
+          <% if @source.reviews.count > 0 %>
+            <h1><%= @source.average_rating %></h1>
+            <p>Average rating on a scale of 1 to 10, by <%= @source.reviews.count %> users.</p>
+          <% else %>
+            <p>There are no ratings for this source yet...</p>
+          <% end %>
+        </div>
+      </div>
+
+    </div>
+
+
+    <div class="row">
+
+      <div class="col-xs-12">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">Reviews by others</h4>
+          </div>
+          <div class="panel-body">
+            <% @reviews.each do |r| %>
+              <%= content_tag :strong, 'Reviewed by' %> <%= r.user.full_name %><br/>
+              <%= content_tag :strong, 'Rating' %> <%= r.rating %><br/>
+              <%= content_tag :strong, 'Comment' %> <%= r.comment %><br/>
+            <% end %>
+          </div>
+        </div>
+      </div>
+
+    </div>
+
   </div>
 </div>
+
+<%= render partial: 'export_modal' %>

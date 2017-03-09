@@ -26,6 +26,14 @@ en:
         one: Source
         other: Sources
 
+      star:
+        one: Star
+        other: Stars
+
+      review:
+        one: Review
+        other: Reviews
+
     attributes:
       source:
         title: Title
@@ -73,6 +81,11 @@ en:
         note: Miscellaneous extra information
         user: Contributed by
         document: PDF Document
-        approvals: Approvals
-        approvers: Approved by
+        stars: Stars
+        starrers: Starred by
         reference: Reference (APA)
+        created_at: Added since
+
+      review:
+        comment: Comment
+        rating: Rating (1-10)

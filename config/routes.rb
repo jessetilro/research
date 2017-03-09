@@ -4,7 +4,8 @@ Rails.application.routes.draw do
   root to: 'sources#index'
 
   resources :sources
-  resources :approvals, only: [:create, :destroy]
+  resources :stars, only: [:create, :destroy]
+  resources :reviews, only: [:create, :update, :destroy]
   resource :export, only: :show
   resources :source_imports, only: :create
 end

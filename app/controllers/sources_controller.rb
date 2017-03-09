@@ -16,7 +16,9 @@ class SourcesController < ApplicationController
   def show
     @source = Source.find params[:id]
     authorize! :read, @source
-    @approval = @source.approval_by current_user
+    @star = @source.star_by current_user
+    @review = @source.review_by(current_user) || Review.new(user: current_user, source: @source)
+    @reviews = @source.reviews.where.not(user_id: current_user.id)
     disposition = params.key?(:download) ? 'attachment' : 'inline'
     respond_to do |format|
       format.html
@@ -98,7 +100,9 @@ class SourcesController < ApplicationController
   end
 
   def search_params
-    params.permit(:q, :sort)
+    prms = params.permit(:q, :sort, :v)
+    prms[:v] = ['default', 'compact'].include?(prms[:v]) ? prms[:v] : 'default'
+    prms
   end
 
 end
