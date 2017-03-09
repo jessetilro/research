@@ -3,6 +3,10 @@
   <div class="col-xs-12 col-lg-4">
     <%= link_to raw("Add #{Source.model_name.human} #{glyphicon :plus}"), new_source_path, class: 'btn btn-default' %>
 
+    <%= content_tag :button, raw("Import Sources #{glyphicon :import}"),
+          class: 'btn btn-default',
+          data: { toggle: 'modal', target: '#importModal' } %>
+
     <div class="btn-group" role="group" aria-label="...">
       <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
         Export
@@ -14,6 +18,9 @@
         </li>
         <li>
           <%= link_to 'Download PDF', export_path(:pdf, @search_params.merge(download: true)) %>
+        </li>
+        <li>
+          <%= link_to 'Download BibTeX', export_path(:bib, @search_params) %>
         </li>
       </ul>
     </div>
@@ -50,7 +57,7 @@
   <thead>
     <tr>
       <th>Source <span class="badge"><%= @sources.size %></span></th>
-      <th><%= Source.human_attribute_name :kind %></th>
+      <th><%= Source.human_attribute_name :bibtex_type %></th>
       <th><%= Source.human_attribute_name :user %></th>
       <th><%= Source.human_attribute_name :approvals %></th>
     </tr>
@@ -62,10 +69,12 @@
           <%= content_tag :p, link_to(s.title, source_path(s)), class: 'lead' %>
           <em><%= s.authors %> | <%= s.year %></em>
         </td>
-        <td><%= s.translated_kind %></td>
+        <td><%= s.translated_bibtex_type %></td>
         <td><%= s.user.full_name %>,<br /><small><em><%= time_ago_in_words(s.created_at) %> ago</em></small></td>
         <td><%= s.approvals_count %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
+
+<%= render partial: 'import_form' %>

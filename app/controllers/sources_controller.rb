@@ -57,7 +57,7 @@ class SourcesController < ApplicationController
       flash[:success] = 'Source removed succesfully!'
       redirect_to sources_url
     else
-      flash[:error] = 'Could not delete Source...'
+      flash[:danger] = 'Could not delete Source...'
       redirect_to source_url(@source)
     end
   end
@@ -68,14 +68,32 @@ class SourcesController < ApplicationController
       :title,
       :authors,
       :year,
-      :kind,
+      :bibtex_type,
       :keywords,
       :abstract,
       :url,
       :search_database,
       :search_query,
-      :description,
-      :document
+      :document,
+      :isbn,
+      :doi,
+      :editors,
+      :subtitle,
+      :shorttitle,
+      :month,
+      :publisher,
+      :institution,
+      :organization,
+      :school,
+      :address,
+      :edition,
+      :series,
+      :chapter,
+      :pages,
+      :journal,
+      :number,
+      :volume,
+      :note
     )
   end
 

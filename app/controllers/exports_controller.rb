@@ -13,6 +13,9 @@ class ExportsController < ApplicationController
                 user_xserver: false,
                 disposition: disposition
       end
+      format.bib do
+        render plain: Source.to_bibliography.to_s
+      end
     end
   end
 
