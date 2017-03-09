@@ -1,4 +1,5 @@
 class SourcesController < ApplicationController
+  include Searching
 
   def index
     @search_params = search_params
@@ -97,12 +98,6 @@ class SourcesController < ApplicationController
       :volume,
       :note
     )
-  end
-
-  def search_params
-    prms = params.permit(:q, :sort, :v)
-    prms[:v] = ['default', 'compact'].include?(prms[:v]) ? prms[:v] : 'default'
-    prms
   end
 
 end

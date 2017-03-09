@@ -21,10 +21,15 @@ class Source < ApplicationRecord
   scope :sorted_by_stars, ->(dir=:desc) { order(stars_count: dir) }
   scope :sorted_by_time, ->(dir=:desc) { order(created_at: dir) }
   scope :by_search_params, ->(params) {
-    if [:time, :stars].include? params[:sort].try(:to_sym)
-      unscoped.by_search_query(params[:q]).send "sorted_by_#{params[:sort]}"
+    if [:time, :stars].include? params[:s].try(:to_sym)
+      sorted = unscoped.by_search_query(params[:q]).send "sorted_by_#{params[:s]}"
     else
-      by_search_query(params[:q])
+      sorted = by_search_query(params[:q])
+    end
+    if params[:f] == :stars
+      sorted.joins(:stars).where(stars: {user_id: params[:u]})
+    else
+      sorted
     end
   }
 

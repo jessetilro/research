@@ -28,20 +28,27 @@
   </div>
 
   <div class="col-xs-12 col-lg-4">
-    Sort by:
     <div class="btn-group" role="group" aria-label="sort">
       <% [:time, :stars].each do |sort| %>
-        <%= link_to sort.to_s.capitalize,
-              sources_path(@search_params.merge(sort: sort)),
-              class: "btn btn-#{@search_params[:sort].try(:to_sym) == sort ? 'primary' : 'default'}"
+        <%= link_to t(sort, scope: 'search_options.sort'),
+              sources_path(@search_params.merge(s: sort)),
+              class: "btn btn-#{@search_params[:s].try(:to_sym) == sort ? 'primary' : 'default'}"
               %>
         <% end %>
       </div>
 
-    View type:
+    <div class="btn-group" role="group" aria-label="sort">
+      <% [:none, :stars].each do |filt| %>
+        <%= link_to t(filt, scope: 'search_options.filter'),
+              sources_path(@search_params.merge(f: filt)),
+              class: "btn btn-#{@search_params[:f].try(:to_sym) == filt ? 'primary' : 'default'}"
+              %>
+        <% end %>
+      </div>
+
     <div class="btn-group" role="group" aria-label="sort">
       <% [:default, :compact].each do |view| %>
-        <%= link_to view.to_s.capitalize,
+        <%= link_to t(view, scope: 'search_options.view'),
               sources_path(@search_params.merge(v: view)),
               class: "btn btn-#{@search_params[:v].try(:to_sym) == view ? 'primary' : 'default'}"
               %>

@@ -3,7 +3,7 @@ class ReviewsController < ApplicationController
   def create
     review = Review.new review_params
     if review.save
-      flash[:success] = 'Succefully saved your review for this source!'
+      flash[:success] = 'Succesfully saved your review for this source!'
       redirect_to source_url(review.source)
     else
       flash[:danger] = 'Failed to save your review for this source...'
@@ -14,7 +14,7 @@ class ReviewsController < ApplicationController
   def update
     review = Review.find params[:id]
     if review.update(review_params)
-      flash[:success] = 'Succefully updated your review for this source!'
+      flash[:success] = 'Succesfully updated your review for this source!'
       redirect_to source_url(review.source)
     else
       flash[:danger] = 'Failed to update your review for this source...'
@@ -25,7 +25,7 @@ class ReviewsController < ApplicationController
   def destroy
     review = Review.find params[:id]
     if review.destroy
-      flash[:success] = 'Succefully deleted your review for this source!'
+      flash[:success] = 'Succesfully deleted your review for this source!'
       redirect_to source_url(review.source)
     else
       flash[:danger] = 'Failed to delete your review for this source...'

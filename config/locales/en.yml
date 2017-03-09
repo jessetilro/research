@@ -20,6 +20,16 @@
 # available at http://guides.rubyonrails.org/i18n.html.
 
 en:
+  search_options:
+    sort:
+      time: Latest
+      stars: Most Stars
+    filter:
+      none: '#nofilter'
+      stars: My Stars
+    view:
+      default: Default
+      compact: Compact
   activerecord:
     models:
       source:
