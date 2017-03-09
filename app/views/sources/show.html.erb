@@ -2,7 +2,8 @@
 <div class="row">
   <div class="col-xs-12 col-md-6">
     <div class="page-header">
-      <h1><%= content_tag :h3, @source.title %> <small>Source <%= @source.id %></small></h1>
+      <h1><%= content_tag :h3, @source.title %>
+        <small>Source <%= @source.id %>, added by <%= "#{@source.user.full_name} #{time_ago_in_words(@source.created_at)}" %> ago.</small></h1>
     </div>
 
     <div class="row">
@@ -93,13 +94,19 @@
   <div class="col-xs-12 col-md-6">
 
     <div class="row">
-      <% if @source.document.present? %>
-        <object data="<%= url_for(format: :pdf) %>" type="application/pdf" width="100%" height="500">
-          alt : <a href="<%= url_for(format: :pdf) %>"><%= File.basename @source.document.path %></a>
-        </object>
-      <% else %>
-        <em>No document attached yet...</em>
-      <% end %>
+      <div class="col-xs-12">
+        <div class="panel panel-default">
+          <div class="panel-body">
+            <% if @source.document.present? %>
+              <object data="<%= url_for(format: :pdf) %>" type="application/pdf" width="100%" height="500">
+                alt : <a href="<%= url_for(format: :pdf) %>"><%= File.basename @source.document.path %></a>
+              </object>
+            <% else %>
+              <em>No document attached yet...</em>
+            <% end %>
+          </div>
+        </div>
+      </div>
     </div>
 
 
@@ -131,8 +138,12 @@
 
       <div class="col-xs-12 col-md-6">
         <div class="jumbotron">
-          <h1><%= @source.average_rating %></h1>
-          <p>Average rating on a scale of 1 to 10, by <%= @source.reviews.count %> users.</p>
+          <% if @source.reviews.count > 0 %>
+            <h1><%= @source.average_rating %></h1>
+            <p>Average rating on a scale of 1 to 10, by <%= @source.reviews.count %> users.</p>
+          <% else %>
+            <p>There are no ratings for this source yet...</p>
+          <% end %>
         </div>
       </div>
 
@@ -141,16 +152,18 @@
 
     <div class="row">
 
-      <div class="panel panel-default">
-        <div class="panel-heading">
-          <h4 class="panel-title">Reviews by others</h4>
-        </div>
-        <div class="panel-body">
-          <% @reviews.each do |r| %>
-            <%= content_tag :strong, 'Reviewed by' %> <%= r.user.full_name %><br/>
-            <%= content_tag :strong, 'Rating' %> <%= r.rating %><br/>
-            <%= content_tag :strong, 'Comment' %> <%= r.comment %><br/>
-          <% end %>
+      <div class="col-xs-12">
+        <div class="panel panel-default">
+          <div class="panel-heading">
+            <h4 class="panel-title">Reviews by others</h4>
+          </div>
+          <div class="panel-body">
+            <% @reviews.each do |r| %>
+              <%= content_tag :strong, 'Reviewed by' %> <%= r.user.full_name %><br/>
+              <%= content_tag :strong, 'Rating' %> <%= r.rating %><br/>
+              <%= content_tag :strong, 'Comment' %> <%= r.comment %><br/>
+            <% end %>
+          </div>
         </div>
       </div>
 
