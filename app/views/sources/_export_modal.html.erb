@@ -6,12 +6,14 @@
         <h4 class="modal-title">Export Source</h4>
       </div>
         <div class="modal-body">
+          <h4>BibTeX Entry</h4>
           <%= click_to_select_box(@source.to_bibtex.to_s) %>
+
+          <h4>APA Reference</h4>
           <%= click_to_select_box(@source.reference, rows: 2) %>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
-          <%= f.submit 'Import Sources', class: 'btn btn-primary' %>
         </div>
     </div>
   </div>

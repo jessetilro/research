@@ -10,9 +10,9 @@
           <%= link_to raw("Download PDF #{glyphicon 'download-alt'}"), url_for(format: :pdf, download: true), class: 'btn btn-default' %>
         <% end %>
 
-        <%= content_tag :button, raw("Export Source #{glyphicon :import}"),
+        <%= content_tag :button, raw("Export Source #{glyphicon :export}"),
               class: 'btn btn-default',
-              data: { toggle: 'modal', target: '#importModal' } %>
+              data: { toggle: 'modal', target: '#exportModal' } %>
       </div>
 
       <div class="col-xs-12 col-md-4 text-right">
@@ -30,8 +30,6 @@
 
     <form class="form-horizontal mt-1 pt-10">
       <% [
-          [:bibtex, click_to_select_box(@source.to_bibtex.to_s)],
-          [:reference, click_to_select_box(@source.reference, rows: 2)],
           :subtitle,
           :shorttitle,
           :authors,
@@ -145,3 +143,5 @@
     </div>
   </div>
 </div>
+
+<%= render partial: 'export_modal' %>
