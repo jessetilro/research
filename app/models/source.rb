@@ -37,6 +37,8 @@ class Source < ApplicationRecord
   # Fix for nil mapping to default enum value
   def bibtex_type= value; super (value.nil? ? 0 : value); end
 
+  def shortest_title; short_title || title; end
+
   def translated_bibtex_type
     I18n.t(bibtex_type, scope: 'activerecord.attributes.source.bibtex_types')
   end

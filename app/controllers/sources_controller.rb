@@ -98,7 +98,9 @@ class SourcesController < ApplicationController
   end
 
   def search_params
-    params.permit(:q, :sort)
+    prms = params.permit(:q, :sort, :v)
+    prms[:v] = ['default', 'compact'].include?(prms[:v]) ? prms[:v] : 'default'
+    prms
   end
 
 end

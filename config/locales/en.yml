@@ -25,7 +25,7 @@ en:
       source:
         one: Source
         other: Sources
-        
+
       star:
         one: Star
         other: Stars
@@ -80,3 +80,4 @@ en:
         stars: Stars
         starrers: Starred by
         reference: Reference (APA)
+        created_at: Added since
