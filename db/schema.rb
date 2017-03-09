@@ -10,16 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170304213824) do
-
-  create_table "approvals", force: :cascade do |t|
-    t.integer  "user_id",    null: false
-    t.integer  "source_id",  null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["source_id"], name: "index_approvals_on_source_id"
-    t.index ["user_id"], name: "index_approvals_on_user_id"
-  end
+ActiveRecord::Schema.define(version: 20170309135612) do
 
   create_table "sources", force: :cascade do |t|
     t.string   "title"
@@ -37,7 +28,7 @@ ActiveRecord::Schema.define(version: 20170304213824) do
     t.text     "search_query"
     t.string   "search_database"
     t.text     "keywords"
-    t.integer  "approvals_count",       default: 0
+    t.integer  "stars_count",           default: 0
     t.integer  "bibtex_type",           default: 0
     t.string   "bibtex_key"
     t.string   "isbn"
@@ -60,6 +51,15 @@ ActiveRecord::Schema.define(version: 20170304213824) do
     t.integer  "volume"
     t.text     "note"
     t.index ["user_id"], name: "index_sources_on_user_id"
+  end
+
+  create_table "stars", force: :cascade do |t|
+    t.integer  "user_id",    null: false
+    t.integer  "source_id",  null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["source_id"], name: "index_stars_on_source_id"
+    t.index ["user_id"], name: "index_stars_on_user_id"
   end
 
   create_table "users", force: :cascade do |t|

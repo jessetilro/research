@@ -12,13 +12,13 @@
       </div>
 
       <div class="col-xs-12 col-md-4 text-right">
-        <% if @source.approved_by? current_user %>
-          <%= link_to raw("Approved #{glyphicon :ok}"), approval_url(@source.approval_by(current_user)), method: :delete, class: 'btn btn-info' %>
+        <% if @source.starred_by? current_user %>
+          <%= link_to raw("#{glyphicon :star}"), star_url(@source.star_by(current_user)), method: :delete, class: 'btn btn-success btn-lg' %>
         <% else %>
-          <%= form_for Approval.new, class: 'form-inline' do |f| %>
+          <%= form_for Star.new, class: 'form-inline' do |f| %>
             <%= f.hidden_field :source_id, value: @source.id %>
             <%= f.hidden_field :user_id, value: current_user.id %>
-            <%= f.submit 'Approve', class: 'btn btn-default' %>
+            <%= content_tag :button, raw("#{glyphicon 'star-empty'}"), class: 'btn btn-default btn-lg' %>
           <% end %>
         <% end %>
       </div>
@@ -59,7 +59,7 @@
                   target: '_blank')],
           :note,
           [:user, "#{@source.user.full_name}, #{time_ago_in_words(@source.created_at)}"],
-          [:approvers, @source.approvers.map { |u| u.full_name }.join(', ')]
+          [:starrers, @source.starrers.map { |u| u.full_name }.join(', ')]
         ].each do |field| %>
         <div class="form-group">
           <div class="col-sm-12 col-md-3">

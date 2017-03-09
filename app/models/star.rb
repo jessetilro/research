@@ -1,4 +1,4 @@
-class Approval < ApplicationRecord
+class Star < ApplicationRecord
 
   belongs_to :user
   belongs_to :source, counter_cache: true

@@ -25,6 +25,10 @@ en:
       source:
         one: Source
         other: Sources
+        
+      star:
+        one: Star
+        other: Stars
 
     attributes:
       source:
@@ -73,6 +77,6 @@ en:
         note: Miscellaneous extra information
         user: Contributed by
         document: PDF Document
-        approvals: Approvals
-        approvers: Approved by
+        stars: Stars
+        starrers: Starred by
         reference: Reference (APA)
