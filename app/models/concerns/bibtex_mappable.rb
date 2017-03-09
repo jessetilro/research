@@ -34,30 +34,39 @@ module BibtexMappable
     note: :note
   }
 
-  def to_bibtex
-    mapped = (BIBTEX_MAPPING.map { |k, v| (self.send(v).present? ? {k => self.send(v)} : nil)  } - [nil]).reduce({}, :update)
-    BibTeX::Entry.new(mapped)
+  def self.included base
+    base.send :include, InstanceMethods
+    base.send :extend, ClassMethods
   end
 
-  def self.from_bibtex entry
-    entry = BibTeX.parse entry if entry.is_a? String
-    entry = entry.data[0] if entry.is_a? BibTeX::Bibliography
-    entry_value = ->(bib) { ( entry[bib].try(:value) || entry.try(bib) || (bib == :bibtex_type && entry.type) || nil ) }
-    params = (BIBTEX_MAPPING.map { |bib, src| { src => entry_value.call(bib) } }).reduce({}, :update)
-    self.new(params)
+  module InstanceMethods
+    def to_bibtex
+      mapped = (BIBTEX_MAPPING.map { |k, v| (self.send(v).present? ? {k => self.send(v)} : nil)  } - [nil]).reduce({}, :update)
+      BibTeX::Entry.new(mapped)
+    end
   end
 
-  def self.to_bibliography sources=nil
-    sources ||= self.all
-    bib = BibTeX::Bibliography.new
-    sources.each { |src| bib << src.to_bibtex }
-    bib
-  end
+  module ClassMethods
+    def from_bibtex entry
+      entry = BibTeX.parse entry if entry.is_a? String
+      entry = entry.data[0] if entry.is_a? BibTeX::Bibliography
+      entry_value = ->(bib) { ( entry[bib].try(:value) || entry.try(bib) || (bib == :bibtex_type && entry.type) || nil ) }
+      params = (BIBTEX_MAPPING.map { |bib, src| { src => entry_value.call(bib) } }).reduce({}, :update)
+      self.new(params)
+    end
 
-  def self.from_bibliography bib
-    bib = BibTeX.parse bib if bib.is_a? String
-    bib.data.map do |entry|
-      self.from_bibtex entry
+    def to_bibliography sources=nil
+      sources ||= self.all
+      bib = BibTeX::Bibliography.new
+      sources.each { |src| bib << src.to_bibtex }
+      bib
+    end
+
+    def from_bibliography bib
+      bib = BibTeX.parse bib if bib.is_a? String
+      bib.data.map do |entry|
+        self.from_bibtex entry
+      end
     end
   end
 
