@@ -9,6 +9,10 @@
         <% if @source.document.present? %>
           <%= link_to raw("Download PDF #{glyphicon 'download-alt'}"), url_for(format: :pdf, download: true), class: 'btn btn-default' %>
         <% end %>
+
+        <%= content_tag :button, raw("Export Source #{glyphicon :import}"),
+              class: 'btn btn-default',
+              data: { toggle: 'modal', target: '#importModal' } %>
       </div>
 
       <div class="col-xs-12 col-md-4 text-right">
@@ -110,12 +114,18 @@
         </div>
         <div class="panel-body">
           <%= bootstrap_form_for @review do |f| %>
-          <%= f.hidden_field :source_id, value: @source.id %>
-          <%= f.text_area :comment %>
-          <%= f.number_field :rating, min: 1, max: 10 %>
-          <div class="text-right">
-            <%= f.submit (@review.new_record? ? 'Save Review' : 'Update Review' ), class: 'btn btn-primary' %>
-          </div>
+            <%= f.hidden_field :source_id, value: @source.id %>
+            <%= f.text_area :comment %>
+            <%= f.number_field :rating, min: 1, max: 10 %>
+            <div class="text-right">
+              <% unless @review.new_record? %>
+              <%= link_to raw("Delete #{glyphicon :trash}"), review_path(@review),
+                    method: :delete,
+                    data: { confirm: 'Are you sure?' },
+                    class: 'btn btn-warning' %>
+              <% end %>
+              <%= f.submit (@review.new_record? ? 'Save Review' : 'Update Review' ), class: 'btn btn-primary' %>
+            </div>
           <% end %>
         </div>
       </div>

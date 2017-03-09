@@ -22,6 +22,17 @@ class ReviewsController < ApplicationController
     end
   end
 
+  def destroy
+    review = Review.find params[:id]
+    if review.destroy
+      flash[:success] = 'Succefully deleted your review for this source!'
+      redirect_to source_url(review.source)
+    else
+      flash[:danger] = 'Failed to delete your review for this source...'
+      redirect_to (review.source.present? ? source_url(review.source) : sources_url)
+    end
+  end
+
   protected
   def review_params
     prms = params.require(:review).permit(
