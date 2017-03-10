@@ -14,6 +14,7 @@ $gradient: linear-gradient(to right, rgba(purple, 0.3), rgba(navy, 0.3));
     input.form-control {
         background-color: #374355;
         border-color: #53657D;
+        color: #fff;
     }
     .btn-primary {
         padding: 0.5em;
@@ -40,7 +41,7 @@ $gradient: linear-gradient(to right, rgba(purple, 0.3), rgba(navy, 0.3));
     height: 150px;
     display: flex;
     align-items: center;
-    justify-content: center; 
+    justify-content: center;
     box-sizing: content-box;
     margin: -2rem -2rem 2rem -2rem;
     padding: 2rem;
