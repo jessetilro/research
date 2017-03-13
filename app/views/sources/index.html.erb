@@ -38,7 +38,7 @@
       </div>
 
     <div class="btn-group" role="group" aria-label="sort">
-      <% [:none, :stars, :unrated].each do |filt| %>
+      <% [:none, :my_stars, :my_reviews, :unrated].each do |filt| %>
         <%= link_to t(filt, scope: 'search_options.filter'),
               sources_path(@search_params.merge(f: filt)),
               class: "btn btn-#{@search_params[:f].try(:to_sym) == filt ? 'primary' : 'default'}"

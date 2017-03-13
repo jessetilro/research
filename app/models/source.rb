@@ -23,8 +23,9 @@ class Source < ApplicationRecord
   scope :sorted_by_stars, ->(dir=:desc) { order(stars_count: dir) }
   scope :sorted_by_time, ->(dir=:desc) { order(created_at: dir) }
 
-  scope :filtered_by_stars, ->(params={}) { joins(:stars).where(stars: {user_id: params[:u]}) }
   scope :filtered_by_unrated, ->(params={}) { left_outer_joins(:reviews).group('sources.id').having('count(rating) = 0') }
+  scope :filtered_by_my_stars, ->(params={}) { joins(:stars).where(stars: {user_id: params[:u]}) }
+  scope :filtered_by_my_reviews, ->(params={}) { joins(:reviews).where(reviews: {user_id: params[:u]}) }
 
   scope :by_search_params, ->(params) {
     sorted = unscoped.by_search_query(params[:q]).send "sorted_by_#{params[:s]}"

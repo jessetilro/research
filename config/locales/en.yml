@@ -27,7 +27,8 @@ en:
       rating: Highest Rating
     filter:
       none: '#nofilter'
-      stars: My Stars
+      my_stars: My Stars
+      my_reviews: My Reviews
       unrated: Unrated
     view:
       list: List

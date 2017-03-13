@@ -5,7 +5,7 @@ module Searching
     prms = params.permit(:q, :s, :v, :f)
     {
       s: enforce([:time, :stars, :rating], prms[:s]),
-      f: enforce([:none, :stars, :unrated], prms[:f]),
+      f: enforce([:none, :my_stars, :my_reviews, :unrated], prms[:f]),
       v: enforce([:table, :list], prms[:v]),
       u: current_user.id
     }
