@@ -94,6 +94,9 @@ en:
         stars: Stars
         starrers: Starred by
         reference: Reference (APA)
+        average_rating: Average Rating
+        rating: Your Rating
+        reviews: Reviews
         created_at: Added since
 
       review:

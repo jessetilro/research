@@ -65,4 +65,8 @@ class Source < ApplicationRecord
     reviews.average :rating
   end
 
+  def rating_by user
+    reviews.find_by(user_id: user.id).try :rating
+  end
+
 end
