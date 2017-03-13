@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" id="plain">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Research</title>
+    <%= csrf_meta_tags %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= stylesheet_link_tag    'plain', media: 'all', 'data-turbolinks-track': 'reload' %>
+</head>
+<body>
+    <header>
+        <%= image_tag 'branding/logo_top.png' %>
+    </header>
+    
+    <div class="main centered">
+        <% flash.each do |name, msg| %>
+        <%= content_tag :div, msg, class: "alert alert-#{name.sub 'alert', 'danger' }" %>
+        <% end %>
+        <div>
+        <%= yield %>
+        </div>
+    </div>
+
+    <footer>
+        <%= image_tag 'branding/logo_bottom.png' %>
+    </footer>
+</body>
+</html>

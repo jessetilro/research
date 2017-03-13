@@ -13,13 +13,18 @@ User.create({
   password: 'testtest'
   })
 
+User.create({
+  email: 'otherguy@jessetilro.nl',
+  first_name: 'Other',
+  last_name: 'Guy',
+  password: 'testtest'
+  })
+
 Source.create({
   title: 'Een Uitgebreid Verhaal over Karamel en Walvissen.',
   authors: 'Koekepeer M.',
   year: 2017,
-  kind: :paper,
   abstract: 'Lorem ipsum...',
-  description: 'Dit sprak mij wel aan!',
   user: User.first
   })
 
@@ -27,8 +32,35 @@ Source.create({
   title: 'Waarom Ruikt Mijn Haar Naar Gras? Feiten en Statistieken Over Mens Naar Plant Transformaties.',
   authors: 'Boom A., Bos P.',
   year: 2017,
-  kind: :paper,
   abstract: 'Lorem ipsum...',
-  description: 'Reuze interessant!',
   user: User.first
+  })
+
+Source.create({
+  user: User.first,
+  bibtex_type: :book,
+  bibtex_key: :rails,
+  address: 'Raleigh, North Carolina',
+  authors: 'Ruby, Sam and Thomas, Dave, and Hansson, David Heinemeier',
+  subtitle: 'Agile Web Development with Rails',
+  edition: 'third',
+  keywords: 'ruby, rails',
+  publisher: 'The Pragmatic Bookshelf',
+  series: 'The Facets of Ruby',
+  title: 'Agile Web Development with Rails',
+  year: '2009'
+  })
+
+Review.create({
+  user_id: User.first.id,
+  source_id: Source.last.id,
+  comment: 'I liked this Source and totally approve it.',
+  rating: (1 + Random.rand(9))
+  })
+
+Review.create({
+  user_id: User.last.id,
+  source_id: Source.last.id,
+  comment: 'I liked this Source and totally approve it.',
+  rating: (1 + Random.rand(9))
   })

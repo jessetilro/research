@@ -1,0 +1,25 @@
+<div id="login">
+  <div class="loginheader">
+    <h2>LOG IN</h2>
+  </div>
+  <%= bootstrap_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+    <div class="field">
+      <%= f.email_field :email, autofocus: true, icon: "envelope", hide_label: true, placeholder: "Email" %>
+    </div>
+
+    <div class="field">
+      <%= f.password_field :password, autocomplete: "off", icon: "lock", hide_label: true, placeholder: "Password" %>
+      <%= link_to 'Forgot password?', new_password_path('user'), class: "forgotten" %>
+    </div>
+    
+    <% if devise_mapping.rememberable? -%>
+      <div class="field">
+        <%= f.check_box :remember_me %>
+      </div>
+    <% end -%>
+
+    <div class="actions">
+      <%= f.primary "Log in" %>
+    </div>
+  <% end %>
+</div>

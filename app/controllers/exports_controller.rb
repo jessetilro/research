@@ -1,4 +1,5 @@
 class ExportsController < ApplicationController
+  include Searching
 
   def show
     @sources = Source.by_search_params search_params
@@ -13,12 +14,10 @@ class ExportsController < ApplicationController
                 user_xserver: false,
                 disposition: disposition
       end
+      format.bib do
+        render plain: Source.to_bibliography(@sources).to_s
+      end
     end
-  end
-
-  protected
-  def search_params
-    params.permit(:q, :sort)
   end
 
 end

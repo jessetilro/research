@@ -7,7 +7,7 @@ class Ability
       can :manage, :all
     elsif user.supervisor?
       can :read, :all
-      can :manage, Approval
+      can :manage, Star
     end
   end
 end

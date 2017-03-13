@@ -1,4 +1,5 @@
 class SourcesController < ApplicationController
+  include Searching
 
   def index
     @search_params = search_params
@@ -16,7 +17,9 @@ class SourcesController < ApplicationController
   def show
     @source = Source.find params[:id]
     authorize! :read, @source
-    @approval = @source.approval_by current_user
+    @star = @source.star_by current_user
+    @review = @source.review_by(current_user) || Review.new(user: current_user, source: @source)
+    @reviews = @source.reviews.where.not(user_id: current_user.id)
     disposition = params.key?(:download) ? 'attachment' : 'inline'
     respond_to do |format|
       format.html
@@ -57,7 +60,7 @@ class SourcesController < ApplicationController
       flash[:success] = 'Source removed succesfully!'
       redirect_to sources_url
     else
-      flash[:error] = 'Could not delete Source...'
+      flash[:danger] = 'Could not delete Source...'
       redirect_to source_url(@source)
     end
   end
@@ -68,19 +71,33 @@ class SourcesController < ApplicationController
       :title,
       :authors,
       :year,
-      :kind,
+      :bibtex_type,
       :keywords,
       :abstract,
       :url,
       :search_database,
       :search_query,
-      :description,
-      :document
+      :document,
+      :isbn,
+      :doi,
+      :editors,
+      :subtitle,
+      :shorttitle,
+      :month,
+      :publisher,
+      :institution,
+      :organization,
+      :school,
+      :address,
+      :edition,
+      :series,
+      :chapter,
+      :pages,
+      :journal,
+      :number,
+      :volume,
+      :note
     )
-  end
-
-  def search_params
-    params.permit(:q, :sort)
   end
 
 end
