@@ -28,8 +28,8 @@ en:
       none: '#nofilter'
       stars: My Stars
     view:
-      default: Default
-      compact: Compact
+      list: List
+      table: Table
   activerecord:
     models:
       source:

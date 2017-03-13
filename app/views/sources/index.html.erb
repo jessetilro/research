@@ -47,7 +47,7 @@
       </div>
 
     <div class="btn-group" role="group" aria-label="sort">
-      <% [:default, :compact].each do |view| %>
+      <% [:table, :list].each do |view| %>
         <%= link_to t(view, scope: 'search_options.view'),
               sources_path(@search_params.merge(v: view)),
               class: "btn btn-#{@search_params[:v].try(:to_sym) == view ? 'primary' : 'default'}"
@@ -70,6 +70,6 @@
   </div>
 </div><!-- /.row -->
 
-<%= render partial: "table_#{@search_params[:v]}" %>
+<%= render partial: "sources/index/#{@search_params[:v]}" %>
 
-<%= render partial: 'import_form' %>
+<%= render partial: 'sources/index/import_form' %>

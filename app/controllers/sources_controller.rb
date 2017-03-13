@@ -3,6 +3,7 @@ class SourcesController < ApplicationController
 
   def index
     @search_params = search_params
+    @sidebar_partial = 'sources/index/filters'
     @sources = Source.by_search_params(@search_params)
   end
 

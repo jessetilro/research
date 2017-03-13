@@ -112,7 +112,7 @@
 
     <div class="row">
 
-      <div class="col-xs-12 col-md-6">
+      <div class="col-md-12 col-lg-8">
         <div class="panel panel-default">
           <div class="panel-heading">
             <h4 class="panel-title">Your Review</h4>
@@ -136,11 +136,11 @@
         </div>
       </div>
 
-      <div class="col-xs-12 col-md-6">
+      <div class="col-md-12 col-lg-4">
         <div class="jumbotron">
           <% if @source.reviews.count > 0 %>
             <h1><%= @source.average_rating %></h1>
-            <p>Average rating on a scale of 1 to 10, by <%= @source.reviews.count %> users.</p>
+            <p><small>Average rating on a scale of 1 to 10, by <%= @source.reviews.count %> users.</small></p>
           <% else %>
             <p>There are no ratings for this source yet...</p>
           <% end %>
@@ -172,4 +172,4 @@
   </div>
 </div>
 
-<%= render partial: 'export_modal' %>
+<%= render partial: 'sources/show/export_modal' %>
