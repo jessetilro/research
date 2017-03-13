@@ -8,6 +8,7 @@
       <th><%= Source.human_attribute_name :created_at %></th>
       <th><%= Source.human_attribute_name :rating %></th>
       <th><%= Source.human_attribute_name :average_rating %></th>
+      <th><%= Source.human_attribute_name :reviews %></th>
       <th><%= Source.human_attribute_name :stars %></th>
       <th></th>
     </tr>
@@ -29,6 +30,7 @@
           <% end %>
         </td>
         <td><%= s.average_rating %></td>
+        <td><%= s.reviews.size %></td>
         <td><%= s.stars_count %></td>
         <td>
           <% if s.starred_by?(current_user) %>
