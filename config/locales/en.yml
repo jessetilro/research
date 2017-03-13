@@ -24,9 +24,11 @@ en:
     sort:
       time: Latest
       stars: Most Stars
+      rating: Highest Rating
     filter:
       none: '#nofilter'
       stars: My Stars
+      unrated: Unrated
     view:
       list: List
       table: Table
