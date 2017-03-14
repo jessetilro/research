@@ -3,6 +3,7 @@ class SourcesController < ApplicationController
 
   def index
     @search_params = search_params
+    @sidebar_partial = 'sources/index/filters'
     @sources = Source.by_search_params(@search_params)
   end
 
@@ -19,7 +20,7 @@ class SourcesController < ApplicationController
     authorize! :read, @source
     @star = @source.star_by current_user
     @review = @source.review_by(current_user) || Review.new(user: current_user, source: @source)
-    @reviews = @source.reviews.where.not(user_id: current_user.id)
+    @reviews = @source.reviews
     disposition = params.key?(:download) ? 'attachment' : 'inline'
     respond_to do |format|
       format.html

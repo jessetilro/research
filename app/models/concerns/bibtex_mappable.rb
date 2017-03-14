@@ -1,4 +1,3 @@
-# uses BibTeX as intermediate form to render references.
 module BibtexMappable
   extend ActiveSupport::Concern
 

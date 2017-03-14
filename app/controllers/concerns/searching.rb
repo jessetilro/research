@@ -3,11 +3,17 @@ module Searching
 
   def search_params
     prms = params.permit(:q, :s, :v, :f)
-    prms[:s] = [:time, :stars].include?(prms[:s].try(:to_sym)) ? prms[:s].to_sym : :time
-    prms[:v] = ['default', 'compact'].include?(prms[:v]) ? prms[:v] : 'default'
-    prms[:f] = [:none, :stars].include?(prms[:f].try(:to_sym)) ? prms[:f].to_sym : :none
-    prms[:u] = current_user.id
-    prms
+    {
+      s: enforce([:time, :stars, :rating], prms[:s]),
+      f: enforce([:none, :my_stars, :my_reviews, :unrated], prms[:f]),
+      v: enforce([:table, :list], prms[:v]),
+      u: current_user.id
+    }
+  end
+
+  protected
+  def enforce options, value
+    options.include?(value.try(:to_sym)) ? value.to_sym : options.first
   end
 
 end

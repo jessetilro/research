@@ -1,0 +1,62 @@
+<div class="row">
+
+  <div class="col-md-12 col-lg-8">
+    <div class="panel panel-default">
+      <div class="panel-heading">
+        <h4 class="panel-title">Your Review</h4>
+      </div>
+      <div class="panel-body">
+        <%= bootstrap_form_for @review do |f| %>
+          <%= f.hidden_field :source_id, value: @source.id %>
+          <%= f.text_area :comment %>
+          <%= f.number_field :rating, min: 1, max: 10 %>
+          <div class="text-right">
+            <%= content_tag :a, raw("Advanced editor #{glyphicon 'new-window'}"),
+                  href: '#',
+                  class: 'mrm',
+                  data: { toggle: 'modal', target: '#reviewModal' } %>
+            <% unless @review.new_record? %>
+            <%= link_to raw("Delete Review #{glyphicon :trash}"), review_path(@review),
+                  method: :delete,
+                  data: { confirm: 'Are you sure?' },
+                  class: 'btn btn-warning' %>
+            <% end %>
+            <%= f.submit (@review.new_record? ? 'Save Review' : 'Update Review' ), class: 'btn btn-primary' %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+
+  <div class="col-md-12 col-lg-4">
+    <div class="jumbotron">
+      <% if @source.reviews.count > 0 %>
+        <h1><%= @source.average_rating %></h1>
+        <p><small>Average rating on a scale of 1 to 10, by <%= @source.reviews.count %> users.</small></p>
+      <% else %>
+        <p>There are no ratings for this source yet...</p>
+      <% end %>
+    </div>
+  </div>
+
+</div>
+
+
+<div class="row">
+
+  <div class="col-xs-12">
+    <% @reviews.each do |r| %>
+      <div class="panel panel-default">
+        <div class="panel-heading">
+          <h4 class="panel-title">Review by <%= r.user.full_name %> <%= content_tag :span, r.rating, class: 'badge' %></h4>
+        </div>
+        <div class="panel-body">
+          <%= raw r.comment_html %><br/>
+        </div>
+      </div>
+    <% end %>
+  </div>
+
+</div>
+
+<%= render partial: 'sources/show/review_modal' %>

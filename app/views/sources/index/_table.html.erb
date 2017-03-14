@@ -1,0 +1,45 @@
+<table class="table floatingheader">
+  <thead>
+    <tr>
+      <th><%= Source.human_attribute_name :short_title %> <span class="badge"><%= @sources.length %></span></th>
+      <th><%= Source.human_attribute_name :year %></th>
+      <th><%= Source.human_attribute_name :bibtex_type %></th>
+      <th><%= Source.human_attribute_name :user %></th>
+      <th><%= Source.human_attribute_name :created_at %></th>
+      <th><%= Source.human_attribute_name :rating %></th>
+      <th><%= Source.human_attribute_name :average_rating %></th>
+      <th><%= Source.human_attribute_name :reviews %></th>
+      <th><%= Source.human_attribute_name :stars %></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @sources.each do |s| %>
+      <tr>
+        <td><%= link_to(s.title, source_path(s)) %></td>
+        <td><%= s.year %></td>
+        <td><%= s.translated_bibtex_type %></td>
+        <td><%= s.user.full_name %></td>
+        <td><small><em><%= time_ago_in_words(s.created_at) %> ago</em></small></td>
+        <td>
+          <% rating = s.rating_by(current_user)
+          if rating.present? %>
+            <%= content_tag :span, class: 'text-success' do %>
+              <%= rating %> <%= glyphicon :ok %>
+            <% end %>
+          <% end %>
+        </td>
+        <td><%= s.average_rating %></td>
+        <td><%= s.reviews.size %></td>
+        <td><%= s.stars_count %></td>
+        <td>
+          <% if s.starred_by?(current_user) %>
+            <%= glyphicon :star %>
+          <% else %>
+            <%= glyphicon 'star-empty' %>
+          <% end %>
+        </td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>

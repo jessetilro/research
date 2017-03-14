@@ -17,19 +17,22 @@ class Source < ApplicationRecord
   validates :bibtex_type, presence: true
 
   scope :by_search_query, ->(q) { where('title LIKE ? OR abstract LIKE ? OR authors LIKE ?', "%#{q}%", "%#{q}%", "%#{q}%") }
-  scope :sorted_by_stars_nonzero, ->(dir=:desc) { joins(:stars).group('sources.id').order('count(sources.id) desc') }
+
+  scope :sorted_by_stars_nocache, ->(dir=:desc) { left_outer_joins(:stars).group('sources.id').order("count(sources.id) #{dir == :asc ? :asc : :desc}") }
+  scope :sorted_by_rating, ->(dir=:desc) { left_outer_joins(:reviews).group('sources.id').order("avg(reviews.rating) #{dir == :asc ? :asc : :desc}") }
   scope :sorted_by_stars, ->(dir=:desc) { order(stars_count: dir) }
   scope :sorted_by_time, ->(dir=:desc) { order(created_at: dir) }
+
+  scope :filtered_by_unrated, ->(params={}) { left_outer_joins(:reviews).group('sources.id').having('count(rating) = 0') }
+  scope :filtered_by_my_stars, ->(params={}) { joins(:stars).where(stars: {user_id: params[:u]}) }
+  scope :filtered_by_my_reviews, ->(params={}) { joins(:reviews).where(reviews: {user_id: params[:u]}) }
+
   scope :by_search_params, ->(params) {
-    if [:time, :stars].include? params[:s].try(:to_sym)
-      sorted = unscoped.by_search_query(params[:q]).send "sorted_by_#{params[:s]}"
-    else
-      sorted = by_search_query(params[:q])
-    end
-    if params[:f] == :stars
-      sorted.joins(:stars).where(stars: {user_id: params[:u]})
-    else
+    sorted = unscoped.by_search_query(params[:q]).send "sorted_by_#{params[:s]}"
+    if params[:f] == :none
       sorted
+    else
+      sorted.send "filtered_by_#{params[:f]}", params
     end
   }
 
@@ -63,6 +66,10 @@ class Source < ApplicationRecord
 
   def average_rating
     reviews.average :rating
+  end
+
+  def rating_by user
+    reviews.find_by(user_id: user.id).try :rating
   end
 
 end
