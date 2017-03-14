@@ -11,7 +11,7 @@ class Review < ApplicationRecord
 
   def comment_html
     markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, autolink: true, tables: true)
-    markdown.render comment
+    markdown.render(comment.to_s).to_s
   end
 
 end
