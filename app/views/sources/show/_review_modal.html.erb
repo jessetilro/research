@@ -10,11 +10,21 @@
           <div class="row">
             <div class="col-xs-12 col-sm-6">
               <%= f.hidden_field :source_id, value: @source.id %>
-              <%= f.text_area :comment, rows: 16 %>
+              <%= f.text_area :comment, rows: 16,
+                    data: {
+                      url: review_previews_path,
+                      remote: true,
+                      method: 'get'
+                      }%>
               <%= f.number_field :rating, min: 1, max: 10 %>
             </div>
             <div class="col-xs-12 col-sm-6">
-              <%= raw @review.comment_html %>
+              <div class="panel panel-default">
+                <div class="panel-heading">Markdown Preview</div>
+                <div class="panel-body" id="review-preview">
+                  <%= raw @review.comment_html %>
+                </div>
+              </div>
             </div>
           </div>
         </div>
