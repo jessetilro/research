@@ -1,6 +1,4 @@
 $(document).ready(function(){
-  console.log('Loaded');
-
   var typingTimer;
   var typingInterval = 500;
 
@@ -24,22 +22,17 @@ $(document).ready(function(){
     }
   }
 
-  console.log('Initialised variables.');
-
   $input.on('keyup', function() {
-    console.log('Key up, resetting timer.');
     clearTimeout(typingTimer);
     typingTimer = setInterval(refreshPreview, typingInterval);
     loadingAnimation.start();
     });
 
   $input.on('keydown', function() {
-    console.log('Key down, killing timer.');
     clearTimeout(typingTimer);
     });
 
   function refreshPreview() {
-    console.log('Refreshing preview.');
     clearTimeout(typingTimer);
     $.ajax({
       url: $input.attr('data-url'),
