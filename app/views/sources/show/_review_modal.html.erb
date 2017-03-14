@@ -11,18 +11,31 @@
             <div class="col-xs-12 col-sm-6">
               <%= f.hidden_field :source_id, value: @source.id %>
               <%= f.text_area :comment, rows: 16,
+                    id: 'review-input',
                     data: {
-                      url: review_previews_path,
-                      remote: true,
-                      method: 'get'
+                      url: review_previews_path
                       }%>
               <%= f.number_field :rating, min: 1, max: 10 %>
             </div>
             <div class="col-xs-12 col-sm-6">
-              <div class="panel panel-default">
+              <div class="panel panel-default" id="review-preview-panel">
                 <div class="panel-heading">Markdown Preview</div>
-                <div class="panel-body" id="review-preview">
-                  <%= raw @review.comment_html %>
+                <div class="panel-body" >
+
+                  <div id="review-preview">
+                    <%= raw @review.comment_html %>
+                  </div>
+
+                  <div class="spinner-container">
+                    <div class="spinner">
+                      <div class="rect1"></div>
+                      <div class="rect2"></div>
+                      <div class="rect3"></div>
+                      <div class="rect4"></div>
+                      <div class="rect5"></div>
+                    </div>
+                  </div>
+
                 </div>
               </div>
             </div>
