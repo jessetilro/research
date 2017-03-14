@@ -9,4 +9,9 @@ class Review < ApplicationRecord
 
   scope :by_user, ->(user) { where user: user }
 
+  def comment_html
+    markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, autolink: true, tables: true)
+    markdown.render comment
+  end
+
 end
