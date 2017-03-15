@@ -31,30 +31,30 @@
               :isbn,
               :doi,
               :search_database, :search_query,
-              [:url, link_to(
-                      raw("#{@source.url} #{glyphicon 'new-window'}"),
-                      @source.url,
-                      target: '_blank')],
+              [:url, link_to_new_window(@source.url)],
               :note,
               [:user, "#{@source.user.full_name}, #{time_ago_in_words(@source.created_at)}"],
-              [:starrers, @source.starrers.map { |u| u.full_name }.join(', ')]
+              [:starrers, @source.list_starrers],
+              [:reviewers, @source.list_reviewers]
             ].each do |field| %>
-            <div class="form-group">
-              <div class="col-sm-12 col-md-3">
-                <% if field.is_a? Array %>
-                  <strong><%= Source.human_attribute_name(field[0]) %></strong>
-                <% else %>
-                  <strong><%= Source.human_attribute_name(field) %></strong>
-                <% end %>
+            <% if (field.is_a?(Array) && field[1].present?) || (!field.is_a?(Array) && @source.try(field).present?) %>
+              <div class="form-group">
+                <div class="col-sm-12 col-md-3">
+                  <% if field.is_a? Array %>
+                    <strong><%= Source.human_attribute_name(field[0]) %></strong>
+                  <% else %>
+                    <strong><%= Source.human_attribute_name(field) %></strong>
+                  <% end %>
+                </div>
+                <div class="col-sm-12 col-md-9">
+                  <% if field.is_a? Array %>
+                    <%= field[1] %>
+                  <% else %>
+                    <%= @source.send field %>
+                  <% end %>
+                </div>
               </div>
-              <div class="col-sm-12 col-md-9">
-                <% if field.is_a? Array %>
-                  <%= field[1] %>
-                <% else %>
-                  <%= @source.send field %>
-                <% end %>
-              </div>
-            </div>
+            <% end %>
           <% end %>
         </form>
 

@@ -32,4 +32,11 @@ module ApplicationHelper
     link_to config[:text], config[:url], config.except(:text, :url)
   end
 
+  def link_to_new_window url, text=nil
+    return '' unless url.present?
+    link_to (text || raw("#{url} #{glyphicon 'new-window'}")),
+        url,
+        target: '_blank'
+  end
+
 end

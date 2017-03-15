@@ -12,34 +12,34 @@
       <% end %>
 
       <h1><%= content_tag :h3, @source.title %>
-        <small>Source <%= @source.id %>, added by <%= "#{@source.user.full_name} #{time_ago_in_words(@source.created_at)}" %> ago.</small></h1>
+      <small>Source <%= @source.id %>, added by <%= "#{@source.user.full_name} #{time_ago_in_words(@source.created_at)}" %> ago.</small></h1>
     </div>
   </div>
   <div class="panel-body">
 
+    <%= link_to raw("Edit #{glyphicon :pencil}"), edit_source_path(@source), class: 'btn btn-primary' %>
 
-    <div class="row">
+    <% if @source.document.present? %>
+      <%= link_to raw("Download PDF #{glyphicon 'download-alt'}"),
+            url_for(format: :pdf, download: true),
+            class: 'btn btn-info' %>
+    <% end %>
 
-      <div class="col-xs-12 col-md-8">
-        <%= link_to raw("Edit #{glyphicon :pencil}"), edit_source_path(@source), class: 'btn btn-default' %>
-        <% if @source.document.present? %>
-          <%= link_to raw("Download PDF #{glyphicon 'download-alt'}"), url_for(format: :pdf, download: true), class: 'btn btn-default' %>
-        <% end %>
+    <% if @source.url.present? %>
+      <%= link_to raw("Original Webpage #{glyphicon 'new-window'}"),
+            @source.url,
+            target: '_blank',
+            class: 'btn btn-info' %>
+    <% end %>
 
-        <%= content_tag :button, raw("Export Source #{glyphicon :export}"),
-              class: 'btn btn-default',
-              data: { toggle: 'modal', target: '#exportModal' } %>
+    <%= content_tag :button, raw("Export Source #{glyphicon :export}"),
+          class: 'btn btn-default',
+          data: { toggle: 'modal', target: '#exportModal' } %>
 
-        <%= link_to raw("Delete #{glyphicon :trash}"), source_path(@source),
-              method: :delete,
-              data: { confirm: 'Are you sure?' },
-              class: 'btn btn-warning' %>
-      </div>
+    <%= link_to raw("Delete Source #{glyphicon :trash}"), source_path(@source),
+          method: :delete,
+          data: { confirm: 'Are you sure?' },
+          class: 'btn btn-warning' %>
 
-      <div class="col-xs-12 col-md-4">
-
-      </div>
-
-    </div>
   </div>
 </div>

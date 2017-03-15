@@ -8,7 +8,7 @@
       <div class="panel-body">
         <%= bootstrap_form_for @review do |f| %>
           <%= f.hidden_field :source_id, value: @source.id %>
-          <%= f.text_area :comment %>
+          <%= f.text_area :comment, rows: 4 %>
           <%= f.number_field :rating, min: 1, max: 10 %>
           <div class="text-right">
             <%= content_tag :a, raw("Advanced editor #{glyphicon 'new-window'}"),
