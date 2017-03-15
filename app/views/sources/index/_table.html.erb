@@ -30,7 +30,19 @@
           <% end %>
         </td>
         <td><%= s.average_rating %></td>
-        <td><%= s.reviews.size %></td>
+        <td>
+          <%= s.reviews.size %>
+          <% if s.reviews.size > 0 %>
+            <%= link_to raw(glyphicon 'question-sign'), 'javascript:void(0)',
+                  data: {
+                    content: s.reviews.map { |r| "#{r.user.full_name} (#{r.rating})" }.join(', '),
+                    toggle: 'popover',
+                    trigger: 'hover',
+                    placement: 'top'
+                  }
+                  %>
+          <% end %>
+        </td>
         <td><%= s.stars_count %></td>
         <td>
           <% if s.starred_by?(current_user) %>

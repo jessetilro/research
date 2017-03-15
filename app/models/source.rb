@@ -10,6 +10,7 @@ class Source < ApplicationRecord
   belongs_to :user
   has_many :reviews, dependent: :destroy
   has_many :stars, dependent: :destroy
+  has_many :reviewers, through: :reviews, source: :user
   has_many :starrers, through: :stars, source: :user
 
   validates :title, presence: true
