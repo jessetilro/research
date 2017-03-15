@@ -1,8 +1,9 @@
-<div class="panel panel-default">
-  <div class="panel-body">
+<div class="row">
+  <div class="col-xs-12 col-lg-6">
 
-    <div class="row">
-      <div class="col-xs-12 col-lg-4">
+    <div class="panel panel-default">
+      <div class="panel-body">
+
         <%= link_to raw("Add #{Source.model_name.human} #{glyphicon :plus}"), new_source_path, class: 'btn btn-default' %>
 
         <%= content_tag :button, raw("Import Sources #{glyphicon :import}"),
@@ -28,37 +29,15 @@
         </div>
 
       </div>
+    </div>
 
-      <div class="col-xs-12 col-lg-4">
-        <div class="btn-group" role="group" aria-label="sort">
-          <% [:time, :stars, :rating].each do |sort| %>
-            <%= link_to t(sort, scope: 'search_options.sort'),
-                  sources_path(@search_params.merge(s: sort)),
-                  class: "btn btn-xs btn-#{@search_params[:s].try(:to_sym) == sort ? 'primary' : 'default'}"
-                  %>
-            <% end %>
-          </div>
+  </div>
 
-        <div class="btn-group" role="group" aria-label="sort">
-          <% [:none, :my_stars, :my_reviews, :unrated].each do |filt| %>
-            <%= link_to t(filt, scope: 'search_options.filter'),
-                  sources_path(@search_params.merge(f: filt)),
-                  class: "btn btn-xs btn-#{@search_params[:f].try(:to_sym) == filt ? 'primary' : 'default'}"
-                  %>
-            <% end %>
-          </div>
+  <div class="col-xs-12 col-lg-6">
 
-        <div class="btn-group" role="group" aria-label="sort">
-          <% [:table, :list].each do |view| %>
-            <%= link_to t(view, scope: 'search_options.view'),
-                  sources_path(@search_params.merge(v: view)),
-                  class: "btn btn-xs btn-#{@search_params[:v].try(:to_sym) == view ? 'primary' : 'default'}"
-                  %>
-            <% end %>
-          </div>
-      </div>
+    <div class="panel panel-default">
+      <div class="panel-body">
 
-      <div class="col-xs-12 col-lg-4">
         <form action="<%= sources_url(@search_params) %>" method="get">
           <div class="input-group">
           </div>
@@ -69,8 +48,40 @@
             </span>
           </div>
         </form>
+
+        <div class="text-center mtm">
+
+          <div class="btn-group mrm" role="group" aria-label="sort">
+            <% [:time, :stars, :rating].each do |sort| %>
+              <%= link_to t(sort, scope: 'search_options.sort'),
+                    sources_path(@search_params.merge(s: sort)),
+                    class: "btn btn-xs btn-#{@search_params[:s].try(:to_sym) == sort ? 'primary' : 'default'}"
+                    %>
+            <% end %>
+          </div>
+
+          <div class="btn-group mlm mrm" role="group" aria-label="sort">
+            <% [:none, :my_stars, :my_reviews, :unrated].each do |filt| %>
+              <%= link_to t(filt, scope: 'search_options.filter'),
+                    sources_path(@search_params.merge(f: filt)),
+                    class: "btn btn-xs btn-#{@search_params[:f].try(:to_sym) == filt ? 'primary' : 'default'}"
+                    %>
+            <% end %>
+          </div>
+
+          <div class="btn-group mlm" role="group" aria-label="sort">
+            <% [:table, :list].each do |view| %>
+              <%= link_to t(view, scope: 'search_options.view'),
+                    sources_path(@search_params.merge(v: view)),
+                    class: "btn btn-xs btn-#{@search_params[:v].try(:to_sym) == view ? 'primary' : 'default'}"
+                    %>
+            <% end %>
+          </div>
+
+        </div>
+
       </div>
-    </div><!-- /.row -->
+    </div>
 
   </div>
 </div>
@@ -78,8 +89,8 @@
 
 <div class="panel panel-default">
   <div class="panel-body">
-    <%= render partial: "sources/index/#{@search_params[:v]}" %>
+    <%= render "sources/index/#{@search_params[:v]}" %>
   </div>
 </div>
 
-<%= render partial: 'sources/index/import_form' %>
+<%= render 'sources/index/import_form' %>
