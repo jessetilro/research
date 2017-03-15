@@ -1,0 +1,66 @@
+<div class="row">
+  <div class="col-xs-12">
+
+    <div class="panel panel-default">
+      <div class="panel-body">
+
+        <form class="form-horizontal mt-1 pt-10">
+          <% [
+              :subtitle,
+              :shorttitle,
+              :authors,
+              :bibtex_key,
+              [:bibtex_type, @source.translated_bibtex_type],
+              :year,
+              :month,
+              :keywords,
+              :abstract,
+              :editors,
+              :publisher,
+              :institution,
+              :organization,
+              :school,
+              :address,
+              :edition,
+              :series,
+              :chapter,
+              :pages,
+              :journal,
+              :number,
+              :volume,
+              :isbn,
+              :doi,
+              :search_database, :search_query,
+              [:url, link_to(
+                      raw("#{@source.url} #{glyphicon 'new-window'}"),
+                      @source.url,
+                      target: '_blank')],
+              :note,
+              [:user, "#{@source.user.full_name}, #{time_ago_in_words(@source.created_at)}"],
+              [:starrers, @source.starrers.map { |u| u.full_name }.join(', ')]
+            ].each do |field| %>
+            <div class="form-group">
+              <div class="col-sm-12 col-md-3">
+                <% if field.is_a? Array %>
+                  <strong><%= Source.human_attribute_name(field[0]) %></strong>
+                <% else %>
+                  <strong><%= Source.human_attribute_name(field) %></strong>
+                <% end %>
+              </div>
+              <div class="col-sm-12 col-md-9">
+                <% if field.is_a? Array %>
+                  <%= field[1] %>
+                <% else %>
+                  <%= @source.send field %>
+                <% end %>
+              </div>
+            </div>
+          <% end %>
+        </form>
+
+
+      </div>
+    </div>
+
+  </div>
+</div>

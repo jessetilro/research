@@ -1,117 +1,19 @@
 
 <div class="row">
   <div class="col-xs-12 col-md-6">
-    <div class="page-header">
-      <h1><%= content_tag :h3, @source.title %>
-        <small>Source <%= @source.id %>, added by <%= "#{@source.user.full_name} #{time_ago_in_words(@source.created_at)}" %> ago.</small></h1>
-    </div>
 
-    <div class="row">
-      <div class="col-xs-12 col-md-8">
-        <%= link_to raw("Edit #{glyphicon :pencil}"), edit_source_path(@source), class: 'btn btn-default' %>
-        <% if @source.document.present? %>
-          <%= link_to raw("Download PDF #{glyphicon 'download-alt'}"), url_for(format: :pdf, download: true), class: 'btn btn-default' %>
-        <% end %>
+    <%= render 'sources/show/header_section' %>
 
-        <%= content_tag :button, raw("Export Source #{glyphicon :export}"),
-              class: 'btn btn-default',
-              data: { toggle: 'modal', target: '#exportModal' } %>
-      </div>
-
-      <div class="col-xs-12 col-md-4 text-right">
-        <% if @source.starred_by? current_user %>
-          <%= link_to raw("#{glyphicon :star}"), star_url(@source.star_by(current_user)), method: :delete, class: 'btn btn-success btn-lg' %>
-        <% else %>
-          <%= form_for Star.new, class: 'form-inline' do |f| %>
-            <%= f.hidden_field :source_id, value: @source.id %>
-            <%= f.hidden_field :user_id, value: current_user.id %>
-            <%= content_tag :button, raw("#{glyphicon 'star-empty'}"), class: 'btn btn-default btn-lg' %>
-          <% end %>
-        <% end %>
-      </div>
-    </div>
-
-    <form class="form-horizontal mt-1 pt-10">
-      <% [
-          :subtitle,
-          :shorttitle,
-          :authors,
-          :bibtex_key,
-          [:bibtex_type, @source.translated_bibtex_type],
-          :year,
-          :month,
-          :keywords,
-          :abstract,
-          :editors,
-          :publisher,
-          :institution,
-          :organization,
-          :school,
-          :address,
-          :edition,
-          :series,
-          :chapter,
-          :pages,
-          :journal,
-          :number,
-          :volume,
-          :isbn,
-          :doi,
-          :search_database, :search_query,
-          [:url, link_to(
-                  raw("#{@source.url} #{glyphicon 'new-window'}"),
-                  @source.url,
-                  target: '_blank')],
-          :note,
-          [:user, "#{@source.user.full_name}, #{time_ago_in_words(@source.created_at)}"],
-          [:starrers, @source.starrers.map { |u| u.full_name }.join(', ')]
-        ].each do |field| %>
-        <div class="form-group">
-          <div class="col-sm-12 col-md-3">
-            <% if field.is_a? Array %>
-              <strong><%= Source.human_attribute_name(field[0]) %></strong>
-            <% else %>
-              <strong><%= Source.human_attribute_name(field) %></strong>
-            <% end %>
-          </div>
-          <div class="col-sm-12 col-md-9">
-            <% if field.is_a? Array %>
-              <%= field[1] %>
-            <% else %>
-              <%= @source.send field %>
-            <% end %>
-          </div>
-        </div>
-      <% end %>
-    </form>
-
-    <%= link_to raw("Delete #{glyphicon :trash}"), source_path(@source),
-          method: :delete,
-          data: { confirm: 'Are you sure?' },
-          class: 'btn btn-warning' %>
+    <%= render 'sources/show/details_section' %>
 
   </div>
   <div class="col-xs-12 col-md-6">
 
-    <div class="row">
-      <div class="col-xs-12">
-        <div class="panel panel-default">
-          <div class="panel-body">
-            <% if @source.document.present? %>
-              <object data="<%= url_for(format: :pdf) %>" type="application/pdf" width="100%" height="500">
-                alt : <a href="<%= url_for(format: :pdf) %>"><%= File.basename @source.document.path %></a>
-              </object>
-            <% else %>
-              <em>No document attached yet...</em>
-            <% end %>
-          </div>
-        </div>
-      </div>
-    </div>
+    <%= render 'sources/show/document_section' %>
 
-    <%= render partial: 'sources/show/review_section' %>
+    <%= render 'sources/show/review_section' %>
 
   </div>
 </div>
 
-<%= render partial: 'sources/show/export_modal' %>
+<%= render 'sources/show/export_modal' %>
