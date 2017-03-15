@@ -73,4 +73,12 @@ class Source < ApplicationRecord
     reviews.find_by(user_id: user.id).try :rating
   end
 
+  def list_starrers
+    starrers.map { |u| u.full_name }.join(', ')
+  end
+
+  def list_reviewers
+    reviews.map { |r| "#{r.user.full_name} (#{r.rating})" }.join(', ')
+  end
+
 end

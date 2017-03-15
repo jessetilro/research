@@ -14,4 +14,22 @@ module ApplicationHelper
     content_tag(:textarea, text, options) + content_tag(:small, raw("#{glyphicon 'info-sign'} Click above box to select all contents"))
   end
 
+  def popover options
+    config = {
+      text: raw(glyphicon 'question-sign'),
+      url: 'javascript:void(0)',
+      data: {
+        content: '',
+        toggle: 'popover',
+        trigger: 'hover',
+        placement: 'top'
+      }
+    }
+
+    config = config.merge options if options.is_a? Hash
+    config[:data][:content] = options if options.is_a? String
+
+    link_to config[:text], config[:url], config.except(:text, :url)
+  end
+
 end

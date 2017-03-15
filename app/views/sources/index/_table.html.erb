@@ -33,17 +33,15 @@
         <td>
           <%= s.reviews.size %>
           <% if s.reviews.size > 0 %>
-            <%= link_to raw(glyphicon 'question-sign'), 'javascript:void(0)',
-                  data: {
-                    content: s.reviews.map { |r| "#{r.user.full_name} (#{r.rating})" }.join(', '),
-                    toggle: 'popover',
-                    trigger: 'hover',
-                    placement: 'top'
-                  }
-                  %>
+            <%= popover s.list_reviewers %>
           <% end %>
         </td>
-        <td><%= s.stars_count %></td>
+        <td>
+          <%= s.stars_count %>
+          <% if s.stars.size > 0 %>
+            <%= popover s.list_starrers %>
+          <% end %>
+        </td>
         <td>
           <% if s.starred_by?(current_user) %>
             <%= glyphicon :star %>
