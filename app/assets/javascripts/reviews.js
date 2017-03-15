@@ -11,7 +11,7 @@ $(document).on('turbolinks:load', function(){
     start: function() {
       $panel.removeClass('panel-default');
       $panel.addClass('panel-info');
-      $spinner.height($spinner.parent().height());
+      $spinner.height($spinner.parent().height() + 2 * parseInt($spinner.parent().css('padding-bottom')));
       $spinner.show();
 
     },

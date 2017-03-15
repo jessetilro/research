@@ -69,6 +69,7 @@ gem 'paperclip'
 # Bootstrap framework
 gem 'bootstrap-sass'
 gem 'bootstrap_form'
+gem 'bootswatch-rails'
 
 # Automatically add vendor prefixes to css
 gem 'autoprefixer-rails'
@@ -85,4 +86,5 @@ gem 'citeproc-ruby'
 gem 'bibtex-ruby'
 gem 'csl-styles'
 
+# Markdown parsing and rendering
 gem 'redcarpet'
