@@ -102,6 +102,7 @@ en:
         rating: Your Rating
         reviews: Reviews
         created_at: Added since
+        updated_at: Last updated at
 
       review:
         comment: Comment

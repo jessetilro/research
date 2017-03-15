@@ -33,9 +33,11 @@
               :search_database, :search_query,
               [:url, link_to_new_window(@source.url)],
               :note,
-              [:user, "#{@source.user.full_name}, #{time_ago_in_words(@source.created_at)}"],
+              [:user, @source.user.full_name],
               [:starrers, @source.list_starrers],
-              [:reviewers, @source.list_reviewers]
+              [:reviewers, @source.list_reviewers],
+              [:created_at, @source.created_at.strftime('%A %e %B %Y at %H:%M:%S')],
+              [:updated_at, @source.updated_at.strftime('%A %e %B %Y at %H:%M:%S')]
             ].each do |field| %>
             <% if (field.is_a?(Array) && field[1].present?) || (!field.is_a?(Array) && @source.try(field).present?) %>
               <div class="form-group">
