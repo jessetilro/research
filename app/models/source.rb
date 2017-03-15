@@ -41,8 +41,6 @@ class Source < ApplicationRecord
   has_attached_file :document
   validates_attachment_content_type :document, content_type: /pdf/
 
-  # def self.bibtex_mapping; BIBTEX_MAPPING; end
-
   # Fix for nil mapping to default enum value
   def bibtex_type= value; super (value.nil? ? 0 : value); end
 
@@ -53,15 +51,19 @@ class Source < ApplicationRecord
   end
 
   def starred_by? user
-    !stars.by_user(user).empty?
+    star_by(user).present?
   end
 
   def star_by user
-    stars.by_user(user).first
+    stars.find_by user: user
+  end
+
+  def reviewed_by? user
+    review_by(user).present?
   end
 
   def review_by user
-    reviews.by_user(user).first
+    reviews.find_by user: user
   end
 
   def average_rating
