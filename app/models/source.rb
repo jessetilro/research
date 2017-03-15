@@ -42,8 +42,6 @@ class Source < ApplicationRecord
   has_attached_file :document
   validates_attachment_content_type :document, content_type: /pdf/
 
-  # Fix for nil mapping to default enum value
-  def bibtex_type= value; super (value.nil? ? 0 : value); end
 
   def shortest_title; short_title || title; end
 
