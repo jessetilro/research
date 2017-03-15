@@ -5,9 +5,10 @@
 /* Override table header. */
 .floatingheader thead {
     position: sticky;
-    top: 0;
+    top: 60px;
     background-color: $body-bg;
     border-bottom: 1px solid dimgray;
+    z-index: 999999;
 }
 
 /* Override table border trick
