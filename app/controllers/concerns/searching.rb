@@ -4,6 +4,7 @@ module Searching
   def search_params
     prms = params.permit(:q, :s, :v, :f)
     {
+      q: prms[:q],
       s: enforce([:time, :stars, :rating], prms[:s]),
       f: enforce([:none, :my_stars, :my_reviews, :unrated], prms[:f]),
       v: enforce([:table, :list], prms[:v]),
