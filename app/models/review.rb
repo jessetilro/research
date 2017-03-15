@@ -8,8 +8,6 @@ class Review < ApplicationRecord
   validates :source, uniqueness: { scope: :user }
   validates :rating, numericality: { greater_than_or_equal_to: 1, less_than_or_equal_to: 10 }
 
-  scope :by_user, ->(user) { where user: user }
-
   def comment_html
     markdown = Redcarpet::Markdown.new(Redcarpet::Render::HTML, autolink: true, tables: true)
     markdown.render(comment.to_s).to_s

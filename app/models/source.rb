@@ -10,6 +10,7 @@ class Source < ApplicationRecord
   belongs_to :user
   has_many :reviews, dependent: :destroy
   has_many :stars, dependent: :destroy
+  has_many :reviewers, through: :reviews, source: :user
   has_many :starrers, through: :stars, source: :user
 
   validates :title, presence: true
@@ -23,9 +24,9 @@ class Source < ApplicationRecord
   scope :sorted_by_stars, ->(dir=:desc) { order(stars_count: dir) }
   scope :sorted_by_time, ->(dir=:desc) { order(created_at: dir) }
 
-  scope :filtered_by_unrated, ->(params={}) { left_outer_joins(:reviews).group('sources.id').having('count(rating) = 0') }
+  scope :filtered_by_unrated, ->(params={}) { left_outer_joins(:reviews).group('sources.id').having('count(reviews.rating) = 0') }
   scope :filtered_by_my_stars, ->(params={}) { joins(:stars).where(stars: {user_id: params[:u]}) }
-  scope :filtered_by_my_reviews, ->(params={}) { joins(:reviews).where(reviews: {user_id: params[:u]}) }
+  scope :filtered_by_my_reviews, ->(params={}) { left_outer_joins(:reviews).where(reviews: {user_id: params[:u]}) }
 
   scope :by_search_params, ->(params) {
     sorted = unscoped.by_search_query(params[:q]).send "sorted_by_#{params[:s]}"
@@ -41,10 +42,6 @@ class Source < ApplicationRecord
   has_attached_file :document
   validates_attachment_content_type :document, content_type: /pdf/
 
-  # def self.bibtex_mapping; BIBTEX_MAPPING; end
-
-  # Fix for nil mapping to default enum value
-  def bibtex_type= value; super (value.nil? ? 0 : value); end
 
   def shortest_title; short_title || title; end
 
@@ -53,15 +50,19 @@ class Source < ApplicationRecord
   end
 
   def starred_by? user
-    !stars.by_user(user).empty?
+    star_by(user).present?
   end
 
   def star_by user
-    stars.by_user(user).first
+    stars.find_by user: user
+  end
+
+  def reviewed_by? user
+    review_by(user).present?
   end
 
   def review_by user
-    reviews.by_user(user).first
+    reviews.find_by user: user
   end
 
   def average_rating
@@ -70,6 +71,14 @@ class Source < ApplicationRecord
 
   def rating_by user
     reviews.find_by(user_id: user.id).try :rating
+  end
+
+  def list_starrers
+    starrers.map { |u| u.full_name }.join(', ')
+  end
+
+  def list_reviewers
+    reviews.map { |r| "#{r.user.full_name} (#{r.rating})" }.join(', ')
   end
 
 end

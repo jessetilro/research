@@ -7,7 +7,7 @@
 }
 
 .spinner-container {
-  background: rgba(white, .5);
+  background: rgba($panel-bg, .75);
   display: none;
   position: absolute;
   top: 0;
@@ -16,15 +16,18 @@
 }
 
 .spinner {
-  margin: 100px auto;
   width: 50px;
   height: 40px;
   text-align: center;
   font-size: 10px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-50%);
 }
 
 .spinner > div {
-  background-color: #333;
+  background-color: $brand-info;
   height: 100%;
   width: 6px;
   display: inline-block;

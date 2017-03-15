@@ -1,4 +1,4 @@
-$(document).ready(function(){
+$(document).on('turbolinks:load', function(){
   var typingTimer;
   var typingInterval = 500;
 
@@ -11,7 +11,7 @@ $(document).ready(function(){
     start: function() {
       $panel.removeClass('panel-default');
       $panel.addClass('panel-info');
-      $spinner.height($spinner.parent().height());
+      $spinner.height($spinner.parent().height() + 2 * parseInt($spinner.parent().css('padding-bottom')));
       $spinner.show();
 
     },
