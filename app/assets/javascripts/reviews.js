@@ -1,4 +1,4 @@
-$(document).ready(function(){
+$(document).on('turbolinks:load', function(){
   var typingTimer;
   var typingInterval = 500;
 
