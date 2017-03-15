@@ -18,6 +18,8 @@
 @import "bootstrap";
 @import "bootswatch/flatly/bootswatch";
 
+body { padding-top: 70px; }
+
 /* Own Styles */
 @import 'helpers';
 @import 'plain';
