@@ -14,9 +14,9 @@
 
 /* Bootstrap and Bootswatch themes */
 @import "bootstrap-sprockets";
-/*@import "bootswatch/flatly/variables";*/
+@import "bootswatch/flatly/variables";
 @import "bootstrap";
-/*@import "bootswatch/flatly/bootswatch";*/
+@import "bootswatch/flatly/bootswatch";
 
 /* Own Styles */
 @import 'helpers';
