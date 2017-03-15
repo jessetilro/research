@@ -1,5 +1,6 @@
 class SourcesController < ApplicationController
   include Searching
+  include Breadcrumbs
 
   def index
     @search_params = search_params
