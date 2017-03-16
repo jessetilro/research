@@ -50,7 +50,7 @@ module BibtexMappable
     end
 
     def to_bibtex
-      mapped = (BIBTEX_MAPPING.map { |k, v| (self.send(v).present? ? {k => self.send(v)} : nil)  } - [nil]).reduce({}, :update)
+      mapped = (BIBTEX_MAPPING.except(:type).map { |k, v| (self.send(v).present? ? {k => self.send(v)} : nil)  } - [nil]).reduce({}, :update)
       BibTeX::Entry.new(mapped)
     end
   end
