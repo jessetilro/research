@@ -36,6 +36,7 @@
               [:user, @source.user.full_name],
               [:starrers, @source.list_starrers],
               [:reviewers, @source.list_reviewers],
+              [:tags, @source.list_tags],
               [:created_at, @source.created_at.strftime('%A %e %B %Y at %H:%M:%S')],
               [:updated_at, @source.updated_at.strftime('%A %e %B %Y at %H:%M:%S')]
             ].each do |field| %>

@@ -11,8 +11,14 @@
         <% end %>
       <% end %>
 
-      <h1><%= content_tag :h3, @source.title %>
-      <small>Source <%= @source.id %>, added by <%= "#{@source.user.full_name} #{time_ago_in_words(@source.created_at)}" %> ago.</small></h1>
+      <h3><%= @source.title %></h3>
+      <small>
+        Source <%= @source.id %>, added by <%= "#{@source.user.full_name} #{time_ago_in_words(@source.created_at)}" %> ago.
+        Tags:
+      </small>
+      <% @source.tags.each do |tag| %>
+        <%= tag_tag tag, type: :info %>
+      <% end %>
     </div>
   </div>
   <div class="panel-body">

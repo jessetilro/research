@@ -1,0 +1,17 @@
+<table class="table table-striped floatingheader">
+  <thead>
+    <tr>
+      <th><%= Tag.human_attribute_name :name %> <span class="badge"><%= @tags.length %></span></th>
+      <th><%= Tag.human_attribute_name :description %></th>
+      <th><%= Tag.human_attribute_name :color %></th>
+      <th><%= Tag.human_attribute_name :sources %></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% @tags.each do |t| %>
+      <%= render 'table_row_form', tag: t %>
+    <% end %>
+    <%= render 'table_row_form', tag: @tag %>
+  </tbody>
+</table>

@@ -9,4 +9,8 @@ class Tag < ApplicationRecord
     super c.downcase
   end
 
+  def effective_color
+    color.present? ? color : '#333'
+  end
+
 end

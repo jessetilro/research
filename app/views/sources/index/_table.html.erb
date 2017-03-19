@@ -10,6 +10,7 @@
       <th><%= Source.human_attribute_name :average_rating %></th>
       <th><%= Source.human_attribute_name :reviews %></th>
       <th><%= Source.human_attribute_name :stars %></th>
+      <th><%= Source.human_attribute_name :tags %></th>
       <th></th>
     </tr>
   </thead>
@@ -40,6 +41,11 @@
           <%= s.stars_count %>
           <% if s.stars.size > 0 %>
             <%= popover s.list_starrers %>
+          <% end %>
+        </td>
+        <td>
+          <% s.tags.each do |t| %>
+            <%= tag_tag t %>
           <% end %>
         </td>
         <td>

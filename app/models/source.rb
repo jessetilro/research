@@ -82,4 +82,8 @@ class Source < ApplicationRecord
     reviews.map { |r| "#{r.user.full_name} (#{r.rating})" }.join(', ')
   end
 
+  def list_tags
+    tags.map { |t| t.name }.join(', ')
+  end
+
 end

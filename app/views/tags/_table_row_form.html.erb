@@ -1,0 +1,15 @@
+<tr>
+  <%= bootstrap_form_for tag do |f| %>
+    <td><%= f.text_field :name, hide_label: true, placeholder: (tag.new_record? ? "New #{Tag.human_attribute_name(:name)}" : '') %></td>
+    <td><%= f.text_field :description, hide_label: true, placeholder: (tag.new_record? ? "New #{Tag.human_attribute_name(:description)}" : '') %></td>
+    <td><%= f.text_field :color, hide_label: true, placeholder: (tag.new_record? ? "New #{Tag.human_attribute_name(:color)}" : '') %></td>
+    <td><%= tag.sources.count %></td>
+    <td class="text-right">
+      <%= button_tag raw(glyphicon :ok), class: 'btn btn-success' %>
+      <%= link_to raw("#{glyphicon :trash}"), tag_url(tag),
+            method: :delete,
+            data: { confirm: 'Are you sure?' },
+            class: 'btn btn-danger' unless tag.new_record? %>
+    </td>
+  <% end %>
+</tr>
