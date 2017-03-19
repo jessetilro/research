@@ -12,6 +12,7 @@ class Source < ApplicationRecord
   has_many :stars, dependent: :destroy
   has_many :reviewers, through: :reviews, source: :user
   has_many :starrers, through: :stars, source: :user
+  has_and_belongs_to_many :tags, join_table: :taggings
 
   validates :title, presence: true
   validates :user, presence: true
