@@ -116,5 +116,5 @@ en:
       tag:
         name: Name
         description: Description
-        color: Color Code
+        color: Color
         sources: Times used

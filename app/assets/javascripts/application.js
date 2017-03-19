@@ -15,4 +15,5 @@
 //= require turbolinks
 //= require bootstrap-sprockets
 //= require selectize
+//= require jquery.minicolors
 //= require_tree .
