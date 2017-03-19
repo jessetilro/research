@@ -69,7 +69,7 @@ class SourcesController < ApplicationController
 
   protected
   def source_params
-    params.require(:source).permit(
+    prms = params.require(:source).permit(
       :title,
       :authors,
       :year,
@@ -98,8 +98,11 @@ class SourcesController < ApplicationController
       :journal,
       :number,
       :volume,
-      :note
+      :note,
+      :tag_ids
     )
+    prms[:tag_ids] = prms[:tag_ids].split(',')
+    prms
   end
 
 end
