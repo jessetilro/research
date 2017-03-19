@@ -1,0 +1,12 @@
+<div class="panel panel-default">
+  <div class="panel-body">
+
+    <div class="list-group">
+      <% @tags.each do |t| %>
+        <%= render 'form_row', tag: t %>
+      <% end %>
+      <%= render 'form_row', tag: @tag %>
+    </div>
+
+  </div>
+</div>

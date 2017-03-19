@@ -19,7 +19,7 @@
             <%= link_to raw("Delete Review #{glyphicon :trash}"), review_path(@review),
                   method: :delete,
                   data: { confirm: 'Are you sure?' },
-                  class: 'btn btn-warning' %>
+                  class: 'btn btn-danger' %>
             <% end %>
             <%= f.submit (@review.new_record? ? 'Save Review' : 'Update Review' ), class: 'btn btn-primary' %>
           </div>

@@ -1,0 +1,33 @@
+<div class="list-group-item">
+
+  <%= bootstrap_form_for tag do |f| %>
+    <% options = ->(field) { { placeholder: (f.object.new_record? ? "New #{Tag.human_attribute_name(field)}" : '') } } %>
+    <div class="row">
+
+    <div class="col-xs-12 col-sm-3">
+      <%= f.text_field :name, options.call(:name) %>
+    </div>
+    <div class="col-xs-12 col-sm-3">
+      <%= f.text_field :description, options.call(:description) %></td>
+    </div>
+    <div class="col-xs-12 col-sm-3">
+      <%= f.text_field :color, options.call(:color).merge(class: 'minicolors') %></td>
+    </div>
+    <div class="col-xs-12 col-sm-3 text-right ptl">
+
+        <%= button_tag raw(glyphicon :ok), class: 'btn btn-success' %>
+        <%= link_to raw("#{glyphicon :trash}"), tag_url(f.object),
+              method: :delete,
+              data: { confirm: 'Are you sure?' },
+              class: 'btn btn-danger' unless f.object.new_record? %>
+
+        <%= link_to raw("Sources #{content_tag(:span, tag.sources.count, class: 'badge')}"),
+              sources_url(t: f.object.id),
+              class: 'btn btn-default' %>
+
+    </div>
+  </div>
+
+  <% end %>
+
+</div>

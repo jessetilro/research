@@ -88,3 +88,9 @@ gem 'csl-styles'
 
 # Markdown parsing and rendering
 gem 'redcarpet'
+
+# Tag selection
+gem 'selectize-rails'
+
+# Color picker
+gem 'jquery-minicolors-rails'

@@ -26,7 +26,7 @@ module ApplicationHelper
       }
     }
 
-    config = config.merge options if options.is_a? Hash
+    config = config.deep_merge options if options.is_a? Hash
     config[:data][:content] = options if options.is_a? String
 
     link_to config[:text], config[:url], config.except(:text, :url)
@@ -37,6 +37,14 @@ module ApplicationHelper
     link_to (text || raw("#{url} #{glyphicon 'new-window'}")),
         url,
         target: '_blank'
+  end
+
+  def tag_tag tag, options={}
+    unless options[:type].present?
+      content_tag :span, tag.name, options.except(:type).merge({ class: 'label', style: "background-color: #{tag.effective_color}" })
+    else
+      content_tag :span, tag.name, options.except(:type).merge({ class: "label label-#{options[:type]}" })
+    end
   end
 
 end

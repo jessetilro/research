@@ -16,13 +16,13 @@
       <%= f.text_field :address %>
       <%= f.text_field :edition %>
       <%= f.text_field :series %>
-    </div>
-    <div class="col-xs-12 col-md-6">
       <%= f.number_field :chapter %>
       <%= f.text_field :pages %>
       <%= f.text_field :journal %>
       <%= f.number_field :number %>
       <%= f.number_field :volume %>
+    </div>
+    <div class="col-xs-12 col-md-6">
       <%= f.number_field :isbn %>
       <%= f.number_field :doi %>
       <%= f.select :bibtex_type, Source.bibtex_types.keys.map { |bt| [I18n.t("activerecord.attributes.source.bibtex_types.#{bt}"), bt] }  %>
@@ -32,6 +32,14 @@
       <%= f.text_field :search_query %>
       <%= f.text_field :url %>
       <%= f.text_area :note %>
+      <div class="form-group">
+        <label class="label-control" for="source_tags"><%= Source.human_attribute_name(:tags) %></label>
+        <%= text_field_tag 'source[tag_ids]', '', class: 'selectize', id: 'source_tag_ids',
+              data: {
+                options: Tag.all.map { |t| { text: t.name, value: t.id } }.to_json,
+                items: "[#{@source.tag_ids.join(',')}]"
+                } %>
+      </div>
       <%= f.file_field :document %>
     </div>
   </div>

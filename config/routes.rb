@@ -6,6 +6,7 @@ Rails.application.routes.draw do
   root to: 'sources#index'
 
   resources :sources
+  resources :tags, only: [:index, :create, :update, :destroy]
   resources :stars, only: [:create, :destroy]
   resources :reviews, only: [:create, :update, :destroy]
   resources :review_previews, only: :index

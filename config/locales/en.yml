@@ -47,6 +47,10 @@ en:
         one: Review
         other: Reviews
 
+      tag:
+        one: Tag
+        other: Tags
+
     attributes:
       source:
         title: Title
@@ -101,9 +105,16 @@ en:
         average_rating: Average Rating
         rating: Your Rating
         reviews: Reviews
+        tags: Tags
         created_at: Added since
         updated_at: Last updated at
 
       review:
         comment: Comment
         rating: Rating (1-10)
+
+      tag:
+        name: Name
+        description: Description
+        color: Color
+        sources: Times used

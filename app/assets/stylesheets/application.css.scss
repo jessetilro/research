@@ -18,7 +18,13 @@
 @import "bootstrap";
 @import "bootswatch/flatly/bootswatch";
 
+/* Bootrstrap navigation bar fix */
 body { padding-top: 70px; }
+
+/* Other libraries */
+@import 'selectize';
+@import 'selectize.default';
+@import 'jquery.minicolors';
 
 /* Own Styles */
 @import 'helpers';
