@@ -30,12 +30,14 @@ class Source < ApplicationRecord
   scope :filtered_by_my_reviews, ->(params={}) { left_outer_joins(:reviews).where(reviews: {user_id: params[:u]}) }
 
   scope :by_search_params, ->(params) {
-    sorted = unscoped.by_search_query(params[:q]).send "sorted_by_#{params[:s]}"
-    if params[:f] == :none
-      sorted
-    else
-      sorted.send "filtered_by_#{params[:f]}", params
-    end
+    # Apply search query and sort
+    result = unscoped.by_search_query(params[:q]).send "sorted_by_#{params[:s]}"
+    # Filter by selected filter if applicable
+    result = result.send "filtered_by_#{params[:f]}", params unless params[:f] == :none
+    # Filter by tag if applicable
+    result = result.joins(:tags).where(tags: {id: params[:t]}) if params[:t].present?
+
+    result
   }
 
   default_scope { sorted_by_time }

@@ -13,8 +13,8 @@
 
       <h3><%= @source.title %></h3>
       <small>
-        Source <%= @source.id %>, added by <%= "#{@source.user.full_name} #{time_ago_in_words(@source.created_at)}" %> ago.
-        Tags:
+        Source <%= @source.id %>, added by <%= "#{@source.user.full_name} #{time_ago_in_words(@source.created_at)}" %> ago,
+        tagged with
       </small>
       <% @source.tags.each do |tag| %>
         <%= tag_tag tag, type: :info %>
