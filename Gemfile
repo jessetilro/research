@@ -69,6 +69,7 @@ gem 'paperclip'
 # Bootstrap framework
 gem 'bootstrap-sass'
 gem 'bootstrap_form'
+gem 'bootswatch-rails'
 
 # Automatically add vendor prefixes to css
 gem 'autoprefixer-rails'
@@ -81,6 +82,15 @@ gem 'wkhtmltopdf-binary', group: :production
 gem 'cancancan'
 
 # Bibliography export/import and reference styling
-gem "citeproc-ruby"
-gem "bibtex-ruby"
-gem "csl-styles"
+gem 'citeproc-ruby'
+gem 'bibtex-ruby'
+gem 'csl-styles'
+
+# Markdown parsing and rendering
+gem 'redcarpet'
+
+# Tag selection
+gem 'selectize-rails'
+
+# Color picker
+gem 'jquery-minicolors-rails'

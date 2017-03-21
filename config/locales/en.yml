@@ -24,12 +24,15 @@ en:
     sort:
       time: Latest
       stars: Most Stars
+      rating: Highest Rating
     filter:
       none: '#nofilter'
-      stars: My Stars
+      my_stars: My Stars
+      my_reviews: My Reviews
+      unrated: Unrated
     view:
-      default: Default
-      compact: Compact
+      list: List
+      table: Table
   activerecord:
     models:
       source:
@@ -43,6 +46,10 @@ en:
       review:
         one: Review
         other: Reviews
+
+      tag:
+        one: Tag
+        other: Tags
 
     attributes:
       source:
@@ -93,9 +100,21 @@ en:
         document: PDF Document
         stars: Stars
         starrers: Starred by
+        reviewers: Reviewed by
         reference: Reference (APA)
+        average_rating: Average Rating
+        rating: Your Rating
+        reviews: Reviews
+        tags: Tags
         created_at: Added since
+        updated_at: Last updated at
 
       review:
         comment: Comment
         rating: Rating (1-10)
+
+      tag:
+        name: Name
+        description: Description
+        color: Color
+        sources: Times used

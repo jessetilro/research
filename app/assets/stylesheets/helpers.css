@@ -1,0 +1,222 @@
+/* -------------------------------
+    HELPERS.CSS
+    JESSE TILRO
+    V1.0.0
+   ------------------------------- */
+
+/* --------------
+    STRUCTURE
+   -------------- */
+
+.columns{
+    float:left;
+    -webkit-box-sizing:border-box;
+    -moz-box-sizing:border-box;
+    box-sizing:border-box;
+}
+
+.block { display:block; }
+.inline-block { display:inline-block; }
+.hidden { display:none; }
+.left { float:left; }
+.right { float:right; }
+.center { margin-left: auto; margin-right: auto; }
+
+.absolute{ position:absolute; }
+.relative{ position:relative; }
+.static{ position:static; }
+.fixed{ position:fixed; }
+
+.wrapper{ max-width:960px; }
+
+.clear { clear:both; }
+
+.columns.twelve { width:100%; }
+.columns.eleven { width: 91.66%; }
+.columns.ten { width: 83.33%; }
+.columns.nine { width: 75%; }
+.columns.eight { width: 66.66%; }
+.columns.seven { width: 58.33%; }
+.columns.six { width: 50%; }
+.columns.five { width: 41.66%; }
+.columns.four { width: 33.33%; }
+.columns.three { width: 25%; }
+.columns.two { width: 16.66%; }
+.columns.one { width: 8.33%; }
+
+.pas, .psa { padding: 5px; }
+.pam, .pma { padding: 10px; }
+.pal, .pla { padding: 20px; }
+.pax, .pxa { padding: 40px; }
+.paxx, .pxxa { padding: 80px; }
+.paxxx, .pxxxa { padding: 160px; }
+
+.pst, .pts { padding-top: 5px; }
+.pmt, .ptm { padding-top: 10px; }
+.plt, .ptl { padding-top: 20px; }
+.pxt, .ptx { padding-top: 40px; }
+
+.psl, .pls { padding-left: 5px; }
+.pml, .plm { padding-left: 10px; }
+.pll { padding-left: 20px; }
+.pxl, .plx { padding-left: 40px; }
+
+.psr, .prs { padding-right: 5px; }
+.pmr, .prm { padding-right: 10px; }
+.plr, .prl { padding-right: 20px; }
+.pxr, .prx { padding-right: 40px; }
+
+.psb, .pbs { padding-bottom: 5px; }
+.pmb, .pbm { padding-bottom: 10px; }
+.plb, .pbl { padding-bottom: 20px; }
+.pxb, .pbx { padding-bottom: 40px; }
+
+.msa, .mas { margin: 5px; }
+.mma, .mam { margin: 10px; }
+.mla, .mal { margin: 20px; }
+.mxa, .max { margin: 40px; }
+
+.mst, .mts { margin-top: 5px; }
+.mmt, .mtm { margin-top: 10px; }
+.mlt, .mtl { margin-top: 20px; }
+.mxt, .mtx { margin-top: 40px; }
+
+.msl, .mls { margin-left: 5px; }
+.mml, .mlm { margin-left: 10px; }
+.mll { margin-left: 20px; }
+.mxl, .mlx { margin-left: 40px; }
+
+.msr, .mrs { margin-right: 5px; }
+.mmr, .mrm { margin-right: 10px; }
+.mlr, .mrl { margin-right: 20px; }
+.mxr, .mrx { margin-right: 40px; }
+
+.msb, .mbs { margin-bottom: 5px; }
+.mmb, .mbm { margin-bottom: 10px; }
+.mlb, .mbl { margin-bottom: 20px; }
+.mxb, .mbx { margin-bottom: 40px; }
+
+.pno { padding: 0; }
+.mno { margin: 0; }
+
+/* --------------
+    BORDER
+   -------------- */
+
+.bls{ border-left-width:1px; border-left-style:solid; }
+.blm{ border-left-width:2px; border-left-style: solid; }
+.bll{ border-left-width:5px; border-left-style: solid; }
+.blx{ border-left-width:10px; border-left-style: solid; }
+
+.bbs{ border-bottom-width:1px; border-bottom-style: solid; }
+.bbm{ border-bottom-width:2px; border-bottom-style: solid; }
+.bbl{ border-bottom-width:5px; border-bottom-style: solid; }
+.bbx{ border-bottom-width:10px; border-bottom-style: solid; }
+
+.bts{ border-top-width:1px; border-top-style: solid; }
+.btm{ border-top-width:2px; border-top-style: solid; }
+.btl{ border-top-width:5px; border-top-style: solid; }
+.btx{ border-top-width:10px; border-top-style: solid; }
+
+.brs{ border-right-width:1px; border-right-style: solid; }
+.brm{ border-right-width:2px; border-right-style: solid; }
+.brl{ border-right-width:5px; border-right-style: solid; }
+.brx{ border-right-width:10px; border-right-style: solid; }
+
+.bas{ border-width:1px; border-style: solid; }
+.bam{ border-width:2px; border-style: solid; }
+.bal{ border-width:5px; border-style: solid; }
+.bax{ border-width:10px; border-style: solid; }
+
+.brds{
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    border-radius: 5px;
+}
+.brdm{
+    -webkit-border-radius: 10px;
+    -moz-border-radius: 10px;
+    border-radius: 10px;
+}
+.brdl{
+    -webkit-border-radius: 15px;
+    -moz-border-radius: 15px;
+    border-radius: 15px;
+}
+.brdx{
+    -webkit-border-radius: 50%;
+    -moz-border-radius: 50%;
+    border-radius: 50%;
+}
+
+/* --------------
+    COLOR
+   -------------- */
+
+.c-white { color: #FFF; }
+.c-black { color: #000; }
+.c-dkgray { color: #333; }
+.c-gray { color: #999; }
+.c-lgray { color: #EEE; }
+
+.bgc-white { background-color: #FFF; }
+.bgc-black { background-color: #000; }
+.bgc-dkgray { background-color: #333; }
+.bgc-gray { background-color: #999; }
+.bgc-ltgray { background-color: #EEE; }
+
+.bc-white { border-color: #FFF; }
+.bc-black { border-color: #000; }
+.bc-gray { border-color: #999; }
+.bc-dkgray { border-color: #333; }
+.bc-ltgray { border-color: #EEE; }
+
+/* --------------
+    TEXT
+   -------------- */
+
+.txt-left { text-align:left; }
+.txt-right { text-align:right; }
+.txt-center { text-align:center; }
+.txt-justify { text-align:justify; }
+
+.txt-strong, .txt-bold { font-weight:bold; }
+
+.txt-uppercase{ text-transform: uppercase; }
+.txt-lowercase{ text-transform: lowercase; }
+.txt-capitalize{ text-transform: capitalize; }
+
+/* --------------
+    OTHER
+   -------------- */
+
+.clean { list-style: none; }
+
+.box {
+    -webkit-box-sizing:border-box;
+    -moz-box-sizing:border-box;
+    box-sizing:border-box;
+}
+
+.mobile{visibility:hidden; display:none; margin:0; padding:0; height:0;}
+.not-mobile{visibility:visible;}
+
+@media screen and (max-width: 960px) {
+
+    .mobile{visibility:visible; display:block; width:auto; height:auto; }
+    .not-mobile{visibility:hidden; display:none; margin:0; padding:0; height:0;}
+
+    .columns.m-twelve { width:100%; }
+    .columns.m-eleven { width: 91.66%; }
+    .columns.m-ten { width: 83.33%; }
+    .columns.m-nine { width: 75%; }
+    .columns.m-eight { width: 66.66%; }
+    .columns.m-seven { width: 58.33%; }
+    .columns.m-six { width: 50%; }
+    .columns.m-five { width: 41.66%; }
+    .columns.m-four { width: 33.33%; }
+    .columns.m-three { width: 25%; }
+    .columns.m-two { width: 16.66%; }
+    .columns.m-one { width: 8.33%; }
+
+}

@@ -11,22 +11,18 @@
 
   <body>
 
-    <% flash.each do |name, msg| %>
-      <%= content_tag :div, msg, class: "alert alert-#{name}" %>
-    <% end %>
+    <%= render 'layouts/navigation' %>
 
     <div id="main-container" class="container-fluid">
-      <div class="row">
-        <div class="col-xs-12 col-md-2 col-lg-1">
-          <h3><%= link_to Rails.application.class.parent_name.to_s, root_url  %></h3>
-          <% if user_signed_in? %>
-          <%= link_to 'Logout', destroy_user_session_path, method: :delete %>
-          <% end %>
-        </div>
-        <div class="col-xs-12 col-md-10 col-lg-11">
-          <%= yield %>
-        </div>
-      </div>
+      <% flash.each do |name, msg| %>
+        <% name = 'info' unless name.to_sym.in? [:success, :info, :warning, :danger] %>
+        <%= content_tag :div, class: "alert alert-#{name} alert-dismissible" do %>
+          <button type="button" class="close" data-dismiss="alert" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+          <%= msg %>
+        <% end %>
+      <% end %>
+
+      <%= yield %>
     </div>
 
   </body>

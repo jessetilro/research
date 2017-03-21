@@ -1,8 +1,10 @@
 class SourcesController < ApplicationController
   include Searching
+  include Breadcrumbs
 
   def index
     @search_params = search_params
+    @sidebar_partial = 'sources/index/filters'
     @sources = Source.by_search_params(@search_params)
   end
 
@@ -19,7 +21,7 @@ class SourcesController < ApplicationController
     authorize! :read, @source
     @star = @source.star_by current_user
     @review = @source.review_by(current_user) || Review.new(user: current_user, source: @source)
-    @reviews = @source.reviews.where.not(user_id: current_user.id)
+    @reviews = @source.reviews
     disposition = params.key?(:download) ? 'attachment' : 'inline'
     respond_to do |format|
       format.html
@@ -67,7 +69,7 @@ class SourcesController < ApplicationController
 
   protected
   def source_params
-    params.require(:source).permit(
+    prms = params.require(:source).permit(
       :title,
       :authors,
       :year,
@@ -96,8 +98,11 @@ class SourcesController < ApplicationController
       :journal,
       :number,
       :volume,
-      :note
+      :note,
+      :tag_ids
     )
+    prms[:tag_ids] = prms[:tag_ids].split(',')
+    prms
   end
 
 end

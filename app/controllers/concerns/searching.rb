@@ -2,12 +2,21 @@ module Searching
   extend ActiveSupport::Concern
 
   def search_params
-    prms = params.permit(:q, :s, :v, :f)
-    prms[:s] = [:time, :stars].include?(prms[:s].try(:to_sym)) ? prms[:s].to_sym : :time
-    prms[:v] = ['default', 'compact'].include?(prms[:v]) ? prms[:v] : 'default'
-    prms[:f] = [:none, :stars].include?(prms[:f].try(:to_sym)) ? prms[:f].to_sym : :none
-    prms[:u] = current_user.id
-    prms
+    prms = params.permit(:q, :s, :v, :f, :t)
+    {
+      q: prms[:q],
+      s: enforce([:time, :stars, :rating], prms[:s]),
+      f: enforce([:none, :my_stars, :my_reviews, :unrated], prms[:f]),
+      v: enforce([:table, :list], prms[:v]),
+      t: enforce([nil] + Tag.ids, prms[:t].to_i),
+      u: current_user.id
+    }
+  end
+
+  protected
+  def enforce options, value
+    value = value.to_sym if value.respond_to? :to_sym
+    options.include?(value) ? value : options.first
   end
 
 end

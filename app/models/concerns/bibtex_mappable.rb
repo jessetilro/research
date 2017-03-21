@@ -1,4 +1,3 @@
-# uses BibTeX as intermediate form to render references.
 module BibtexMappable
   extend ActiveSupport::Concern
 
@@ -40,8 +39,18 @@ module BibtexMappable
   end
 
   module InstanceMethods
+    # Fix for nil mapping to default enum value
+    # and conference mapping to inproceedings.
+    def bibtex_type= value
+      if value.try(:downcase).try(:to_sym) == :conference || value.to_sym == :conference
+        super :inproceedings
+      else
+        super (value.nil? ? 0 : value)
+      end
+    end
+
     def to_bibtex
-      mapped = (BIBTEX_MAPPING.map { |k, v| (self.send(v).present? ? {k => self.send(v)} : nil)  } - [nil]).reduce({}, :update)
+      mapped = (BIBTEX_MAPPING.except(:type).map { |k, v| (self.send(v).present? ? {k => self.send(v)} : nil)  } - [nil]).reduce({}, :update)
       BibTeX::Entry.new(mapped)
     end
   end
