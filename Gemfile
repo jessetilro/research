@@ -94,3 +94,6 @@ gem 'selectize-rails'
 
 # Color picker
 gem 'jquery-minicolors-rails'
+
+# Breadcrumbs
+gem 'breadcrumbs_on_rails'

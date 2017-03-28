@@ -1,6 +1,5 @@
 class SourcesController < ApplicationController
   include Searching
-  include Breadcrumbs
   include ProjectScoped
 
   load_and_authorize_resource
@@ -12,6 +11,14 @@ class SourcesController < ApplicationController
     redirect_to project_source_url(@project, @source) unless params[:project_id].present?
   end
 
+  before_action do
+    add_breadcrumb "#{Source.model_name.human(count: 2)}", project_sources_url(@project)
+  end
+
+  before_action only: [:show, :edit] do
+    add_breadcrumb "#{Source.model_name.human} #{@source.id}", project_source_url(@project, @source)
+  end
+
   def index
     @search_params = search_params
     @sources = Source.by_search_params(@search_params).by_project(@project)
@@ -19,10 +26,12 @@ class SourcesController < ApplicationController
 
   def new
     @source = Source.new
+    add_breadcrumb "New #{Source.model_name.human}"
   end
 
   def edit
     @source = Source.by_project(@project).find params[:id]
+    add_breadcrumb 'Edit'
   end
 
   def show
@@ -113,6 +122,10 @@ class SourcesController < ApplicationController
     prms[:tag_ids] = prms[:tag_ids].split(',')
     prms[:project] = @project
     prms
+  end
+
+  def index_breadcrumb_path
+    project_sources_path(@project)
   end
 
 end
