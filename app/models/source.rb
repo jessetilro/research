@@ -8,6 +8,7 @@ class Source < ApplicationRecord
   ]
 
   belongs_to :user
+  belongs_to :project
   has_many :reviews, dependent: :destroy
   has_many :stars, dependent: :destroy
   has_many :reviewers, through: :reviews, source: :user
