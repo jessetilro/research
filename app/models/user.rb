@@ -8,6 +8,11 @@ class User < ApplicationRecord
   has_many :stars, dependent: :destroy
   has_many :reviews, dependent: :destroy
 
+  has_and_belongs_to_many :projects, join_table: :participations
+
+  has_many :accessible_sources, through: :projects, source: :sources
+  has_many :accessible_tags, through: :projects, source: :tags
+
   enum role: [:contributor, :supervisor]
 
   scope :contributors, ->() { where(role: :contributor) }

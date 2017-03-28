@@ -5,7 +5,7 @@
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title">Import Sources</h4>
       </div>
-      <%= bootstrap_form_for :source_import, url: source_imports_path, method: :post do |f| %>
+      <%= bootstrap_form_for :source_import, url: project_source_imports_path(@project), method: :post do |f| %>
         <div class="modal-body">
           <%= f.text_area :bibtex_text, rows: 10, label: 'BibTeX Text', placeholder: <<-BIBTEX
 @book{programming_ruby,

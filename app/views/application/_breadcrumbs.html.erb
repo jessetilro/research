@@ -1,12 +1,3 @@
-<% breadcrumbs ||= @breadcrumbs %>
-<% breadcrumbs = breadcrumbs.to_a %>
-<% breadcrumbs = breadcrumbs.map { |h| h.to_a.flatten } if breadcrumbs.first.is_a? Hash %>
 <ol class="breadcrumb">
-  <% breadcrumbs.each do |text, url| %>
-    <% if url == :active %>
-      <li class="active"><%= text %></li>
-    <% else %>
-      <li><%= link_to text, (url.is_a?(String) ? url : url_for(url)) %></li>
-    <% end %>
-  <% end %>
+  <%= render_breadcrumbs tag: :li, separator: '' %>
 </ol>

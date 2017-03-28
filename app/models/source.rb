@@ -8,6 +8,7 @@ class Source < ApplicationRecord
   ]
 
   belongs_to :user
+  belongs_to :project
   has_many :reviews, dependent: :destroy
   has_many :stars, dependent: :destroy
   has_many :reviewers, through: :reviews, source: :user
@@ -39,6 +40,8 @@ class Source < ApplicationRecord
 
     result
   }
+
+  scope :by_project, ->(project) { where(project: project) }
 
   default_scope { sorted_by_time }
 
