@@ -36,7 +36,7 @@
         <label class="label-control" for="source_tags"><%= Source.human_attribute_name(:tags) %></label>
         <%= text_field_tag 'source[tag_ids]', '', class: 'selectize', id: 'source_tag_ids',
               data: {
-                options: Tag.all.map { |t| { text: t.name, value: t.id } }.to_json,
+                options: @tags.map { |t| { text: t.name, value: t.id } }.to_json,
                 items: "[#{@source.tag_ids.join(',')}]"
                 } %>
       </div>

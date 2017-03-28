@@ -49,7 +49,7 @@ class TagsController < ApplicationController
   end
 
   def load_tags
-    @tags = Tag.all
+    @tags = Tag.by_project @project
   end
 
 end

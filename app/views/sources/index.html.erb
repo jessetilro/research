@@ -96,7 +96,7 @@
               <% @search_params.each do |param, value| %>
                 <%= hidden_field_tag param, value %>
               <% end %>
-              <%= collection_select :t, nil, Tag.all, :id, :name, { prompt: 'Tag', selected: @search_params[:t] }, { class: 'selectize submit', name: 't' } %>
+              <%= collection_select :t, nil, @tags, :id, :name, { prompt: 'Tag', selected: @search_params[:t] }, { class: 'selectize submit', name: 't' } %>
             </form>
           </div>
 

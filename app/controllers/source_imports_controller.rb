@@ -20,6 +20,7 @@ class SourceImportsController < ApplicationController
       Source.transaction do
         sources.each do |src|
           src.user = current_user
+          src.project = @project
           src.save!
         end
       end
