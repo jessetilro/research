@@ -1,10 +1,14 @@
 <div class="row">
   <div class="col-xs-12 col-lg-6">
 
+    <div class="page-header">
+      <h1>Sources <small>for <%= @project.name %></small></h1>
+    </div>
+
     <div class="panel panel-default">
       <div class="panel-body">
 
-        <%= link_to raw("Add #{Source.model_name.human} #{glyphicon :plus}"), new_source_path, class: 'btn btn-default' %>
+        <%= link_to raw("Add #{Source.model_name.human} #{glyphicon :plus}"), new_project_source_path(@project), class: 'btn btn-default' %>
 
         <%= content_tag :button, raw("Import Sources #{glyphicon :import}"),
               class: 'btn btn-default',
@@ -17,13 +21,13 @@
           </button>
           <ul class="dropdown-menu">
             <li>
-              <%= link_to 'View PDF', export_path(:pdf, @search_params), target: '_blank' %>
+              <%= link_to 'View PDF', project_export_path(@project, :pdf, @search_params), target: '_blank' %>
             </li>
             <li>
-              <%= link_to 'Download PDF', export_path(:pdf, @search_params.merge(download: true)) %>
+              <%= link_to 'Download PDF', project_export_path(@project, :pdf, @search_params.merge(download: true)) %>
             </li>
             <li>
-              <%= link_to 'Download BibTeX', export_path(:bib, @search_params) %>
+              <%= link_to 'Download BibTeX', project_export_path(@project, :bib, @search_params) %>
             </li>
           </ul>
         </div>
@@ -38,7 +42,7 @@
     <div class="panel panel-default">
       <div class="panel-body">
 
-        <form action="<%= sources_url(@search_params) %>" method="get">
+        <form action="<%= project_sources_url(@project, @search_params) %>" method="get">
           <div class="input-group">
           </div>
           <div class="input-group">
@@ -56,7 +60,7 @@
                 <div class="btn-group mbs mtm" role="group" aria-label="sort">
                   <% [:time, :stars, :rating].each do |sort| %>
                     <%= link_to t(sort, scope: 'search_options.sort'),
-                          sources_path(@search_params.merge(s: sort)),
+                          project_sources_path(@project, @search_params.merge(s: sort)),
                           class: "btn btn-xs btn-#{@search_params[:s].try(:to_sym) == sort ? 'primary' : 'default'}"
                           %>
                   <% end %>
@@ -67,7 +71,7 @@
                 <div class="btn-group mts mbs" role="group" aria-label="sort">
                   <% [:none, :my_stars, :my_reviews, :unrated].each do |filt| %>
                     <%= link_to t(filt, scope: 'search_options.filter'),
-                          sources_path(@search_params.merge(f: filt)),
+                          project_sources_path(@project, @search_params.merge(f: filt)),
                           class: "btn btn-xs btn-#{@search_params[:f].try(:to_sym) == filt ? 'primary' : 'default'}"
                           %>
                   <% end %>
@@ -78,7 +82,7 @@
                 <div class="btn-group mts" role="group" aria-label="sort">
                   <% [:table, :list].each do |view| %>
                     <%= link_to t(view, scope: 'search_options.view'),
-                          sources_path(@search_params.merge(v: view)),
+                          project_sources_path(@project, @search_params.merge(v: view)),
                           class: "btn btn-xs btn-#{@search_params[:v].try(:to_sym) == view ? 'primary' : 'default'}"
                           %>
                   <% end %>
@@ -88,11 +92,11 @@
           </div>
 
           <div class="col-xs-12 col-sm-6 ptl">
-            <form action="<%= sources_url %>" method="get">
+            <form action="<%= project_sources_url(@project) %>" method="get">
               <% @search_params.each do |param, value| %>
                 <%= hidden_field_tag param, value %>
               <% end %>
-              <%= collection_select :t, nil, Tag.all, :id, :name, { prompt: 'Tag', selected: @search_params[:t] }, { class: 'selectize submit', name: 't' } %>
+              <%= collection_select :t, nil, @tags, :id, :name, { prompt: 'Tag', selected: @search_params[:t] }, { class: 'selectize submit', name: 't' } %>
             </form>
           </div>
 

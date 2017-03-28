@@ -1,4 +1,5 @@
 class TagsController < ApplicationController
+  include ProjectScoped
 
   before_action :load_tags
 
@@ -10,7 +11,7 @@ class TagsController < ApplicationController
     @tag = Tag.new tag_params
     if @tag.save
       flash[:success] = "Succesfully created the '#{@tag.name}' tag!"
-      redirect_to tags_url
+      redirect_to project_tags_url(@project)
     else
       flash[:danger] = 'Failed to create the new tag...'
       render 'index'
@@ -22,7 +23,7 @@ class TagsController < ApplicationController
     tag = @tags.find params[:id]
     if tag.update(tag_params)
       flash[:success] = "Succesfully saved changes to the '#{tag.name}' tag!"
-      redirect_to tags_url
+      redirect_to project_tags_url(@project)
     else
       @tags = @tags.to_a.map! { |t| t.id == tag.id ? tag : t }
       flash[:danger] = "Failed to save changes to the '#{tag.name}' tag..."
@@ -37,16 +38,18 @@ class TagsController < ApplicationController
     else
       flash[:danger] = "Failed to delete the '#{tag.name}' tag..."
     end
-    redirect_to tags_url
+    redirect_to project_tags_url(@project)
   end
 
   protected
   def tag_params
-    params.require(:tag).permit(:name, :description, :color)
+    prms = params.require(:tag).permit(:name, :description, :color)
+    prms[:project] = @project
+    prms
   end
 
   def load_tags
-    @tags = Tag.all
+    @tags = @project.tags
   end
 
 end

@@ -52,6 +52,7 @@ GEM
     bootstrap_form (2.6.0)
     bootswatch-rails (3.3.5)
       railties (>= 3.1)
+    breadcrumbs_on_rails (3.0.1)
     builder (3.2.3)
     byebug (9.0.6)
     cancancan (1.15.0)
@@ -239,6 +240,7 @@ DEPENDENCIES
   bootstrap-sass
   bootstrap_form
   bootswatch-rails
+  breadcrumbs_on_rails
   byebug
   cancancan
   capistrano (~> 3.7, >= 3.7.1)

@@ -1,4 +1,4 @@
-<%= bootstrap_form_for(@source) do |f| %>
+<%= bootstrap_form_for([@project, @source]) do |f| %>
 
   <div class="row">
     <div class="col-xs-12 col-md-6">
@@ -36,7 +36,7 @@
         <label class="label-control" for="source_tags"><%= Source.human_attribute_name(:tags) %></label>
         <%= text_field_tag 'source[tag_ids]', '', class: 'selectize', id: 'source_tag_ids',
               data: {
-                options: Tag.all.map { |t| { text: t.name, value: t.id } }.to_json,
+                options: @tags.map { |t| { text: t.name, value: t.id } }.to_json,
                 items: "[#{@source.tag_ids.join(',')}]"
                 } %>
       </div>
@@ -46,6 +46,6 @@
 
   <%= f.submit 'Save Source',
         class: 'btn btn-primary' %>
-  <%= link_to 'Cancel', ((@source.new_record?) ? sources_path : source_path(@source)),
+  <%= link_to 'Cancel', ((@source.new_record?) ? project_sources_path(@project) : project_source_path(@project, @source)),
         class: 'btn btn-default'%>
 <% end %>

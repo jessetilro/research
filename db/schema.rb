@@ -10,7 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170319105037) do
+ActiveRecord::Schema.define(version: 20170328073218) do
+
+  create_table "participations", id: false, force: :cascade do |t|
+    t.integer "project_id", null: false
+    t.integer "user_id",    null: false
+    t.index ["project_id"], name: "index_participations_on_project_id"
+    t.index ["user_id"], name: "index_participations_on_user_id"
+  end
+
+  create_table "projects", force: :cascade do |t|
+    t.string   "name"
+    t.string   "description"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+  end
 
   create_table "reviews", force: :cascade do |t|
     t.integer  "rating"
@@ -61,6 +75,8 @@ ActiveRecord::Schema.define(version: 20170319105037) do
     t.integer  "number"
     t.integer  "volume"
     t.text     "note"
+    t.integer  "project_id"
+    t.index ["project_id"], name: "index_sources_on_project_id"
     t.index ["user_id"], name: "index_sources_on_user_id"
   end
 
@@ -86,6 +102,8 @@ ActiveRecord::Schema.define(version: 20170319105037) do
     t.string   "color"
     t.datetime "created_at",  null: false
     t.datetime "updated_at",  null: false
+    t.integer  "project_id"
+    t.index ["project_id"], name: "index_tags_on_project_id"
   end
 
   create_table "users", force: :cascade do |t|

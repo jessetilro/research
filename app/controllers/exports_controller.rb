@@ -1,8 +1,9 @@
 class ExportsController < ApplicationController
   include Searching
+  include ProjectScoped
 
   def show
-    @sources = Source.by_search_params search_params
+    @sources = Source.by_search_params(search_params).by_project(@project)
     @users = User.all
     disposition = params.key?(:download) ? 'attachment' : 'inline'
     respond_to do |format|

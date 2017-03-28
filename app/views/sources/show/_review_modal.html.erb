@@ -1,7 +1,7 @@
 <div class="modal fade" tabindex="-1" role="dialog" id="reviewModal">
   <div class="modal-dialog modal-lg" role="document">
     <div class="modal-content">
-      <%= bootstrap_form_for @review do |f| %>
+      <%= bootstrap_form_for [@project, @review] do |f| %>
       <div class="modal-header">
         <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
         <h4 class="modal-title">Advanced Review Editor</h4>
@@ -13,7 +13,7 @@
               <%= f.text_area :comment, rows: 16,
                     id: 'review-input',
                     data: {
-                      url: review_previews_path
+                      url: project_review_previews_path(@project)
                       }%>
               <%= f.number_field :rating, min: 1, max: 10 %>
             </div>
@@ -44,7 +44,7 @@
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
           <% unless @review.new_record? %>
-            <%= link_to raw("Delete Review #{glyphicon :trash}"), review_path(@review),
+            <%= link_to raw("Delete Review #{glyphicon :trash}"), project_review_path(@project, @review),
                   method: :delete,
                   data: { confirm: 'Are you sure?' },
                   class: 'btn btn-danger' %>

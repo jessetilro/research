@@ -1,4 +1,5 @@
 class ReviewPreviewsController < ApplicationController
+  include ProjectScoped
 
   def index
     @review = Review.new review_params
