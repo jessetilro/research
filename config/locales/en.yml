@@ -51,6 +51,10 @@ en:
         one: Tag
         other: Tags
 
+      project:
+        one: Project
+        other: Projects
+
     attributes:
       source:
         title: Title

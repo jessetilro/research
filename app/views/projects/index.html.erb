@@ -1,5 +1,10 @@
-<h1>Your Projects</h1>
+<div class="page-header">
+  <h1>Projects <small>that you participate in</small></h1>
+</div>
 
-<% @projects.each do |project| %>
-  <%= project.name %>
-<% end %>
+<div class="list-group">
+  <% @projects.each do |project| %>
+    <%= link_to project.name, project_sources_path(project),
+          class: "list-group-item#{ @project == project ? ' active' : '' }" %>
+  <% end %>
+</div>

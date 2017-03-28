@@ -41,6 +41,8 @@ class Source < ApplicationRecord
     result
   }
 
+  scope :by_project, ->(project) { where(project: project) }
+
   default_scope { sorted_by_time }
 
   has_attached_file :document

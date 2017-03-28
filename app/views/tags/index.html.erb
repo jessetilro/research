@@ -1,12 +1,10 @@
-<div class="panel panel-default">
-  <div class="panel-body">
+<div class="page-header">
+  <h1>Tags <small>for <%= @project.name %></small></h1>
+</div>
 
-    <div class="list-group">
-      <% @tags.each do |t| %>
-        <%= render 'form_row', tag: t %>
-      <% end %>
-      <%= render 'form_row', tag: @tag %>
-    </div>
-
-  </div>
+<div class="list-group">
+  <% @tags.each do |t| %>
+    <%= render 'form_row', tag: t %>
+  <% end %>
+  <%= render 'form_row', tag: @tag %>
 </div>

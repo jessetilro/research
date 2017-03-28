@@ -3,10 +3,17 @@ class SourcesController < ApplicationController
   include Breadcrumbs
   include ProjectScoped
 
+  load_and_authorize_resource
+
+  before_action { @project ||= @source.project }
+
+  before_action only: :show do
+    redirect_to project_source_url(@project, @source) unless params[:project_id].present?
+  end
+
   def index
     @search_params = search_params
-    @sidebar_partial = 'sources/index/filters'
-    @sources = Source.by_search_params(@search_params)
+    @sources = Source.by_search_params(@search_params).by_project(@project)
   end
 
   def new
@@ -14,11 +21,11 @@ class SourcesController < ApplicationController
   end
 
   def edit
-    @source = Source.find params[:id]
+    @source = Source.by_project(@project).find params[:id]
   end
 
   def show
-    @source = Source.find params[:id]
+    @source = Source.by_project(@project).find params[:id]
     authorize! :read, @source
     @star = @source.star_by current_user
     @review = @source.review_by(current_user) || Review.new(user: current_user, source: @source)
@@ -46,7 +53,7 @@ class SourcesController < ApplicationController
   end
 
   def update
-    @source = Source.find params[:id]
+    @source = Source.by_project(@project).find params[:id]
     authorize! :update, @source
     @source.update source_params
     if (@source.save)
@@ -57,7 +64,7 @@ class SourcesController < ApplicationController
   end
 
   def destroy
-    @source = Source.find params[:id]
+    @source = Source.by_project(@project).find params[:id]
     authorize! :destroy, @source
     if @source.destroy
       flash[:success] = 'Source removed succesfully!'
@@ -103,6 +110,7 @@ class SourcesController < ApplicationController
       :tag_ids
     )
     prms[:tag_ids] = prms[:tag_ids].split(',')
+    prms[:project] = @project
     prms
   end
 

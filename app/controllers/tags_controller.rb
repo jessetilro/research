@@ -1,6 +1,6 @@
 class TagsController < ApplicationController
   include ProjectScoped
-  
+
   before_action :load_tags
 
   def index
@@ -43,7 +43,9 @@ class TagsController < ApplicationController
 
   protected
   def tag_params
-    params.require(:tag).permit(:name, :description, :color)
+    prms = params.require(:tag).permit(:name, :description, :color)
+    prms[:project] = @project
+    prms
   end
 
   def load_tags

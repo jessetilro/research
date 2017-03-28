@@ -3,9 +3,11 @@ Rails.application.routes.draw do
     sessions: 'sessions/sessions'
   }
 
-  root to: 'projects#index'
+  root to: 'sources#index'
 
-  resources :projects, only: [:index] do
+  resources :sources, only: [:show, :index]
+
+  resources :projects, only: [:index, :show] do
     resources :sources
     resources :tags, only: [:index, :create, :update, :destroy]
     resource :export, only: :show

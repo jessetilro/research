@@ -7,8 +7,9 @@ module ProjectScoped
 
   protected
   def load_project
-    @project = Project.find(params[:project_id] || params[:id])
     @projects = current_user.projects
+    @project = params[:project_id].present? ? @projects.find(params[:project_id]) : @projects.first
+    authorize! :read, ([@project] + @projects)
   end
 
 end
