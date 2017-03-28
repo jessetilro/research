@@ -11,7 +11,7 @@
     <% @sources.each do |s| %>
       <tr>
         <td>
-          <%= content_tag :p, link_to(s.title, source_path(s)), class: 'lead' %>
+          <%= content_tag :p, link_to(s.title, project_source_path(@project, s)), class: 'lead' %>
           <em><%= s.authors %> | <%= s.year %></em>
         </td>
         <td><%= s.translated_bibtex_type %></td>

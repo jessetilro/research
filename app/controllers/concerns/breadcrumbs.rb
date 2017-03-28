@@ -2,11 +2,14 @@ module Breadcrumbs
   extend ActiveSupport::Concern
 
   included do
-    before_action :set_breadcrumbs
-    before_action :add_breadcrumbs_new, only: :new
-    before_action :add_breadcrumbs_show, only: [:show, :edit]
-    before_action :add_breadcrumbs_edit, only: :edit
-    before_action :finalize_breadcrumbs
+    # before_action :set_breadcrumbs
+    # before_action :add_breadcrumbs_new, only: :new
+    # before_action :add_breadcrumbs_show, only: [:show, :edit]
+    # before_action :add_breadcrumbs_edit, only: :edit
+    # before_action :finalize_breadcrumbs
+    before_action do
+      @breadcrumbs = []
+    end
   end
 
   protected

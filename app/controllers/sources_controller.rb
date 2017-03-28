@@ -1,6 +1,7 @@
 class SourcesController < ApplicationController
   include Searching
   include Breadcrumbs
+  include ProjectScoped
 
   def index
     @search_params = search_params
@@ -38,7 +39,7 @@ class SourcesController < ApplicationController
     @source = Source.new(source_params)
     @source.user = current_user
     if (@source.save)
-      redirect_to sources_url
+      redirect_to project_sources_url(@project)
     else
       render 'new'
     end
@@ -49,7 +50,7 @@ class SourcesController < ApplicationController
     authorize! :update, @source
     @source.update source_params
     if (@source.save)
-      redirect_to source_url(@source)
+      redirect_to project_source_url(@project, @source)
     else
       render 'edits'
     end
@@ -60,10 +61,10 @@ class SourcesController < ApplicationController
     authorize! :destroy, @source
     if @source.destroy
       flash[:success] = 'Source removed succesfully!'
-      redirect_to sources_url
+      redirect_to project_sources_url(@project)
     else
       flash[:danger] = 'Could not delete Source...'
-      redirect_to source_url(@source)
+      redirect_to project_source_url(@project, @source)
     end
   end
 

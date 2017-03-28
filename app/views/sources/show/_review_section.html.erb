@@ -6,7 +6,7 @@
         <h4 class="panel-title">Your Review</h4>
       </div>
       <div class="panel-body">
-        <%= bootstrap_form_for @review do |f| %>
+        <%= bootstrap_form_for [@project, @review] do |f| %>
           <%= f.hidden_field :source_id, value: @source.id %>
           <%= f.text_area :comment, rows: 4 %>
           <%= f.number_field :rating, min: 1, max: 10 %>
@@ -16,7 +16,7 @@
                   class: 'mrm',
                   data: { toggle: 'modal', target: '#reviewModal' } %>
             <% unless @review.new_record? %>
-            <%= link_to raw("Delete Review #{glyphicon :trash}"), review_path(@review),
+            <%= link_to raw("Delete Review #{glyphicon :trash}"), project_review_path(@project, @review),
                   method: :delete,
                   data: { confirm: 'Are you sure?' },
                   class: 'btn btn-danger' %>

@@ -1,4 +1,4 @@
-<%= bootstrap_form_for(@source) do |f| %>
+<%= bootstrap_form_for([@project, @source]) do |f| %>
 
   <div class="row">
     <div class="col-xs-12 col-md-6">
@@ -46,6 +46,6 @@
 
   <%= f.submit 'Save Source',
         class: 'btn btn-primary' %>
-  <%= link_to 'Cancel', ((@source.new_record?) ? sources_path : source_path(@source)),
+  <%= link_to 'Cancel', ((@source.new_record?) ? project_sources_path(@project) : project_source_path(@project, @source)),
         class: 'btn btn-default'%>
 <% end %>

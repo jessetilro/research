@@ -1,4 +1,5 @@
 class SourceImportsController < ApplicationController
+  include ProjectScoped
 
   def create
     prms = source_import_params
@@ -24,10 +25,10 @@ class SourceImportsController < ApplicationController
       end
     rescue
       flash[:danger] = "Failed to import at least one of the #{sources.size} sources, so transaction rolled back..."
-      redirect_to sources_url
+      redirect_to project_sources_url(@project)
     else
       flash[:success] = "Succesfully imported #{sources.size} sources!"
-      redirect_to sources_url
+      redirect_to project_sources_url(@project)
     end
   end
 

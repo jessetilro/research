@@ -1,5 +1,6 @@
-class ExportsController < ApplicationController
+class SourceExportsController < ApplicationController
   include Searching
+  include ProjectScoped
 
   def show
     @sources = Source.by_search_params search_params

@@ -1,4 +1,5 @@
 class StarsController < ApplicationController
+  include ProjectScoped
 
   def create
     @star = Star.create star_params
@@ -8,9 +9,9 @@ class StarsController < ApplicationController
       flash[:success] = 'Source succesfully starred!'
     end
     if @star.source.present?
-      redirect_to source_url(@star.source)
+      redirect_to project_source_url(@project, @star.source)
     else
-      redirect_to sources_url
+      redirect_to project_sources_url(@project)
     end
   end
 
@@ -22,7 +23,7 @@ class StarsController < ApplicationController
     else
       flash[:danger] = "Removing star failed!"
     end
-    redirect_to source_url(@source)
+    redirect_to project_source_url(@project, @source)
   end
 
   protected
