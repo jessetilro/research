@@ -31,6 +31,13 @@
             class: 'btn btn-info' %>
     <% end %>
 
+    <% if @source.document.present? %>
+      <%= link_to raw("View PDF #{glyphicon 'new-window'}"),
+            url_for(format: :pdf),
+            class: 'btn btn-info',
+            target: '_blank' %>
+    <% end %>
+
     <% if @source.url.present? %>
       <%= link_to raw("Original Webpage #{glyphicon 'new-window'}"),
             @source.url,
