@@ -97,3 +97,7 @@ gem 'jquery-minicolors-rails'
 
 # Breadcrumbs
 gem 'breadcrumbs_on_rails'
+
+# Security testing
+gem 'brakeman'
+gem 'bundler-audit'
