@@ -22,7 +22,8 @@ User.create({
 
 Project.create({
   name: 'Test Project',
-  description: 'Test Description'
+  description: 'Test Description',
+  users: [User.first, User.second]
   })
 
 Source.create({
