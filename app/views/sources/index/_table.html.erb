@@ -17,7 +17,7 @@
   <tbody>
     <% @sources.each do |s| %>
       <tr>
-        <td><%= link_to(s.title, project_source_path(@project, s)) %></td>
+        <td><%= link_to(s.title.truncate(80), project_source_path(@project, s)) %></td>
         <td><%= s.year %></td>
         <td><%= s.translated_bibtex_type %></td>
         <td><%= s.user.full_name %></td>
