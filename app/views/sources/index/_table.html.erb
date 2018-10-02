@@ -2,6 +2,7 @@
   <thead>
     <tr>
       <th><%= Source.human_attribute_name :short_title %> <span class="badge"><%= @sources.length %></span></th>
+      <th></th>
       <th><%= Source.human_attribute_name :year %></th>
       <th><%= Source.human_attribute_name :bibtex_type %></th>
       <th><%= Source.human_attribute_name :user %></th>
@@ -18,6 +19,14 @@
     <% @sources.each do |s| %>
       <tr>
         <td><%= link_to(s.title.truncate(80), project_source_path(@project, s)) %></td>
+        <td>
+          <% if s.document.present? %>
+            <%= link_to raw("PDF #{glyphicon 'new-window'}"),
+                  project_source_url(@project, s, format: :pdf),
+                  class: 'btn btn-info btn-xs',
+                  target: '_blank' %>
+          <% end %>
+        </td>
         <td><%= s.year %></td>
         <td><%= s.translated_bibtex_type %></td>
         <td><%= s.user.full_name %></td>
