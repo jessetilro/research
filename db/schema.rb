@@ -10,11 +10,14 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170328073218) do
+ActiveRecord::Schema.define(version: 20181003110404) do
 
-  create_table "participations", id: false, force: :cascade do |t|
-    t.integer "project_id", null: false
-    t.integer "user_id",    null: false
+  create_table "participations", force: :cascade do |t|
+    t.integer  "project_id",                                   null: false
+    t.integer  "user_id",                                      null: false
+    t.datetime "last_used_at"
+    t.datetime "created_at",   default: '2017-02-27 20:54:00', null: false
+    t.datetime "updated_at",   default: '2017-02-27 20:54:00', null: false
     t.index ["project_id"], name: "index_participations_on_project_id"
     t.index ["user_id"], name: "index_participations_on_user_id"
   end
