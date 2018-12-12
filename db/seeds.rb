@@ -20,12 +20,19 @@ User.create({
   password: 'testtest'
   })
 
+Project.create({
+  name: 'Test Project',
+  description: 'Test Description',
+  users: [User.first, User.second]
+  })
+
 Source.create({
   title: 'Een Uitgebreid Verhaal over Karamel en Walvissen.',
   authors: 'Koekepeer M.',
   year: 2017,
   abstract: 'Lorem ipsum...',
-  user: User.first
+  user: User.first,
+  project_id: Project.first.id
   })
 
 Source.create({
@@ -33,7 +40,8 @@ Source.create({
   authors: 'Boom A., Bos P.',
   year: 2017,
   abstract: 'Lorem ipsum...',
-  user: User.first
+  user: User.first,
+  project_id: Project.first.id
   })
 
 Source.create({
@@ -48,7 +56,8 @@ Source.create({
   publisher: 'The Pragmatic Bookshelf',
   series: 'The Facets of Ruby',
   title: 'Agile Web Development with Rails',
-  year: '2009'
+  year: '2009',
+  project_id: Project.first.id
   })
 
 Review.create({
