@@ -25,24 +25,23 @@
   <body>
 
     <div id="header">
-      <h1>Sources for Literature Review</h1>
+      <h1>Sources for <%= @project.name %></h1>
       <small><em>Generated on <%= Time.now.strftime("%A %B %d, %Y, at %H:%M:%S") %></em></small>
-
-      <p>
-        <strong>Supervisors</strong><br />
-        <% @users.supervisors.each do |user| %>
-          <%= user.full_name %> - <%= user.email %><br />
-        <% end %>
-      </p>
-
-      <p>
-        <strong>Contributors</strong><br />
-        <% @users.contributors.each do |user| %>
-          <%= user.full_name %> - <%= user.email %><br />
-        <% end %>
-      </p>
     </div>
 
+    <h2>Summary</h2>
+    <hr>
+    <ul>
+      <% @sources.each do |s| %>
+        <li>
+          <small>
+            <%= s.reference %>
+          </small>
+        </li>
+      <% end %>
+    </ul>
+
+    <h2>Sources</h2>
     <% @sources.each do |s| %>
       <hr>
       <div class="source">
