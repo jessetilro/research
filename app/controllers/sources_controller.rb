@@ -5,7 +5,7 @@ class SourcesController < ApplicationController
   load_and_authorize_resource
 
   before_action { @project ||= @source.project }
-  before_action only: [:index, :new, :edit] { @tags = @project.tags }
+  before_action(only: [:index, :new, :edit]) { @tags = @project.tags }
 
   before_action only: :show do
     redirect_to project_source_url(@project, @source) unless params[:project_id].present?
