@@ -6,9 +6,9 @@
         <h4 class="panel-title">Original Document</h4>
       </div>
       <div class="panel-body">
-        <% if @source.document.present? %>
+        <% if @source.document.attached? %>
           <object data="<%= url_for(format: :pdf) %>" type="application/pdf" width="100%" height="500">
-            alt : <a href="<%= url_for(format: :pdf) %>"><%= File.basename @source.document.path %></a>
+            alt : <a href="<%= url_for(format: :pdf) %>"><%= @source.document.filename %></a>
           </object>
         <% else %>
           <em>No document attached yet...</em>

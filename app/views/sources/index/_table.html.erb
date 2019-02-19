@@ -22,7 +22,7 @@
           <%= link_to(s.title.truncate(70), project_source_path(@project, s)) %>
         </td>
         <td>
-          <% if s.document.present? %>
+          <% if s.document.attached? %>
             <%= link_to raw("PDF #{glyphicon 'new-window'}"),
                   project_source_url(@project, s, format: :pdf),
                   class: 'btn btn-info btn-xs',

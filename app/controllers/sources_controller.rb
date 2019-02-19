@@ -44,7 +44,8 @@ class SourcesController < ApplicationController
     respond_to do |format|
       format.html
       format.pdf do
-        send_file File.realpath(@source.document.path),
+        path = ActiveStorage::Blob.service.send(:path_for, @source.document.key)
+        send_file File.realpath(path),
           type: @source.document.content_type,
           disposition: disposition
       end

@@ -103,3 +103,15 @@ gem 'breadcrumbs_on_rails'
 # Security testing
 gem 'brakeman'
 gem 'bundler-audit'
+
+# Image processing
+gem 'mini_magick'
+
+# PostgreSQL database adapter to be used for production soon
+gem 'pg'
+
+# Bulk insert statements
+gem 'activerecord-import'
+
+# Validations for ActiveStorage file attachments
+gem 'file_validators'
