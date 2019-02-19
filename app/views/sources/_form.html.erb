@@ -24,7 +24,7 @@
     </div>
     <div class="col-xs-12 col-md-6">
       <%= f.number_field :isbn %>
-      <%= f.number_field :doi %>
+      <%= f.text_field :doi %>
       <%= f.select :bibtex_type, Source.bibtex_types.keys.map { |bt| [I18n.t("activerecord.attributes.source.bibtex_types.#{bt}"), bt] }  %>
       <%= f.text_field :keywords %>
       <%= f.text_area :abstract %>
