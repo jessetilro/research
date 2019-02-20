@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_02_19_155254) do
+ActiveRecord::Schema.define(version: 2019_02_20_160834) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -73,10 +73,6 @@ ActiveRecord::Schema.define(version: 2019_02_19_155254) do
     t.integer "user_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "document_file_name"
-    t.string "document_content_type"
-    t.integer "document_file_size"
-    t.datetime "document_updated_at"
     t.text "search_query"
     t.string "search_database"
     t.text "keywords"

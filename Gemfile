@@ -65,9 +65,6 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 # User authentication
 gem 'devise'
 
-# Associatiating files with models
-gem 'paperclip'
-
 # Bootstrap framework
 gem 'bootstrap-sass'
 gem 'bootstrap_form'

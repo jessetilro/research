@@ -45,14 +45,11 @@ class Source < ApplicationRecord
 
   default_scope { sorted_by_time }
 
-  has_attached_file :document
-  validates_attachment_content_type :document, content_type: /pdf/
-
-  # has_one_attached :document
-  # validates :document, file_content_type: {
-  #   allow: ['application/pdf'],
-  #   if: -> { document.attached? }
-  # }
+  has_one_attached :document
+  validates :document, file_content_type: {
+    allow: ['application/pdf'],
+    if: -> { document.attached? }
+  }
 
   def shortest_title; short_title || title; end
 
