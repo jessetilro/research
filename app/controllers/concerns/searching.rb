@@ -3,11 +3,12 @@ module Searching
 
   def search_params
     prms = params.permit(:q, :s, :v, :f, :t)
+    cookies[:v] = prms[:v] if prms[:v].present?
     {
       q: prms[:q],
       s: enforce([:time, :stars, :rating], prms[:s]),
       f: enforce([:none, :my_stars, :my_reviews, :unrated], prms[:f]),
-      v: enforce([:table, :list], prms[:v]),
+      v: enforce([:table, :list, :grid], prms[:v] || cookies[:v]),
       t: enforce([nil] + Tag.ids, prms[:t].to_i),
       u: current_user.id
     }

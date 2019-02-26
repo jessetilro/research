@@ -1,23 +1,35 @@
-<table class="table floatingheader">
-  <thead>
-    <tr>
-      <th>Source <span class="badge"><%= @sources.length %></span></th>
-      <th><%= Source.human_attribute_name :bibtex_type %></th>
-      <th><%= Source.human_attribute_name :user %></th>
-      <th><%= Source.human_attribute_name :stars %></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @sources.each do |s| %>
-      <tr>
-        <td>
-          <%= content_tag :p, link_to(s.title, project_source_path(@project, s)), class: 'lead' %>
-          <em><%= s.authors %> | <%= s.year %></em>
-        </td>
-        <td><%= s.translated_bibtex_type %></td>
-        <td><%= s.user.full_name %>,<br /><small><em><%= time_ago_in_words(s.created_at) %> ago</em></small></td>
-        <td><%= s.stars_count %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<div class="panel panel-default">
+  <div class="panel-body">
+    <table class="table floatingheader">
+      <thead>
+        <tr>
+          <th>PDF</th>
+          <th>Source <span class="badge"><%= @sources.length %></span></th>
+          <th><%= Source.human_attribute_name :bibtex_type %></th>
+          <th><%= Source.human_attribute_name :user %></th>
+          <th><%= Source.human_attribute_name :stars %></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @sources.each do |s| %>
+          <tr>
+            <td>
+              <% if s.document.attached? %>
+                <%= link_to project_source_url(@project, s, format: :pdf), target: '_blank' do %>
+                  <%= image_tag url_for(s.document.blob.preview(resize: '90x90').processed), align: 'left' %>
+                <% end %>
+              <% end %>
+            </td>
+            <td>
+              <%= content_tag :p, link_to(s.title, project_source_path(@project, s)), class: 'lead' %>
+              <em><%= s.authors %> | <%= s.year %></em>
+            </td>
+            <td><%= s.translated_bibtex_type %></td>
+            <td><%= s.user.full_name %>,<br /><small><em><%= time_ago_in_words(s.created_at) %> ago</em></small></td>
+            <td><%= s.stars_count %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

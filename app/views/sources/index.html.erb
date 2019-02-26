@@ -80,7 +80,7 @@
 
               <div class="row">
                 <div class="btn-group mts" role="group" aria-label="sort">
-                  <% [:table, :list].each do |view| %>
+                  <% [:table, :list, :grid].each do |view| %>
                     <%= link_to t(view, scope: 'search_options.view'),
                           project_sources_path(@project, @search_params.merge(v: view)),
                           class: "btn btn-xs btn-#{@search_params[:v].try(:to_sym) == view ? 'primary' : 'default'}"
