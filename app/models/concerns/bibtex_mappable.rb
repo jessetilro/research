@@ -36,6 +36,8 @@ module BibtexMappable
   def self.included base
     base.send :include, InstanceMethods
     base.send :extend, ClassMethods
+
+    attr_accessor :bibtex_text
   end
 
   module InstanceMethods
@@ -54,7 +56,12 @@ module BibtexMappable
       BibTeX::Entry.new(mapped)
     end
 
+    def bibtex_text=(entry)
+      assign_bibtex(entry)
+    end
+
     def assign_bibtex(entry)
+      return if entry.blank?
       assign_attributes(self.class.params_from_bibtex(entry))
     end
   end
@@ -63,6 +70,7 @@ module BibtexMappable
     def params_from_bibtex(entry)
       entry = BibTeX.parse entry if entry.is_a? String
       entry = entry.data[0] if entry.is_a? BibTeX::Bibliography
+      return {} if entry.blank?
       entry_value = ->(bib) { ( entry[bib].try(:value) || entry.try(bib) || (bib == :bibtex_type && entry.type) || nil ) }
       params = (BIBTEX_MAPPING.map { |bib, src| { src => entry_value.call(bib) } }).reduce({}, :update)
     end

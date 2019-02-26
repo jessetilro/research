@@ -61,7 +61,24 @@
           <% end %>
         </form>
 
+        <hr>
 
+        <%= bootstrap_form_for @source, url: project_source_path(@project, @source) do |f| %>
+          <%= f.text_area :bibtex_text, rows: 6, label: 'Quick update with BibTeX', class: 'enter-submit change-submit',
+                placeholder: <<-BIBTEX
+@book{programming_ruby,
+  author = {Thomas, Dave and Fowler, Chad and Hunt, Andy},
+  publisher = {The Pragmatic Bookshelf},
+  title = {Programming Ruby 1.9: The Pragmatic Programmer's Guide},
+  year = {2009}
+}
+BIBTEX
+          %>
+          <small>
+            <%= glyphicon :'question-sign' %>
+            Press enter in above box or defocus it to submit
+          </small>
+        <% end %>
       </div>
     </div>
 
