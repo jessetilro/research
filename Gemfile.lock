@@ -109,6 +109,8 @@ GEM
       railties (>= 4.1.0, < 6.0)
       responders
       warden (~> 1.2.3)
+    dropzonejs-rails (0.8.4)
+      rails (> 3.1)
     erubi (1.8.0)
     execjs (2.7.0)
     ffi (1.9.25)
@@ -275,6 +277,7 @@ DEPENDENCIES
   coffee-rails (~> 4.2)
   csl-styles
   devise
+  dropzonejs-rails
   file_validators
   jbuilder (~> 2.5)
   jquery-minicolors-rails

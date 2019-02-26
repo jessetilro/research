@@ -12,6 +12,7 @@ Rails.application.routes.draw do
     resources :tags, only: [:index, :create, :update, :destroy]
     resource :export, only: :show
     resources :source_imports, only: :create
+    resources :source_drops, only: :create
     resources :stars, only: [:create, :destroy]
     resources :reviews, only: [:create, :update, :destroy]
     resources :review_previews, only: :index

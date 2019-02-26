@@ -112,3 +112,6 @@ gem 'activerecord-import'
 
 # Validations for ActiveStorage file attachments
 gem 'file_validators'
+
+# Dropzone for file uploads
+gem 'dropzonejs-rails'

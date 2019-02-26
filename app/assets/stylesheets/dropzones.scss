@@ -1,0 +1,34 @@
+.dropzone {
+  border: 2px solid rgb(220, 228, 236);
+  border-radius: 4px;
+  color: #acb6c0;
+}
+
+.dz-preview {
+  min-height: 50px !important;
+}
+.dz-image {
+  background: rgb(121, 141, 143) !important;
+  border-radius: 4px !important;
+  height: 90px !important;
+  width: 100px !important;
+}
+.dz-details {
+  padding: 1.5em 1em !important;
+}
+.dz-size {
+  margin-bottom: 8px !important;
+  font-size: 14px !important;
+}
+.dz-progress {
+  display: none;
+}
+.dz-remove {
+
+}
+.dz-size > span,
+.dz-filename > span {
+  background-color: rgb(26, 37, 47) !important;
+  border-color: rgb(26, 37, 47) !important;
+  color: #fff;
+}

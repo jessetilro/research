@@ -53,15 +53,22 @@ module BibtexMappable
       mapped = (BIBTEX_MAPPING.except(:type).map { |k, v| (self.send(v).present? ? {k => self.send(v)} : nil)  } - [nil]).reduce({}, :update)
       BibTeX::Entry.new(mapped)
     end
+
+    def assign_bibtex(entry)
+      assign_attributes(self.class.params_from_bibtex(entry))
+    end
   end
 
   module ClassMethods
-    def from_bibtex entry
+    def params_from_bibtex(entry)
       entry = BibTeX.parse entry if entry.is_a? String
       entry = entry.data[0] if entry.is_a? BibTeX::Bibliography
       entry_value = ->(bib) { ( entry[bib].try(:value) || entry.try(bib) || (bib == :bibtex_type && entry.type) || nil ) }
       params = (BIBTEX_MAPPING.map { |bib, src| { src => entry_value.call(bib) } }).reduce({}, :update)
-      self.new(params)
+    end
+
+    def from_bibtex(entry)
+      self.new(params_from_bibtex(entry))
     end
 
     def to_bibliography sources=nil
