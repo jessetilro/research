@@ -66,8 +66,7 @@ class SourcesController < ApplicationController
   def update
     @source = Source.by_project(@project).find params[:id]
     authorize! :update, @source
-    @source.update source_params
-    if (@source.save)
+    if @source.update source_params
       redirect_to project_source_url(@project, @source)
     else
       render 'edits'
@@ -120,7 +119,7 @@ class SourcesController < ApplicationController
       :note,
       :tag_ids
     )
-    prms[:tag_ids] = prms[:tag_ids].split(',')
+    prms[:tag_ids] = prms[:tag_ids].split(',') if prms[:tag_ids].present?
     prms[:project] = @project
     prms
   end
