@@ -62,8 +62,8 @@ en:
         shorttitle: Short Title
         authors: Authors
         editors: Editors
-        year: Year (of publication)
-        month: Month (of publication)
+        year: Year (pub)
+        month: Month (pub)
         publisher: Publisher
         institution: Institution (involved in publishing)
         organization: Organization (conference sponsor)
@@ -74,7 +74,7 @@ en:
         chapter: Chapter
         pages: Page numbers
         journal: Journal
-        number: Number (e.g. issue)
+        number: Number (issue)
         volume: Volume
         bibtex_key: BibTeX Entry Key
         bibtex_type: BibTeX Item Type
