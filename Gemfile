@@ -115,3 +115,6 @@ gem 'file_validators'
 
 # Dropzone for file uploads
 gem 'dropzonejs-rails'
+
+# Parsing references
+gem 'anystyle'

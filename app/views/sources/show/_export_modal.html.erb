@@ -10,7 +10,7 @@
           <%= click_to_select_box(@source.to_bibtex.to_s) %>
 
           <h4>APA Reference</h4>
-          <%= click_to_select_box(@source.reference, rows: 3) %>
+          <%= click_to_select_box(@source.to_reference, rows: 3) %>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
