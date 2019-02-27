@@ -33,6 +33,11 @@ module BibtexMappable
     note: :note
   }
 
+  included do
+    before_save :decode_latex
+    after_initialize :decode_latex
+  end
+
   def self.included base
     base.send :include, InstanceMethods
     base.send :extend, ClassMethods
@@ -64,6 +69,14 @@ module BibtexMappable
     def assign_bibtex(entry)
       return if entry.blank?
       assign_attributes(self.class.params_from_bibtex(entry))
+    end
+
+    protected
+
+    def decode_latex
+      BIBTEX_MAPPING.values.each do |field|
+        self.send("#{field}=", LaTeX.decode(send(field)))
+      end
     end
   end
 
