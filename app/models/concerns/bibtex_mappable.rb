@@ -36,8 +36,6 @@ module BibtexMappable
   def self.included base
     base.send :include, InstanceMethods
     base.send :extend, ClassMethods
-
-    attr_accessor :bibtex_text
   end
 
   module InstanceMethods
@@ -54,6 +52,9 @@ module BibtexMappable
     def to_bibtex
       mapped = (BIBTEX_MAPPING.except(:type).map { |k, v| (self.send(v).present? ? {k => self.send(v)} : nil)  } - [nil]).reduce({}, :update)
       BibTeX::Entry.new(mapped)
+    end
+
+    def bibtex_text
     end
 
     def bibtex_text=(entry)

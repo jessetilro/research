@@ -16,6 +16,7 @@ class SourceDropsController < ApplicationController
     source.title = prms[:title] if prms[:title].present?
 
     source.assign_bibtex(prms[:bibtex_text]) if prms[:bibtex_text].present?
+    source.assign_reference(prms[:reference_text]) if prms[:reference_text].present?
 
     if prms[:document].present?
       source.document = prms[:document]
@@ -41,7 +42,7 @@ class SourceDropsController < ApplicationController
     params.require(:source_drop).permit(
       :id,
       :bibtex_text,
-      :bibtex_url,
+      :reference_text,
       :document,
       :document_url,
       :title

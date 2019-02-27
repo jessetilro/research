@@ -4,8 +4,7 @@ module Referrable
 
   DEFAULT_OPTIONS = { style: 'apa', format: 'text' }
 
-  included do
-    attr_accessor :reference_text
+  def reference_text
   end
 
   def reference_text=(ref)

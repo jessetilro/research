@@ -118,7 +118,8 @@ class SourcesController < ApplicationController
       :volume,
       :note,
       :tag_ids,
-      :bibtex_text
+      :bibtex_text,
+      :reference_text
     )
     prms[:tag_ids] = prms[:tag_ids].split(',') if prms[:tag_ids].present?
     prms[:project] = @project

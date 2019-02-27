@@ -68,20 +68,30 @@
           <%= f.number_field :volume %>
         </div>
       </div>
-      <div class="row">
-        <div class="col-md-12">
-          <%= f.text_field :journal %>
-        </div>
-      </div>
       <div class="row mtx">
-        <div class="col-md-12">
-          <%= f.submit 'Save Source',
-              class: 'btn btn-primary' %>
-          <%= link_to 'Cancel', ((@source.new_record?) ? project_sources_path(@project) : project_source_path(@project, @source)),
-              class: 'btn btn-default'%>
+        <div class="col-md-7">
+          <%= f.text_area :bibtex_text, rows: 5, label: 'Assign values from BibTeX',
+          placeholder: <<-BIBTEX
+@book{programming_ruby,
+  author = {Thomas, Dave and Fowler, Chad and Hunt, Andy},
+  publisher = {The Pragmatic Bookshelf},
+  title = {Programming Ruby 1.9: The Pragmatic Programmer's Guide},
+  year = {2009}
+}
+          BIBTEX
+          %>
+        </div>
+        <div class="col-md-5">
+          <%= f.text_area :reference_text, rows: 5, label: 'Assign values from reference',
+          placeholder: <<-REFERENCE
+Thomas, D., Fowler, C., & Hunt, A. (2009). Programming Ruby 1.9: The Pragmatic Programmer's Guide. The Pragmatic Bookshelf.
+REFERENCE
+          %>
         </div>
       </div>
     </div>
+
+
     <div class="col-xs-12 col-md-6">
       <div class="row">
         <div class="col-md-4">
@@ -131,17 +141,19 @@
           <%= f.file_field :document %>
         </div>
       </div>
-
-      <%= f.text_area :bibtex_text, rows: 6, label: 'Assign values from BibTeX',
-            placeholder: <<-BIBTEX
-@book{programming_ruby,
-author = {Thomas, Dave and Fowler, Chad and Hunt, Andy},
-publisher = {The Pragmatic Bookshelf},
-title = {Programming Ruby 1.9: The Pragmatic Programmer's Guide},
-year = {2009}
-}
-BIBTEX
-      %>
+      <div class="row">
+        <div class="col-md-12">
+          <%= f.text_field :journal %>
+        </div>
+      </div>
+      <div class="row mtx">
+        <div class="col-md-12">
+          <%= f.submit 'Save Source',
+              class: 'btn btn-primary right mlm' %>
+          <%= link_to 'Cancel', ((@source.new_record?) ? project_sources_path(@project) : project_source_path(@project, @source)),
+            class: 'btn btn-default right'%>
+        </div>
+      </div>
     </div>
   </div>
 <% end %>
