@@ -30,11 +30,14 @@
         <div class="col-md-2">
           <%= f.number_field :month %>
         </div>
-        <div class="col-md-4">
+        <div class="col-md-2">
           <%= f.text_field :publisher %>
         </div>
-        <div class="col-md-4">
-          <%= f.text_field :institution %>
+        <div class="col-md-3">
+          <%= f.text_field :address %>
+        </div>
+        <div class="col-md-3">
+          <%= f.text_field :journal %>
         </div>
       </div>
       <div class="row">
@@ -45,7 +48,7 @@
           <%= f.text_field :school %>
         </div>
         <div class="col-md-4">
-          <%= f.text_field :address %>
+          <%= f.text_field :institution %>
         </div>
       </div>
       <div class="row">
@@ -68,7 +71,7 @@
           <%= f.number_field :volume %>
         </div>
       </div>
-      <div class="row mtx">
+      <div class="row mtl">
         <div class="col-md-7">
           <%= f.text_area :bibtex_text, rows: 5, label: 'Assign values from BibTeX',
           placeholder: <<-BIBTEX
@@ -94,27 +97,30 @@ REFERENCE
 
     <div class="col-xs-12 col-md-6">
       <div class="row">
-        <div class="col-md-4">
+        <div class="col-md-6">
           <%= f.select :bibtex_type, Source.bibtex_types.keys.map { |bt| [I18n.t("activerecord.attributes.source.bibtex_types.#{bt}"), bt] }  %>
         </div>
+        <div class="col-md-6">
+          <%= f.text_field :bibtex_key %>
+        </div>
+      </div>
+      <div class="row">
         <div class="col-md-4">
           <%= f.number_field :isbn %>
         </div>
         <div class="col-md-4">
           <%= f.text_field :doi %>
         </div>
-      </div>
-      <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-4">
           <%= f.text_field :url %>
         </div>
       </div>
       <div class="row">
         <div class="col-md-8">
-          <%= f.text_area :abstract %>
+          <%= f.text_area :abstract, rows: 6 %>
         </div>
         <div class="col-md-4">
-          <%= f.text_area :keywords %>
+          <%= f.text_area :keywords, rows: 6 %>
         </div>
       </div>
       <div class="row">
@@ -139,11 +145,6 @@ REFERENCE
                     } %>
           </div>
           <%= f.file_field :document %>
-        </div>
-      </div>
-      <div class="row">
-        <div class="col-md-12">
-          <%= f.text_field :journal %>
         </div>
       </div>
       <div class="row mtx">
