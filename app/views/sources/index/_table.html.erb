@@ -23,13 +23,17 @@
             <td width="564">
               <%= link_to(s.title.truncate(70), project_source_path(@project, s)) %>
             </td>
-            <td>
+            <td class="text-right">
               <% if s.document.attached? %>
                 <%= link_to raw("PDF #{glyphicon 'new-window'}"),
                       project_source_url(@project, s, format: :pdf),
                       class: 'btn btn-info btn-xs',
                       target: '_blank' %>
               <% end %>
+              <%= link_to raw("#{glyphicon 'search'}"),
+                    s.scholar_url,
+                    class: 'btn btn-info btn-xs',
+                    target: '_blank' %>
             </td>
             <td><%= s.year %></td>
             <td><%= s.translated_bibtex_type %></td>

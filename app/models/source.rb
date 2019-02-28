@@ -1,4 +1,5 @@
 class Source < ApplicationRecord
+  SCHOLAR_URL = "https://scholar.google.com/scholar?q=%{q}"
 
   include Referrable
   include BibtexMappable
@@ -92,4 +93,7 @@ class Source < ApplicationRecord
     tags.map { |t| t.name }.join(', ')
   end
 
+  def scholar_url
+     SCHOLAR_URL % { q: CGI.escape(to_reference) }
+  end
 end

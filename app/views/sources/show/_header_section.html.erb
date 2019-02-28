@@ -39,17 +39,22 @@
     <% end %>
 
     <% if @source.url.present? %>
-      <%= link_to raw("Original Webpage #{glyphicon 'new-window'}"),
+      <%= link_to raw("Webpage #{glyphicon 'new-window'}"),
             @source.url,
             target: '_blank',
             class: 'btn btn-info' %>
     <% end %>
 
-    <%= content_tag :button, raw("Export Source #{glyphicon :export}"),
+    <%= link_to raw("Scholar #{glyphicon 'search'}"),
+          @source.scholar_url,
+          target: '_blank',
+          class: 'btn btn-info' %>
+
+    <%= content_tag :button, raw("Export #{glyphicon :export}"),
           class: 'btn btn-default',
           data: { toggle: 'modal', target: '#exportModal' } %>
 
-    <%= link_to raw("Delete Source #{glyphicon :trash}"), project_source_path(@project, @source),
+    <%= link_to raw("Delete #{glyphicon :trash}"), project_source_path(@project, @source),
           method: :delete,
           data: { confirm: 'Are you sure?' },
           class: 'btn btn-danger' %>
