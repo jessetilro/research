@@ -16,6 +16,7 @@
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
         <li<%= raw(' class="active"') if controller_name == 'sources' %>><%= link_to Source.model_name.human(count: 2), project_sources_url(@project) %></li>
+        <li<%= raw(' class="active"') if controller_name == 'queries' %>><%= link_to 'Queries', project_queries_url(@project) %></li>
         <li<%= raw(' class="active"') if controller_name == 'tags' %>><%= link_to Tag.model_name.human(count: 2), project_tags_url(@project) %></li>
       </ul>
       <ul class="nav navbar-nav navbar-right">

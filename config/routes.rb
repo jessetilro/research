@@ -16,6 +16,6 @@ Rails.application.routes.draw do
     resources :stars, only: [:create, :destroy]
     resources :reviews, only: [:create, :update, :destroy]
     resources :review_previews, only: :index
+    resources :queries
   end
-
 end
