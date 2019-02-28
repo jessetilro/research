@@ -26,7 +26,7 @@
             <td class="text-right">
               <% if s.document.attached? %>
                 <%= link_to raw("PDF #{glyphicon 'new-window'}"),
-                      project_source_url(@project, s, format: :pdf),
+                      project_source_path(@project, s, format: :pdf),
                       class: 'btn btn-info btn-xs',
                       target: '_blank' %>
               <% end %>
@@ -34,6 +34,9 @@
                     s.scholar_url,
                     class: 'btn btn-info btn-xs',
                     target: '_blank' %>
+              <%= link_to raw("#{glyphicon 'pencil'}"),
+                    edit_project_source_path(@project, s),
+                    class: 'btn btn-default btn-xs' %>
             </td>
             <td><%= s.year %></td>
             <td><%= s.translated_bibtex_type %></td>
