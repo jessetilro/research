@@ -16,4 +16,5 @@
 //= require bootstrap-sprockets
 //= require selectize
 //= require jquery.minicolors
+//= require dropzone
 //= require_tree .

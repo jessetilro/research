@@ -1,0 +1,23 @@
+<div class="row">
+  <% @sources.each do |s| %>
+      <div class="col-sm-4 col-md-2">
+        <div class="thumbnail source-grid-item">
+          <% if s.document.attached? %>
+            <% style = "background-image: url('#{url_for(s.document.blob.preview(resize: '400x400').processed)}');" %>
+            <%= link_to project_source_path(@project, s, format: :pdf), target: '_blank' do %>
+              <%= tag.div nil, class: 'source-grid-item__thumbnail', style: style %>
+            <% end %>
+          <% else %>
+            <%= tag.div nil, class: 'source-grid-item__thumbnail' %>
+          <% end %>
+          <div class="caption">
+            <%= link_to project_source_path(@project, s) do %>
+              <h4 class="source-grid-item__title">
+                <%= s.title %>
+              </h4>
+            <% end %>
+          </div>
+        </div>
+      </div>
+  <% end %>
+</div>

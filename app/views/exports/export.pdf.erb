@@ -4,13 +4,16 @@
     <meta charset='utf-8' />
     <style type="text/css">
       body { font-family: "Times New Roman", Times, serif; }
+
       h1 { font-size: 28px; }
-      h3 { margin-bottom: 10px; }
+      h3 { font-size: 20px; margin-bottom: 10px; }
+      table td h3 { margin: 0; }
+      big { font-size: 20px; }
       p { font-size: 13px; }
       small { font-size: 12px; }
       #header { margin-bottom: 42px; }
       .source { margin: 20px 0; }
-      .source strong { font-size: 14px; }
+      .source strong { font-size: 12px; }
       .source small { font-size: 12px; }
       .source p { font-size: 12px; }
       .source .description strong { font-size: 12px; }
@@ -19,41 +22,111 @@
       .source .description {
         background-color: #f0f0f0;
         padding: 4px 8px;
+        margin-top: 10px;
+      }
+      table td {
+        padding-right: 10px;
+        padding-top: 10px;
+        font-size: 12px;
+        vertical-align: top;
       }
     </style>
   </head>
   <body>
 
     <div id="header">
-      <h1>Sources for Literature Review</h1>
+      <h1>Sources for <%= @project.name %></h1>
       <small><em>Generated on <%= Time.now.strftime("%A %B %d, %Y, at %H:%M:%S") %></em></small>
-
-      <p>
-        <strong>Supervisors</strong><br />
-        <% @users.supervisors.each do |user| %>
-          <%= user.full_name %> - <%= user.email %><br />
-        <% end %>
-      </p>
-
-      <p>
-        <strong>Contributors</strong><br />
-        <% @users.contributors.each do |user| %>
-          <%= user.full_name %> - <%= user.email %><br />
-        <% end %>
-      </p>
     </div>
 
+    <h2>Summary</h2>
+    <hr>
+    <ul>
+      <% @sources.each do |s| %>
+        <li>
+          <small>
+            <%= s.title %>
+          </small>
+        </li>
+      <% end %>
+    </ul>
+
+    <h2>Sources</h2>
     <% @sources.each do |s| %>
       <hr>
       <div class="source">
-        <%= content_tag :h3, s.title %>
-        <strong><%= s.authors %> (<%= s.year %>)</strong><br />
-        <small><em>Keywords: <%= s.keywords %></em></small>
-        <%= content_tag :p, s.abstract %>
-        <div class="description">
-          <strong>Contributed by <%= s.user.full_name %>:</strong><br />
-          <small><em><%= s.created_at.strftime("%Y-%m-%d %H:%M:%S") %></em></small>
-        </div>
+        <table style="width: 100%;">
+          <tbody>
+            <tr>
+              <td>
+                <%= content_tag :h3, s.title %>
+              </td>
+              <td style="width: 50px; text-align: right;">
+                <big>
+                  <%= s.year %>
+                </big>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <table>
+          <tbody>
+            <tr>
+              <td>
+                <strong>
+                  Authors
+                </strong>
+              </td>
+              <td><%= s.authors %></td>
+            </tr>
+            <% if s.keywords.present? %>
+            <tr>
+              <td>
+                <strong>
+                  Keywords
+                </strong>
+              </td>
+              <td>
+                <%= s.keywords %>
+              </td>
+            </tr>
+            <% end %>
+            <% if s.abstract.present? %>
+            <tr>
+              <td>
+                <strong>
+                  Abstract
+                </strong>
+              </td>
+              <td>
+                <%= s.abstract %>
+              </td>
+            </tr>
+            <% end %>
+            <tr>
+              <td>
+                <strong>
+                  Reference
+                </strong>
+              </td>
+              <td>
+                <%= s.to_reference %>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+
+        <% review = s.reviews.find_by(user: s.user) %>
+        <% if review.present? %>
+          <div class="description">
+            <strong>Comment by <%= s.user.full_name %>:</strong><br />
+            <p>
+              <%= review.comment %>
+            </p>
+            <small><em><%= s.created_at.strftime("%Y-%m-%d %H:%M:%S") %></em></small>
+          </div>
+        <% end %>
       </div>
     <% end %>
 

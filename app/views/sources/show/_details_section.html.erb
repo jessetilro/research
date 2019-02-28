@@ -61,7 +61,41 @@
           <% end %>
         </form>
 
+        <hr>
 
+        <%= bootstrap_form_for @source, url: project_source_path(@project, @source) do |f| %>
+          <div class="row">
+            <div class="col-md-7">
+              <%= f.label :bibtex_text, 'Quick update with BibTeX' %>
+              <%= text_area_tag :'source[bibtex_text]', nil, rows: 5, label: 'Quick update with BibTeX', class: 'form-control enter-submit change-submit',
+                    placeholder: <<-BIBTEX
+@book{programming_ruby,
+  author = {Thomas, Dave and Fowler, Chad and Hunt, Andy},
+  publisher = {The Pragmatic Bookshelf},
+  title = {Programming Ruby 1.9: The Pragmatic Programmer's Guide},
+  year = {2009}
+}
+BIBTEX
+              %>
+              <small>
+                <%= glyphicon :'question-sign' %>
+                Press enter in above box or defocus it to submit
+              </small>
+            </div>
+            <div class="col-md-5">
+              <%= f.label :reference_text, 'Quick update with reference' %>
+              <%= text_area_tag :'source[reference_text]', nil, rows: 5, label: 'Quick update with reference', class: 'form-control enter-submit change-submit',
+                    placeholder: <<-REFERENCE
+Thomas, D., Fowler, C., & Hunt, A. (2009). Programming Ruby 1.9: The Pragmatic Programmer's Guide. The Pragmatic Bookshelf.
+REFERENCE
+              %>
+              <small>
+                <%= glyphicon :'question-sign' %>
+                Press enter in above box or defocus it to submit
+              </small>
+            </div>
+          </div>
+        <% end %>
       </div>
     </div>
 

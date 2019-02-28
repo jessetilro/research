@@ -25,13 +25,13 @@
 
     <%= link_to raw("Edit #{glyphicon :pencil}"), edit_project_source_path(@project, @source), class: 'btn btn-primary' %>
 
-    <% if @source.document.present? %>
+    <% if @source.document.attached? %>
       <%= link_to raw("Download PDF #{glyphicon 'download-alt'}"),
             url_for(format: :pdf, download: true),
             class: 'btn btn-info' %>
     <% end %>
 
-    <% if @source.document.present? %>
+    <% if @source.document.attached? %>
       <%= link_to raw("View PDF #{glyphicon 'new-window'}"),
             url_for(format: :pdf),
             class: 'btn btn-info',

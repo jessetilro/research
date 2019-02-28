@@ -7,9 +7,11 @@ end
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails', '~> 5.0.1'
+gem 'rails', '~> 5.2.2'
+# Improves performance of booting the application
+gem 'bootsnap', '>= 1.1.0', require: false
 # Use sqlite3 as the database for Active Record
-gem 'sqlite3'
+gem 'sqlite3', '~> 1.3.6'
 # Use Puma as the app server
 gem 'puma', '~> 3.0'
 # Use SCSS for stylesheets
@@ -63,9 +65,6 @@ gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 # User authentication
 gem 'devise'
 
-# Associatiating files with models
-gem 'paperclip'
-
 # Bootstrap framework
 gem 'bootstrap-sass'
 gem 'bootstrap_form'
@@ -101,3 +100,21 @@ gem 'breadcrumbs_on_rails'
 # Security testing
 gem 'brakeman'
 gem 'bundler-audit'
+
+# Image processing
+gem 'mini_magick'
+
+# PostgreSQL database adapter to be used for production soon
+gem 'pg'
+
+# Bulk insert statements
+gem 'activerecord-import'
+
+# Validations for ActiveStorage file attachments
+gem 'file_validators'
+
+# Dropzone for file uploads
+gem 'dropzonejs-rails'
+
+# Parsing references
+gem 'anystyle'

@@ -1,61 +1,76 @@
-<table class="table table-striped floatingheader">
-  <thead>
-    <tr>
-      <th><%= Source.human_attribute_name :short_title %> <span class="badge"><%= @sources.length %></span></th>
-      <th><%= Source.human_attribute_name :year %></th>
-      <th><%= Source.human_attribute_name :bibtex_type %></th>
-      <th><%= Source.human_attribute_name :user %></th>
-      <th><%= Source.human_attribute_name :created_at %></th>
-      <th><%= Source.human_attribute_name :rating %></th>
-      <th><%= Source.human_attribute_name :average_rating %></th>
-      <th><%= Source.human_attribute_name :reviews %></th>
-      <th><%= Source.human_attribute_name :stars %></th>
-      <th><%= Source.human_attribute_name :tags %></th>
-      <th></th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @sources.each do |s| %>
-      <tr>
-        <td><%= link_to(s.title, project_source_path(@project, s)) %></td>
-        <td><%= s.year %></td>
-        <td><%= s.translated_bibtex_type %></td>
-        <td><%= s.user.full_name %></td>
-        <td><small><em><%= time_ago_in_words(s.created_at) %> ago</em></small></td>
-        <td>
-          <% rating = s.rating_by(current_user)
-          if rating.present? %>
-            <%= content_tag :span, class: 'text-success' do %>
-              <%= rating %> <%= glyphicon :ok %>
-            <% end %>
-          <% end %>
-        </td>
-        <td><%= s.average_rating %></td>
-        <td>
-          <%= s.reviews.size %>
-          <% if s.reviews.size > 0 %>
-            <%= popover s.list_reviewers %>
-          <% end %>
-        </td>
-        <td>
-          <%= s.stars_count %>
-          <% if s.stars.size > 0 %>
-            <%= popover s.list_starrers %>
-          <% end %>
-        </td>
-        <td>
-          <% s.tags.each do |t| %>
-            <%= tag_tag t %>
-          <% end %>
-        </td>
-        <td>
-          <% if s.starred_by?(current_user) %>
-            <%= glyphicon :star %>
-          <% else %>
-            <%= glyphicon 'star-empty' %>
-          <% end %>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<div class="panel panel-default">
+  <div class="panel-body">
+    <table class="table table-striped floatingheader">
+      <thead>
+        <tr>
+          <th><%= Source.human_attribute_name :short_title %> <span class="badge"><%= @sources.length %></span></th>
+          <th></th>
+          <th><%= Source.human_attribute_name :year %></th>
+          <th><%= Source.human_attribute_name :bibtex_type %></th>
+          <th><%= Source.human_attribute_name :user %></th>
+          <th><%= Source.human_attribute_name :created_at %></th>
+          <th><%= Source.human_attribute_name :rating %></th>
+          <th><%= Source.human_attribute_name :average_rating %></th>
+          <th><%= Source.human_attribute_name :reviews %></th>
+          <th><%= Source.human_attribute_name :stars %></th>
+          <th><%= Source.human_attribute_name :tags %></th>
+          <th></th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @sources.each do |s| %>
+          <tr>
+            <td width="564">
+              <%= link_to(s.title.truncate(70), project_source_path(@project, s)) %>
+            </td>
+            <td>
+              <% if s.document.attached? %>
+                <%= link_to raw("PDF #{glyphicon 'new-window'}"),
+                      project_source_url(@project, s, format: :pdf),
+                      class: 'btn btn-info btn-xs',
+                      target: '_blank' %>
+              <% end %>
+            </td>
+            <td><%= s.year %></td>
+            <td><%= s.translated_bibtex_type %></td>
+            <td><%= s.user.full_name %></td>
+            <td><small><em><%= time_ago_in_words(s.created_at) %> ago</em></small></td>
+            <td>
+              <% rating = s.rating_by(current_user)
+              if rating.present? %>
+                <%= content_tag :span, class: 'text-success' do %>
+                  <%= rating %> <%= glyphicon :ok %>
+                <% end %>
+              <% end %>
+            </td>
+            <td><%= s.average_rating %></td>
+            <td>
+              <%= s.reviews.size %>
+              <% if s.reviews.size > 0 %>
+                <%= popover s.list_reviewers %>
+              <% end %>
+            </td>
+            <td>
+              <%= s.stars_count %>
+              <% if s.stars.size > 0 %>
+                <%= popover s.list_starrers %>
+              <% end %>
+            </td>
+            <td>
+              <% s.tags.each do |t| %>
+                <%= tag_tag t %>
+              <% end %>
+            </td>
+            <td>
+              <% if s.starred_by?(current_user) %>
+                <%= glyphicon :star %>
+              <% else %>
+                <%= glyphicon 'star-empty' %>
+              <% end %>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

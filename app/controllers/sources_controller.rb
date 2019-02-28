@@ -5,7 +5,7 @@ class SourcesController < ApplicationController
   load_and_authorize_resource
 
   before_action { @project ||= @source.project }
-  before_action only: [:index, :new, :edit] { @tags = @project.tags }
+  before_action(only: [:index, :new, :edit]) { @tags = @project.tags }
 
   before_action only: :show do
     redirect_to project_source_url(@project, @source) unless params[:project_id].present?
@@ -44,7 +44,8 @@ class SourcesController < ApplicationController
     respond_to do |format|
       format.html
       format.pdf do
-        send_file File.realpath(@source.document.path),
+        path = ActiveStorage::Blob.service.send(:path_for, @source.document.key)
+        send_file File.realpath(path),
           type: @source.document.content_type,
           disposition: disposition
       end
@@ -65,8 +66,7 @@ class SourcesController < ApplicationController
   def update
     @source = Source.by_project(@project).find params[:id]
     authorize! :update, @source
-    @source.update source_params
-    if (@source.save)
+    if @source.update source_params
       redirect_to project_source_url(@project, @source)
     else
       render 'edits'
@@ -117,9 +117,11 @@ class SourcesController < ApplicationController
       :number,
       :volume,
       :note,
-      :tag_ids
+      :tag_ids,
+      :bibtex_text,
+      :reference_text
     )
-    prms[:tag_ids] = prms[:tag_ids].split(',')
+    prms[:tag_ids] = prms[:tag_ids].split(',') if prms[:tag_ids].present?
     prms[:project] = @project
     prms
   end

@@ -33,6 +33,11 @@ module BibtexMappable
     note: :note
   }
 
+  included do
+    before_save :decode_latex
+    after_initialize :decode_latex
+  end
+
   def self.included base
     base.send :include, InstanceMethods
     base.send :extend, ClassMethods
@@ -53,15 +58,39 @@ module BibtexMappable
       mapped = (BIBTEX_MAPPING.except(:type).map { |k, v| (self.send(v).present? ? {k => self.send(v)} : nil)  } - [nil]).reduce({}, :update)
       BibTeX::Entry.new(mapped)
     end
+
+    def bibtex_text
+    end
+
+    def bibtex_text=(entry)
+      assign_bibtex(entry)
+    end
+
+    def assign_bibtex(entry)
+      return if entry.blank?
+      assign_attributes(self.class.params_from_bibtex(entry))
+    end
+
+    protected
+
+    def decode_latex
+      BIBTEX_MAPPING.values.each do |field|
+        self.send("#{field}=", LaTeX.decode(send(field)))
+      end
+    end
   end
 
   module ClassMethods
-    def from_bibtex entry
+    def params_from_bibtex(entry)
       entry = BibTeX.parse entry if entry.is_a? String
       entry = entry.data[0] if entry.is_a? BibTeX::Bibliography
+      return {} if entry.blank?
       entry_value = ->(bib) { ( entry[bib].try(:value) || entry.try(bib) || (bib == :bibtex_type && entry.type) || nil ) }
       params = (BIBTEX_MAPPING.map { |bib, src| { src => entry_value.call(bib) } }).reduce({}, :update)
-      self.new(params)
+    end
+
+    def from_bibtex(entry)
+      self.new(params_from_bibtex(entry))
     end
 
     def to_bibliography sources=nil
