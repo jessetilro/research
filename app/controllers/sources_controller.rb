@@ -21,7 +21,7 @@ class SourcesController < ApplicationController
 
   def index
     @search_params = search_params
-    @sources = Source.by_search_params(@search_params).by_project(@project)
+    @sources = Source.by_search_params(@search_params).by_project(@project).with_attached_document
   end
 
   def new
