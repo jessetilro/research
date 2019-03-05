@@ -54,6 +54,7 @@
                     <%= field[1] %>
                   <% else %>
                     <%= @source.send field %>
+                    <%= glyphicon(:alert) if field == :doi && !@source.doi_valid? %>
                   <% end %>
                 </div>
               </div>

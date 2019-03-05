@@ -2,6 +2,8 @@ class Source < ApplicationRecord
   SCHOLAR_URL = "https://scholar.google.com/scholar?q=%{q}"
   DOI_URL = "https://doi.org/%{doi}"
 
+  DOI_PATTERN = /^10.\d{4,9}\/[-._;()\/:A-Z0-9]+$/i
+
   include Referrable
   include BibtexMappable
 
@@ -101,8 +103,17 @@ class Source < ApplicationRecord
   end
 
   def doi_url
-    return if doi.blank?
+    return if doi.blank? || !doi_valid?
     DOI_URL % { doi: doi }
+  end
+
+  def doi_valid?
+    Source.doi_valid? doi
+  end
+
+  def self.doi_valid?(doi)
+    return false if doi.blank?
+    DOI_PATTERN.match?(doi)
   end
 
   protected
