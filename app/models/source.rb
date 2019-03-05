@@ -1,5 +1,6 @@
 class Source < ApplicationRecord
   SCHOLAR_URL = "https://scholar.google.com/scholar?q=%{q}"
+  DOI_URL = "https://doi.org/%{doi}"
 
   include Referrable
   include BibtexMappable
@@ -51,6 +52,8 @@ class Source < ApplicationRecord
     if: -> { document.attached? }
   }
 
+  before_save :infer_url_from_doi
+
   def shortest_title; short_title || title; end
 
   def translated_bibtex_type
@@ -95,5 +98,16 @@ class Source < ApplicationRecord
 
   def scholar_url
      SCHOLAR_URL % { q: CGI.escape("\"#{title}\"") }
+  end
+
+  def doi_url
+    return if doi.blank?
+    DOI_URL % { doi: doi }
+  end
+
+  protected
+
+  def infer_url_from_doi
+    self.url = doi_url if url.blank?
   end
 end
