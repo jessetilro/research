@@ -57,35 +57,27 @@
               <%= s.average_rating %>
             </td>
             <td>
-              <% if false %>
               <%= s.reviews.size %>
               <% if s.reviews.size > 0 %>
                 <%= popover s.list_reviewers %>
               <% end %>
-              <% end %>
             </td>
             <td>
-              <% if false %>
-              <%= s.stars_count %>
+              <%= s.stars.size %>
               <% if s.stars.size > 0 %>
                 <%= popover s.list_starrers %>
               <% end %>
-              <% end %>
             </td>
             <td>
-              <% if false %>
               <% s.tags.each do |t| %>
                 <%= tag_tag t %>
               <% end %>
-              <% end %>
             </td>
             <td>
-              <% if false %>
               <% if s.starred_by?(current_user) %>
                 <%= glyphicon :star %>
               <% else %>
                 <%= glyphicon 'star-empty' %>
-              <% end %>
               <% end %>
             </td>
           </tr>

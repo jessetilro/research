@@ -98,7 +98,7 @@ class Source < ApplicationRecord
   end
 
   def starred_by? user
-    star_by(user).present?
+    stars.select { |s| s.user == user  }.present?
   end
 
   def star_by user
@@ -122,7 +122,7 @@ class Source < ApplicationRecord
   end
 
   def list_starrers
-    starrers.map { |u| u.full_name }.join(', ')
+    stars.map { |s| s.user.full_name }.join(', ')
   end
 
   def list_reviewers
