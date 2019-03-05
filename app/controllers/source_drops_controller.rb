@@ -1,6 +1,10 @@
 class SourceDropsController < ApplicationController
   include ProjectScoped
 
+  def show
+    @sources = Source.by_project(@project)
+  end
+
   def create
     prms = source_drop_params
 
@@ -30,10 +34,10 @@ class SourceDropsController < ApplicationController
 
     if source.save
       flash[:success] = "Succesfully added the source!"
-      redirect_to project_sources_url(@project)
+      redirect_to project_source_drops_url(@project)
     else
       flash[:danger] = "Failed to add the source, so transaction rolled back..."
-      redirect_to project_sources_url(@project)
+      redirect_to project_source_drops_url(@project)
     end
   end
 

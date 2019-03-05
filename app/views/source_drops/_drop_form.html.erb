@@ -1,0 +1,50 @@
+<%= bootstrap_form_for :source_drop, url: project_source_drops_path(@project), method: :post,
+html: { class: '', id: 'new-source-drop' } do |f| %>
+
+  <div class="row">
+    <div class="col-xs-12 col-lg-6">
+          <%= f.text_area :bibtex_text, rows: 7, label: 'BibTeX',
+          placeholder: <<-BIBTEX
+@book{programming_ruby,
+  author = {Thomas, Dave and Fowler, Chad and Hunt, Andy},
+  publisher = {The Pragmatic Bookshelf},
+  title = {Programming Ruby 1.9: The Pragmatic Programmer's Guide},
+  year = {2009}
+}
+BIBTEX
+          %>
+          <%= f.text_area :reference_text, rows: 3, label: 'Or reference',
+          placeholder: <<-REFERENCE
+Thomas, D., Fowler, C., & Hunt, A. (2009). Programming Ruby 1.9: The Pragmatic Programmer's Guide. The Pragmatic Bookshelf.
+REFERENCE
+          %>
+          <%= f.text_field :title, label: 'Or just the title', placeholder: 'Some Publication Title' %>
+    </div>
+    <div class="col-xs-12 col-lg-6 attachment-area mbm ptm">
+      <div class="attachment-area__paperclip"></div>
+      <%= f.label :document, 'Document (PDF)' %>
+      <div class="dropzone dropzone-previews mbm" id="preview">
+        <div class="dz-message" data-dz-message>
+          <span>Drop a PDF file here or click to select one</span>
+        </div>
+      </div>
+      <%= f.text_field :document_url, label: 'Or Document URL', placeholder: 'https://host/some/document.pdf' %>
+    </div>
+    <div class="col-xs-12 col-lg-6 text-center">
+      <%= button_tag class: 'btn btn-primary btn-warning btn-lg mtx', role: :submit do %>
+      <strong>
+        D R O P <%= glyphicon :save %>
+      </strong>
+      <% end %>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-xs-12 col-lg-6">
+    </div>
+    <div class="col-xs-12 col-lg-6">
+    </div>
+    <div class="col-xs-12 col-lg-12">
+
+    </div>
+  </div>
+<% end %>

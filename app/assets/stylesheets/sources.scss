@@ -3,19 +3,25 @@
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
 /* Override table header. */
-.floatingheader thead {
+
+.sticky {
     position: sticky;
     top: 60px;
-    background-color: $body-bg;
-    border-bottom: 1px solid dimgray;
     z-index: 9;
+}
+thead.sticky {
+  background-color: $body-bg;
+  border-bottom: 1px solid dimgray;
+}
+.sticky--below-search {
+  top: 105px;
 }
 
 /* Override table border trick
    Replace with something else instead. */
-table.floatingheader {
+table.sticky-container {
     border-collapse: separate;
 }
-table.floatingheader > tbody > tr:first-of-type > td {
+table.sticky-container > tbody > tr:first-of-type > td {
     border-top: none;
 }
