@@ -23,29 +23,32 @@ class Source < ApplicationRecord
   validates :user, presence: true
 
   scope :by_search_query, ->(q) {
-    return all if q.blank?
-    terms = parse_query(q)
-    sources = arel_table
+    if q.present?
+      terms = parse_query(q)
+      sources = arel_table
 
-    match = ->(col, q) { sources[col].lower.matches(q) }
+      match = ->(col, q) { sources[col].lower.matches(q) }
 
-    term_expressions = terms.map do |term|
-      infix_term = "%#{term}%"
+      term_expressions = terms.map do |term|
+        infix_term = "%#{term}%"
 
-      fields = [:title, :abstract, :authors, :keywords]
+        fields = [:title, :abstract, :authors, :keywords]
 
-      first_disjunct = match.call(fields.shift, infix_term)
-      term_exp = fields.reduce(first_disjunct) { |exp, field| exp.or(match.call(field, infix_term)) }
-      term_exp = term_exp.or(sources[:year].eq(term.to_i)) if (1900..(Date.today.year)).include?(term.to_i)
-      term_exp = term_exp.or(sources[:doi].eq(term)) if doi_valid?(term)
-      term_exp
+        first_disjunct = match.call(fields.shift, infix_term)
+        term_exp = fields.reduce(first_disjunct) { |exp, field| exp.or(match.call(field, infix_term)) }
+        term_exp = term_exp.or(sources[:year].eq(term.to_i)) if (1900..(Date.today.year)).include?(term.to_i)
+        term_exp = term_exp.or(sources[:doi].eq(term)) if doi_valid?(term)
+        term_exp
+      end
+
+      expression = term_expressions.shift
+      expression = term_expressions.reduce(expression) { |exp, conjunct| exp.and(conjunct) }
+
+      where(expression)
+        .order("levenshtein(lower(title), '#{q.downcase}')/CAST(char_length(title) AS FLOAT)")
+    else
+      all
     end
-
-    expression = term_expressions.shift
-    expression = term_expressions.reduce(expression) { |exp, conjunct| exp.and(conjunct) }
-
-    where(expression)
-      .order("levenshtein(lower(title), '#{q.downcase}')/CAST(char_length(title) AS FLOAT)")
   }
 
   scope :sorted_by_stars_nocache, ->(dir=:desc) { left_outer_joins(:stars).group('sources.id').order("count(sources.id) #{dir == :asc ? :asc : :desc}") }
