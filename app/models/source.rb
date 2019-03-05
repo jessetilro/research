@@ -94,6 +94,6 @@ class Source < ApplicationRecord
   end
 
   def scholar_url
-     SCHOLAR_URL % { q: CGI.escape(to_reference) }
+     SCHOLAR_URL % { q: CGI.escape("\"#{title}\"") }
   end
 end
