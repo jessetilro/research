@@ -83,6 +83,14 @@ class Source < ApplicationRecord
 
   before_save :infer_url_from_doi
 
+  def self.select_average_rating
+    reviews = Review.arel_table
+    sources = Source.arel_table
+    arel_average_rating = reviews.where(reviews[:source_id].eq(sources[:id]))
+        .project(reviews[:rating].average)
+    select(arel_average_rating.as('average_rating'))
+  end
+
   def shortest_title; short_title || title; end
 
   def translated_bibtex_type(short: false)
@@ -105,12 +113,12 @@ class Source < ApplicationRecord
     reviews.find_by user: user
   end
 
-  def average_rating
+  def compute_average_rating
     reviews.average :rating
   end
 
   def rating_by user
-    reviews.find_by(user_id: user.id).try :rating
+    reviews.find { |r| r.user_id == user.id }.try :rating
   end
 
   def list_starrers

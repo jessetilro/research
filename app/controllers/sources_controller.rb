@@ -22,6 +22,11 @@ class SourcesController < ApplicationController
   def index
     @search_params = search_params
     @sources = Source.by_search_params(@search_params).by_project(@project)
+        .includes(:stars)
+        .includes(:tags)
+        .includes(:reviews)
+        .select(Source.arel_table[Arel.star])
+        .select_average_rating
   end
 
   def new

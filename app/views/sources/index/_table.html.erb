@@ -46,19 +46,15 @@
             <td><%= s.translated_bibtex_type(short: true) %></td>
             <td><small><em><%= time_ago_in_words(s.created_at) %> ago</em></small></td>
             <td>
-              <% if false %>
               <% rating = s.rating_by(current_user)
               if rating.present? %>
                 <%= content_tag :span, class: 'text-success' do %>
                   <%= rating %> <%= glyphicon :ok %>
                 <% end %>
               <% end %>
-              <% end %>
             </td>
             <td>
-              <% if false %>
               <%= s.average_rating %>
-              <% end %>
             </td>
             <td>
               <% if false %>
