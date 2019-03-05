@@ -127,6 +127,7 @@ BIBTEX
 Thomas, D., Fowler, C., & Hunt, A. (2009). Programming Ruby 1.9: The Pragmatic Programmer's Guide. The Pragmatic Bookshelf.
 REFERENCE
                   %>
+                  <%= f.text_field :title, label: 'Or just the title', placeholder: 'Some Publication Title' %>
             </div>
             <div class="col-xs-12 col-lg-6 attachment-area mbm ptm">
               <div class="attachment-area__paperclip"></div>
@@ -138,8 +139,12 @@ REFERENCE
               </div>
               <%= f.text_field :document_url, label: 'Or Document URL', placeholder: 'https://host/some/document.pdf' %>
             </div>
-            <div class="col-xs-12 col-lg-6">
-              <%= f.text_field :title, label: 'Or just the title', placeholder: 'Some Publication Title' %>
+            <div class="col-xs-12 col-lg-6 text-center">
+              <%= button_tag class: 'btn btn-primary btn-warning btn-lg mtx', role: :submit do %>
+              <strong>
+                D R O P <%= glyphicon :save %>
+              </strong>
+              <% end %>
             </div>
           </div>
           <div class="row">
@@ -148,7 +153,7 @@ REFERENCE
             <div class="col-xs-12 col-lg-6">
             </div>
             <div class="col-xs-12 col-lg-12">
-              <%= submit_tag 'DROP IT', class: 'btn btn-primary btn-block' %>
+
             </div>
           </div>
           <% end %>

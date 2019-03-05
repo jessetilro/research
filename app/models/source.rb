@@ -56,8 +56,8 @@ class Source < ApplicationRecord
 
   def shortest_title; short_title || title; end
 
-  def translated_bibtex_type
-    I18n.t(bibtex_type, scope: 'activerecord.attributes.source.bibtex_types')
+  def translated_bibtex_type(short: false)
+    I18n.t(bibtex_type, scope: "activerecord.attributes.source.#{'short_' if short}bibtex_types")
   end
 
   def starred_by? user

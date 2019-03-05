@@ -107,5 +107,4 @@ module BibtexMappable
       end
     end
   end
-
 end

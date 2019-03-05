@@ -78,6 +78,7 @@ en:
         volume: Volume
         bibtex_key: BibTeX Entry Key
         bibtex_type: BibTeX Item Type
+        short_bibtex_type: Type
         bibtex_types:
           article: Journal/Magazine Article
           book: Book
@@ -92,6 +93,20 @@ en:
           proceedings: Conference Proceedings
           techreport: Technical Report
           unpublished: Unpublished work
+        short_bibtex_types:
+          article: Article
+          book: Book
+          booklet: Booklet
+          inbook: Book part
+          incollection: Book part (Named)
+          inproceedings: Paper
+          manual: Manual
+          mastersthesis: Thesis (MSc)
+          misc: Miscellaneous
+          phdthesis: Thesis (PhD)
+          proceedings: Proceedings
+          techreport: Report
+          unpublished: Unpublished
         url: URL
         keywords: Keywords
         abstract: Abstract
