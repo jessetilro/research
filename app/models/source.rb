@@ -161,6 +161,23 @@ class Source < ApplicationRecord
     end.flatten
   end
 
+  def document_url; end
+  def document_url=(document_url)
+    return if document_url.blank?
+    uri = URI.parse(document_url)
+    filename = uri.path.split('/').last
+    filename = 'document.pdf' if filename.blank?
+
+    begin
+      file = open(document_url)
+    rescue Errno::ENOENT
+      false
+    else
+      document.attach(io: file, filename: filename)
+      true
+    end
+  end
+
   protected
 
   def infer_url_from_doi

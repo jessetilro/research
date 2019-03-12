@@ -25,9 +25,7 @@ class SourceDropsController < ApplicationController
     if prms[:document].present?
       source.document = prms[:document]
     elsif prms[:document_url].present?
-      filename = File.basename(prms[:document_url])
-      file = open(prms[:document_url])
-      source.document.attach(io: file, filename: filename)
+      source.document_url = prms[:document_url]
     end
 
     source.title ||= 'Untitled source'

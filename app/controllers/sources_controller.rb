@@ -5,7 +5,7 @@ class SourcesController < ApplicationController
   load_and_authorize_resource
 
   before_action { @project ||= @source.project }
-  before_action(only: [:index, :new, :edit]) { @tags = @project.tags }
+  before_action(only: [:index, :new, :edit, :update]) { @tags = @project.tags }
 
   before_action only: :show do
     redirect_to project_source_url(@project, @source) unless params[:project_id].present?
@@ -74,7 +74,7 @@ class SourcesController < ApplicationController
     if @source.update source_params
       redirect_to project_source_url(@project, @source)
     else
-      render 'edits'
+      render 'edit'
     end
   end
 
@@ -104,6 +104,7 @@ class SourcesController < ApplicationController
       :search_database,
       :search_query,
       :document,
+      :document_url,
       :isbn,
       :doi,
       :editors,

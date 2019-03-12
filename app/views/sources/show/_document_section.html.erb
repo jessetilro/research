@@ -19,6 +19,9 @@
               </div>
             </div>
           <% end %>
+          <%= bootstrap_form_for @source, url: project_source_path(@project, @source), html: { class: 'mtm' } do |f| %>
+            <%= f.text_field :document_url, label: 'Or Document URL', placeholder: 'https://host/some/document.pdf', class: 'enter-submit change-submit' %>
+          <% end %>
         <% end %>
       </div>
     </div>
