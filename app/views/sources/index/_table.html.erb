@@ -28,18 +28,35 @@
             </td>
             <td class="text-right">
               <% if s.document.attached? %>
-                <%= link_to raw("PDF #{glyphicon 'new-window'}"),
+                <%= link_to raw("#{glyphicon 'file'}"),
                       project_source_path(@project, s, format: :pdf),
                       class: 'btn btn-info btn-xs',
                       target: '_blank' %>
+              <% else %>
+              <%= tag.span raw("#{glyphicon 'file'}"),
+                      class: 'btn btn-default btn-xs',
+                      target: '_blank' %>
               <% end %>
+
+              <% if s.url.present? %>
+                <%= link_to raw("#{glyphicon 'globe'}"),
+                      s.url,
+                      class: 'btn btn-info btn-xs',
+                      target: '_blank' %>
+              <% else %>
+                <%= tag.span raw("#{glyphicon 'globe'}"),
+                      class: 'btn btn-default btn-xs',
+                      target: '_blank' %>
+              <% end %>
+
               <%= link_to raw("#{glyphicon 'search'}"),
                     s.scholar_url,
                     class: 'btn btn-info btn-xs',
                     target: '_blank' %>
+
               <%= link_to raw("#{glyphicon 'pencil'}"),
                     edit_project_source_path(@project, s),
-                    class: 'btn btn-default btn-xs' %>
+                    class: 'btn btn-info btn-xs' %>
             </td>
             <td><%= s.year %></td>
             <td>
