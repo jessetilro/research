@@ -87,6 +87,7 @@ module BibtexMappable
       return {} if entry.blank?
       entry_value = ->(bib) { ( entry[bib].try(:value) || entry.try(bib) || (bib == :bibtex_type && entry.type) || nil ) }
       params = (BIBTEX_MAPPING.map { |bib, src| { src => entry_value.call(bib) } }).reduce({}, :update)
+      params.reject { |_,v| v.blank? }
     end
 
     def from_bibtex(entry)
