@@ -5,7 +5,7 @@
       <thead class="sticky <%= 'sticky--below-search' if extended %>">
         <tr>
           <th><%= Source.human_attribute_name :short_title %> <span class="badge"><%= @sources.length %></span></th>
-          <th></th>
+          <th width="140"></th>
           <th><%= Source.human_attribute_name :year %></th>
           <th><%= Source.human_attribute_name :authors %></th>
           <% if extended %>
