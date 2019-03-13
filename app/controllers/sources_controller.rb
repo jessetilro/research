@@ -25,8 +25,6 @@ class SourcesController < ApplicationController
         .includes(stars: :user)
         .includes(:tags)
         .includes(:reviews)
-        .select(Source.arel_table[Arel.star])
-        .select_average_rating
   end
 
   def new

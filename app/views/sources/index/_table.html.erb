@@ -12,7 +12,6 @@
             <th><%= Source.human_attribute_name :short_bibtex_type %></th>
             <th><%= Source.human_attribute_name :created_at %></th>
             <th><%= Source.human_attribute_name :rating %></th>
-            <th><%= Source.human_attribute_name :average_rating %></th>
             <th><%= Source.human_attribute_name :reviews %></th>
             <th><%= Source.human_attribute_name :stars %></th>
             <th><%= Source.human_attribute_name :tags %></th>
@@ -73,9 +72,6 @@
                     <%= rating %> <%= glyphicon :ok %>
                   <% end %>
                 <% end %>
-              </td>
-              <td>
-                <%= s.average_rating %>
               </td>
               <td>
                 <%= s.reviews.size %>
