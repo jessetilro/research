@@ -118,3 +118,11 @@ gem 'dropzonejs-rails'
 
 # Parsing references
 gem 'anystyle'
+
+# Check dependencies for security vulnerabilities
+gem 'bundler-audit'
+
+# Integrate premailer with actionmailer to inline css
+gem 'actionmailer_inline_css'
+
+gem 'letter_opener', group: :development
