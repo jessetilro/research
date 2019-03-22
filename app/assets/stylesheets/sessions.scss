@@ -1,6 +1,6 @@
 $gradient: linear-gradient(to right, rgba(purple, 0.3), rgba(navy, 0.3));
 
-#login {
+.login {
     background-color: #3D4D65;
     border-radius: 5px;
     box-shadow: 0 6px 10px rgba(black, 0.5);
@@ -39,7 +39,7 @@ $gradient: linear-gradient(to right, rgba(purple, 0.3), rgba(navy, 0.3));
         height: 150px;
         display: flex;
         align-items: center;
-        justify-content: center; 
+        justify-content: center;
         box-sizing: content-box;
         margin: -2rem -2rem 2rem -2rem;
         padding: 2rem;
@@ -49,5 +49,3 @@ $gradient: linear-gradient(to right, rgba(purple, 0.3), rgba(navy, 0.3));
         }
     }
 }
-
-    

@@ -1,8 +1,8 @@
-<div id="login">
+<div class="login">
   <div class="loginheader">
     <h2>LOG IN</h2>
   </div>
-  <%= bootstrap_form_for([@project, resource], as: resource_name, url: session_path(resource_name)) do |f| %>
+  <%= bootstrap_form_with url: user_session_path do |f| %>
     <div class="field">
       <%= f.email_field :email, autofocus: true, icon: "envelope", hide_label: true, placeholder: "Email" %>
     </div>
@@ -22,4 +22,10 @@
       <%= f.primary "Log in" %>
     </div>
   <% end %>
+</div>
+
+
+<div class="login mtm">
+  <p>New to this tool? Sign up for a free account and start tracking your academic sources right away!</p>
+  <%= link_to 'Sign me up!', new_user_registration_path %>
 </div>

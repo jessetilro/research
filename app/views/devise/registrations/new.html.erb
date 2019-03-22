@@ -1,0 +1,38 @@
+<div class="login">
+  <div class="loginheader">
+    <h2>SIGN UP</h2>
+  </div>
+  <%= bootstrap_form_for @user, url: user_registration_path do |f| %>
+    <div class="field">
+      <%= f.form_group do %>
+        <%= f.text_field :first_name, autofocus: true, icon: "envelope", hide_label: true, placeholder: "First name", autocomplete: 'email', wrapper: false %>
+      <% end %>
+    </div>
+
+    <div class="field">
+      <%= f.form_group do %>
+        <%= f.email_field :email, autofocus: true, icon: "envelope", hide_label: true, placeholder: "Email", autocomplete: 'email', wrapper: false %>
+      <% end %>
+    </div>
+
+    <div class="field">
+      <%= f.form_group do %>
+        <%= f.password_field :password, autocomplete: "off", icon: "lock", hide_label: true, placeholder: "Password", autocomplete: 'new-password', wrapper: false %>
+        <% unless @user.errors.messages[:password].present? %>
+          <% if @minimum_password_length %>
+            <em>(<%= @minimum_password_length %> characters minimum)</em>
+          <% end %><br />
+        <% end %>
+      <% end %>
+    </div>
+    <div class="field">
+      <%= f.form_group do %>
+        <%= f.password_field :password_confirmation, autocomplete: "off", icon: "lock", hide_label: true, placeholder: "Confirm password", autocomplete: 'new-password', wrapper: false %>
+      <% end %>
+    </div>
+
+    <div class="actions">
+      <%= f.primary "Sign up" %>
+    </div>
+  <% end %>
+</div>
