@@ -4,7 +4,6 @@ class ApplicationController < ActionController::Base
   before_action :configure_permitted_parameters, if: :devise_controller?
   layout :determine_layout
 
-
   protected
 
   def after_sign_in_path(user)

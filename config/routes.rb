@@ -1,7 +1,11 @@
 Rails.application.routes.draw do
-  devise_for :users
+  devise_for :users, controllers: {
+    registrations: :registrations
+  }
 
   root to: 'sources#index'
+
+  resource :welcome, only: :show
 
   resources :sources, only: [:show, :index]
 

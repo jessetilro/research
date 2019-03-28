@@ -1,0 +1,17 @@
+<div class="login">
+  <div class="loginheader">
+    <h2>THANK YOU!</h2>
+  </div>
+  <p>
+    Hi <%= h params[:name] %>,
+  </p>
+  <p>
+    Thank you for signing up! You should have received an email with instructions
+    on how to confirm your account and start working with the research tool!
+  </p>
+  <p>
+    <%= link_to new_user_session_path do %>
+      &laquo; Back to login page
+    <% end %>
+  </p>
+</div>
