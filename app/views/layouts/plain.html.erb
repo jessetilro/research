@@ -12,9 +12,13 @@
     <header>
         <%= image_tag 'branding/logo_top.png' %>
     </header>
-    
+
     <div class="main centered">
         <% flash.each do |name, msg| %>
+        <% name = {
+          'alert' => 'danger',
+          'notice' => 'info'
+          }[name] || name %>
         <%= content_tag :div, msg, class: "alert alert-#{name.sub 'alert', 'danger' }" %>
         <% end %>
         <div>
