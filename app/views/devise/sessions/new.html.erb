@@ -2,7 +2,7 @@
   <div class="loginheader">
     <h2>LOG IN</h2>
   </div>
-  <%= bootstrap_form_with url: user_session_path do |f| %>
+  <%= bootstrap_form_with model: @user, url: user_session_path do |f| %>
     <div class="field">
       <%= f.email_field :email, autofocus: true, icon: "envelope", hide_label: true, placeholder: "Email" %>
     </div>
@@ -26,6 +26,6 @@
 
 
 <div class="login mtm">
-  <p>New to this tool? Sign up for a free account and start tracking your academic sources right away!</p>
-  <%= link_to 'Sign me up!', new_user_registration_path %>
+  <p>New here? Sign up for a free account and start tracking your academic sources right away!</p>
+  <%= link_to 'Sign me up!', new_user_registration_path, class: 'btn btn-warning btn-sm' %>
 </div>
