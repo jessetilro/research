@@ -15,10 +15,12 @@
     <!-- Collect the nav links, forms, and other content for toggling -->
     <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
       <ul class="nav navbar-nav">
-        <li<%= raw(' class="active"') if controller_name == 'source_drops' %>><%= link_to 'Dropzone', project_source_drops_url(@project) %></li>
-        <li<%= raw(' class="active"') if controller_name == 'sources' %>><%= link_to Source.model_name.human(count: 2), project_sources_url(@project) %></li>
-        <li<%= raw(' class="active"') if controller_name == 'queries' %>><%= link_to 'Queries', project_queries_url(@project) %></li>
-        <li<%= raw(' class="active"') if controller_name == 'tags' %>><%= link_to Tag.model_name.human(count: 2), project_tags_url(@project) %></li>
+        <% if @project.present? && @project.persisted? %>
+          <li<%= raw(' class="active"') if controller_name == 'source_drops' %>><%= link_to 'Dropzone', project_source_drops_url(@project) %></li>
+          <li<%= raw(' class="active"') if controller_name == 'sources' %>><%= link_to Source.model_name.human(count: 2), project_sources_url(@project) %></li>
+          <li<%= raw(' class="active"') if controller_name == 'queries' %>><%= link_to 'Queries', project_queries_url(@project) %></li>
+          <li<%= raw(' class="active"') if controller_name == 'tags' %>><%= link_to Tag.model_name.human(count: 2), project_tags_url(@project) %></li>
+        <% end %>
       </ul>
       <ul class="nav navbar-nav navbar-right">
         <% if user_signed_in? %>
@@ -29,7 +31,10 @@
       <ul class="nav navbar-nav navbar-right">
         <li>
           <p class="navbar-text">
-            Working as <%= current_user.full_name %> on <%= @project.name %>
+            Working as <%= current_user.full_name %>
+            <% if @project.present? && @project.persisted? %>
+              on <%= @project.name %>
+            <% end %>
           </p>
         </li>
         <li class="dropdown">
@@ -37,11 +42,26 @@
             <%= Project.model_name.human(count: 2) %>
             <span class="caret"></span></a>
           <ul class="dropdown-menu">
-            <% @projects.first(5).each do |project| %>
-              <li><a href="<%= project_sources_path(project) %>"><%= project.name %></a></li>
+            <% if @projects.present? %>
+              <% @projects.first(5).each do |project| %>
+                <li><a href="<%= project_sources_path(project) %>"><%= project.name %></a></li>
+              <% end %>
+              <li role="separator" class="divider"></li>
+              <li>
+                <a href="<%= projects_path %>">
+                  <%= glyphicon 'list' %>
+                  View all projects
+                </a>
+              </li>
+              <li>
+                <a href="<%= new_project_path %>">
+                  <%= glyphicon 'plus' %>
+                  New project
+                </a>
+              </li>
+            <% else %>
+              <li><a href="<%= projects_path %>">Make first project</a></li>
             <% end %>
-            <li role="separator" class="divider"></li>
-            <li><a href="<%= project_path @project %>">View all projects</a></li>
           </ul>
         </li>
       </ul>

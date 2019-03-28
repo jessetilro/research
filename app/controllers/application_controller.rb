@@ -9,7 +9,11 @@ class ApplicationController < ActionController::Base
 
   def after_sign_in_path(user)
     project = user.projects.most_recently_used
-    project_sources_path(project)
+    if project.present?
+      project_sources_path(project)
+    else
+      projects_path
+    end
   end
 
   def configure_permitted_parameters

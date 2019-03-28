@@ -5,6 +5,8 @@ class Project < ApplicationRecord
   has_many :participations
   has_many :users, through: :participations
 
+  validates :name, presence: true
+
   scope :ordered_by_last_usage, -> {
     order('participations.last_used_at DESC NULLS LAST')
   }

@@ -1,0 +1,14 @@
+.has-error .help-block,
+.invalid-feedback {
+  color: $brand-danger !important;
+}
+
+.has-error .form-control,
+.is-invalid {
+  border-color: $brand-danger !important;
+}
+
+label.required:after {
+  content:" *";
+  color: $brand-danger;
+}
