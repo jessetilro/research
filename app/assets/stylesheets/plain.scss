@@ -20,6 +20,7 @@
         justify-content: center;
         height: 80px;
         flex-grow: 0;
+        z-index: -999;
     }
     .main {
         flex-grow: 2;
