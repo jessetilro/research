@@ -7,6 +7,7 @@ class ProjectsController < ApplicationController
     @projects = @participations.map(&:project)
     @other_projects = Project.where.not(id: @participations.select(:project_id)).order(created_at: :desc)
     @project ||= @participations.first.try(:project)
+    @source_counts = Source.unscoped.group(:project_id).count
     @new_project = Project.new
     authorize! :read, @projects
   end

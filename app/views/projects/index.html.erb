@@ -27,6 +27,7 @@
             <th>Name</th>
             <th></th>
             <th>Contributors</th>
+            <th>Sources</th>
             <th>Last viewed</th>
           </tr>
         </thead>
@@ -65,6 +66,9 @@
                 <%= contributors.to_sentence %>
               </td>
               <td>
+                <%= @source_counts[project.id] || '-' %>
+              </td>
+              <td>
                 <em>
                   <small>
                     <% if participation.last_used_at.present? %>
@@ -97,6 +101,7 @@
           <tr>
             <th>Name</th>
             <th>Contributors</th>
+            <th>Sources</th>
             <th></th>
           </tr>
         </thead>
@@ -108,6 +113,9 @@
               </td>
               <td>
                 <%= (project.users.map(&:first_name)).to_sentence %>
+              </td>
+              <td>
+                <%= @source_counts[project.id] || '-' %>
               </td>
               <td>
               </td>
