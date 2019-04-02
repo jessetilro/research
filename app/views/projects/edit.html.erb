@@ -1,0 +1,28 @@
+<div class="centered">
+  <div class="centered__content">
+    <div class="panel panel-default">
+      <div class="panel-body">
+        <h1>
+          Edit Project
+          <small>
+            <%= @project.name %>
+          </small>
+        </h1>
+        <hr>
+        <%= bootstrap_form_with model: @project do |f| %>
+          <%= f.text_field :name, placeholder: 'My Terrifying Thesis' %>
+          <div class="text-right">
+            <%= link_to projects_path, class: 'btn btn-default' do %>
+              <%= glyphicon 'chevron-left' %>
+              Cancel
+            <% end %>
+            <%= button_tag type: :submit, class: 'btn btn-primary' do %>
+              Save project
+              <%= glyphicon 'ok' %>
+            <% end %>
+          </div>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</div>

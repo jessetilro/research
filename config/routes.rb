@@ -9,7 +9,7 @@ Rails.application.routes.draw do
 
   resources :sources, only: [:show, :index]
 
-  resources :projects, only: [:index, :show, :create, :new] do
+  resources :projects, only: [:index, :show, :create, :new, :edit, :update] do
     resources :sources
     resources :tags, only: [:index, :create, :update, :destroy]
     resource :export, only: :show
@@ -20,4 +20,6 @@ Rails.application.routes.draw do
     resources :review_previews, only: :index
     resources :queries
   end
+
+  resources :participations, only: :destroy
 end

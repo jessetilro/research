@@ -25,6 +25,7 @@
         <thead>
           <tr>
             <th>Name</th>
+            <th></th>
             <th>Contributors</th>
             <th>Last viewed</th>
           </tr>
@@ -44,6 +45,17 @@
                 <% else %>
                   <%= link_to project.name, project_sources_path(project) %>
                 <% end %>
+              </td>
+              <td>
+                <%= link_to raw("#{glyphicon 'pencil'}"),
+                      edit_project_path(project),
+                      class: 'btn btn-info btn-xs' %>
+
+                <%= link_to raw("#{glyphicon 'log-out'}"),
+                      participation_path(participation),
+                      class: 'btn btn-danger btn-xs',
+                      method: :delete,
+                      data: { confirm: 'Are you sure you want to leave this project? (For now, nothing in the project will be deleted, not even your stars and reviews.)' } %>
               </td>
               <td>
                 <%
@@ -74,7 +86,7 @@
     <div class="page-header">
       <div class="row">
         <div class="col-md-12">
-          <h1 class="mtn"><small>projects you can join</small></h1>
+          <h1 class="mtn"><small>projects you can join or be invited to (soon)</small></h1>
         </div>
       </div>
     </div>
