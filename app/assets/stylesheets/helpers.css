@@ -51,21 +51,25 @@
 .paxx, .pxxa { padding: 80px; }
 .paxxx, .pxxxa { padding: 160px; }
 
+.ptn { padding-top: 0; }
 .pst, .pts { padding-top: 5px; }
 .pmt, .ptm { padding-top: 10px; }
 .plt, .ptl { padding-top: 20px; }
 .pxt, .ptx { padding-top: 40px; }
 
+.pln { padding-left: 0; }
 .psl, .pls { padding-left: 5px; }
 .pml, .plm { padding-left: 10px; }
 .pll { padding-left: 20px; }
 .pxl, .plx { padding-left: 40px; }
 
+.prn { padding-right: 0; }
 .psr, .prs { padding-right: 5px; }
 .pmr, .prm { padding-right: 10px; }
 .plr, .prl { padding-right: 20px; }
 .pxr, .prx { padding-right: 40px; }
 
+.pbn { padding-bottom: 0; }
 .psb, .pbs { padding-bottom: 5px; }
 .pmb, .pbm { padding-bottom: 10px; }
 .plb, .pbl { padding-bottom: 20px; }
@@ -76,21 +80,25 @@
 .mla, .mal { margin: 20px; }
 .mxa, .max { margin: 40px; }
 
+.mtn { margin-top: 0; }
 .mst, .mts { margin-top: 5px; }
 .mmt, .mtm { margin-top: 10px; }
 .mlt, .mtl { margin-top: 20px; }
 .mxt, .mtx { margin-top: 40px; }
 
+.mln { margin-left: 0; }
 .msl, .mls { margin-left: 5px; }
 .mml, .mlm { margin-left: 10px; }
 .mll { margin-left: 20px; }
 .mxl, .mlx { margin-left: 40px; }
 
+.mrn { margin-right: 0; }
 .msr, .mrs { margin-right: 5px; }
 .mmr, .mrm { margin-right: 10px; }
 .mlr, .mrl { margin-right: 20px; }
 .mxr, .mrx { margin-right: 40px; }
 
+.mbn { margin-bottom: 0; }
 .msb, .mbs { margin-bottom: 5px; }
 .mmb, .mbm { margin-bottom: 10px; }
 .mlb, .mbl { margin-bottom: 20px; }

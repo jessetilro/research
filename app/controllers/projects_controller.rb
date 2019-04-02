@@ -3,8 +3,10 @@ class ProjectsController < ApplicationController
   load_and_authorize_resource
 
   before_action do
-    @projects = current_user.projects
-    @project ||= @projects.first
+    @participations = current_user.participations.ordered_by_last_usage.includes(:project)
+    @projects = @participations.map(&:project)
+    @other_projects = Project.where.not(id: @participations.select(:project_id)).order(created_at: :desc)
+    @project ||= @participations.first.try(:project)
     @new_project = Project.new
     authorize! :read, @projects
   end

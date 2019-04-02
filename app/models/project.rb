@@ -4,6 +4,9 @@ class Project < ApplicationRecord
 
   has_many :participations
   has_many :users, through: :participations
+  # has_many :contributors,
+  #     -> { where(participations: { role: Participation.roles['contributor'] }) },
+  #     class_name: 'User', through: :participations, source: :user
 
   validates :name, presence: true
 

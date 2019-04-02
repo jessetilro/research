@@ -1,20 +1,108 @@
-<div class="page-header">
-  <div class="row">
-    <div class="col-md-6">
-      <h1>Projects <small>that you participate in</small></h1>
-    </div>
-    <div class="col-md-6 text-right">
-      <%= link_to new_project_path, class: 'btn btn-default mtl' do %>
-        <%= glyphicon :plus %>
-        Add project
-      <% end %>
-    </div>
+<div class="row">
+  <div class="col-md-6">
+    <h1 class="mbn">Projects</h1>
+  </div>
+  <div class="col-md-6 text-right">
+    <%= link_to new_project_path, class: 'btn btn-default mtl' do %>
+      <%= glyphicon :plus %>
+      Add project
+    <% end %>
   </div>
 </div>
 
-<div class="list-group">
-  <% @projects.each do |project| %>
-    <%= link_to project.name, project_sources_path(project),
-          class: "list-group-item#{ @project == project ? ' active' : '' }" %>
-  <% end %>
+<div class="row">
+  <div class="col-md-6">
+    <div class="page-header">
+      <div class="row">
+        <div class="col-md-12">
+          <h1 class="mtn"><small>projects that you participate in</small></h1>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel panel-default">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Contributors</th>
+            <th>Last viewed</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @participations.each do |participation| %>
+            <% project = participation.project %>
+            <tr>
+              <td>
+                <% if @project == project %>
+                  <strong>
+                    <%= project.name %>
+                  </strong>
+                  <small>
+                    <em>(Current)</em>
+                  </small>
+                <% else %>
+                  <%= link_to project.name, project_sources_path(project) %>
+                <% end %>
+              </td>
+              <td>
+                <%
+                  contributors = project.users.reject { |u| u == current_user }.map(&:first_name)
+                  contributors.unshift 'You'
+                %>
+                <%= contributors.to_sentence %>
+              </td>
+              <td>
+                <em>
+                  <small>
+                    <% if participation.last_used_at.present? %>
+                      <%= time_ago_in_words participation.last_used_at %> ago
+                    <% else %>
+                        Never
+                    <% end %>
+                  </small>
+                </em>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <div class="col-md-6">
+    <div class="page-header">
+      <div class="row">
+        <div class="col-md-12">
+          <h1 class="mtn"><small>projects you can join</small></h1>
+        </div>
+      </div>
+    </div>
+
+    <div class="panel panel-default">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Contributors</th>
+            <th></th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @other_projects.each do |project| %>
+            <tr>
+              <td>
+                <%= project.name %>
+              </td>
+              <td>
+                <%= (project.users.map(&:first_name)).to_sentence %>
+              </td>
+              <td>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
 </div>
