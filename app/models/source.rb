@@ -19,7 +19,7 @@ class Source < ApplicationRecord
   has_many :starrers, through: :stars, source: :user
   has_and_belongs_to_many :tags, join_table: :taggings
 
-  validates :title, presence: true
+  validates :title, presence: true, uniqueness: { scope: :project_id }
   validates :user, presence: true
 
   scope :by_search_query, ->(q) {
