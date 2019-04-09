@@ -55,6 +55,7 @@ class Source < ApplicationRecord
   scope :sorted_by_rating, ->(dir=:desc) { left_outer_joins(:reviews).group('sources.id').order("avg(reviews.rating) #{dir == :asc ? :asc : :desc}") }
   scope :sorted_by_stars, ->(dir=:desc) { order(stars_count: dir) }
   scope :sorted_by_time, ->(dir=:desc) { order(created_at: dir) }
+  scope :sorted_by_year, ->(dir=:desc) { order("year #{dir == :desc ? 'DESC NULLS LAST' : 'ASC NULLS FIRST'}") }
 
   scope :filtered_by_unrated, ->(params={}) { left_outer_joins(:reviews).group('sources.id').having('count(reviews.rating) = 0') }
   scope :filtered_by_my_stars, ->(params={}) { joins(:stars).where(stars: {user_id: params[:u]}) }

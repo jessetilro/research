@@ -9,7 +9,7 @@
     <div class="row">
       <div class="col-xs-12 col-lg-6 text-center ptm">
         <div class="btn-group" role="group" aria-label="sort">
-          <% [:time, :stars, :rating].each do |sort| %>
+          <% [:time, :stars, :rating, :year].each do |sort| %>
             <%= link_to t(sort, scope: 'search_options.sort'),
                   project_sources_path(@project, @search_params.merge(s: sort)),
                   class: "btn btn-xs btn-#{@search_params[:s].try(:to_sym) == sort ? 'primary' : 'default'}"

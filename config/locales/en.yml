@@ -25,6 +25,7 @@ en:
       time: Latest
       stars: Most Stars
       rating: Highest Rating
+      year: Year
     filter:
       none: '#nofilter'
       my_stars: My Stars
