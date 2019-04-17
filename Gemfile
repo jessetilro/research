@@ -42,9 +42,6 @@ group :development do
   gem 'capistrano-rvm'
 end
 
-# Use mysql2 as production database
-gem 'mysql2', group: :production
-
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
   gem 'byebug', platform: :mri
@@ -104,8 +101,8 @@ gem 'bundler-audit'
 # Image processing
 gem 'mini_magick'
 
-# PostgreSQL database adapter to be used for production soon
-gem 'pg'
+# PostgreSQL database adapter used both in development and production
+gem 'pg', group: [:production, :development]
 
 # Bulk insert statements
 gem 'activerecord-import'
