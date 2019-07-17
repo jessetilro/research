@@ -67,7 +67,7 @@ class Source < ApplicationRecord
     # Filter by selected filter if applicable
     result = result.send "filtered_by_#{params[:f]}", params unless params[:f] == :none
     # Filter by tag if applicable
-    result = result.joins(:tags).where(tags: {id: params[:t]}) if params[:t].present?
+    result = result.where(id: Tag.where(id: params[:t]).joins(:sources).select('sources.id')) if params[:t].present?
 
     result
   }
