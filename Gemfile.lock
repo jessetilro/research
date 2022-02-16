@@ -75,7 +75,7 @@ GEM
       activemodel (>= 5.0)
     bootswatch-rails (3.3.5)
       railties (>= 3.1)
-    brakeman (4.5.0)
+    brakeman (5.2.1)
     breadcrumbs_on_rails (3.0.1)
     builder (3.2.4)
     bundler-audit (0.9.0.1)
