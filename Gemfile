@@ -9,7 +9,7 @@ end
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.2.2'
 # Improves performance of booting the application
-gem 'bootsnap', '>= 1.1.0', require: false
+gem 'bootsnap', require: false
 # Use sqlite3 as the database for Active Record
 gem 'sqlite3', '~> 1.3.6'
 # Use Puma as the app server
@@ -95,8 +95,10 @@ gem 'jquery-minicolors-rails'
 gem 'breadcrumbs_on_rails'
 
 # Security testing
-gem 'brakeman'
-gem 'bundler-audit'
+group :development do
+  gem 'brakeman'
+  gem 'bundler-audit'
+end
 
 # Image processing
 gem 'mini_magick'
@@ -115,9 +117,6 @@ gem 'dropzonejs-rails'
 
 # Parsing references
 gem 'anystyle'
-
-# Check dependencies for security vulnerabilities
-gem 'bundler-audit'
 
 # Integrate premailer with actionmailer to inline css
 gem 'actionmailer_inline_css'
