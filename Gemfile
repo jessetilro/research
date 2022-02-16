@@ -125,6 +125,4 @@ gem 'actionmailer_inline_css'
 gem 'letter_opener', group: :development
 
 # Transactional email API
-# version 1.11.1 is broken
-# https://github.com/mailgun/mailgun-ruby/issues/157
-gem 'mailgun-ruby', github: 'mailgun/mailgun-ruby', ref: '0f538d0d172a1b1f9b6c681ee1c28bb8857b90f4'
+gem 'mailgun-ruby'
